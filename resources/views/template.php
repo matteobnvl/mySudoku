@@ -12,7 +12,8 @@ $title = (isset($current['name'])) ? ' - ' . ucfirst($current['name']) : '';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Site web<?= $title ?></title>
     <link rel="icon" href="public/images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="resources/css/app.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js" integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 

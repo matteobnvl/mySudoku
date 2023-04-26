@@ -12,3 +12,6 @@ Route::get(['/register', 'App\Controllers\AuthentificationController@register'])
 
 // Route Dashboard
 Route::get(['/dashboard', 'App\Controllers\DashboardController@index'])->name('Dashboard');
+
+// Route Game 
+Route::get(['/game', 'App\Controllers\GameController@index'])->name('Game');
