@@ -19,6 +19,11 @@ class AuthentificationController extends Controller
         redirect('Accueil');
     }
 
+    public function register()
+    {
+        return view('auth.register');
+    }
+
     private function checkIfConnectionSent() {
 
         if (isset($_POST['check']) && $_POST['check'] === 'ok') {
