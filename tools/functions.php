@@ -188,9 +188,9 @@ if (!function_exists('route')) {
 
 if (!function_exists('redirect')) {
 
-    function redirect($name)
+    function redirect($name, $param = '')
     {
-        header('Location: ' . route($name));
+        header('Location: ' . route($name) . $param);
         exit();
     }
 }

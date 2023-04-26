@@ -1,0 +1,39 @@
+
+table{
+    margin: auto;
+    width: 500px;
+    height: 500px;
+    border:2px solid black;
+    text-align: center;
+    border-collapse: collapse; 
+}
+
+td{
+    padding: 5px;
+    width: 10%;
+    height: 10%;
+    font-size: 2rem;
+    border: 1px solid gray;
+    transition: all .4s;
+
+    &:nth-child(3),
+    &:nth-child(6){
+        border-right: 2px solid black;
+    }
+
+    &:hover{
+        background-color: grey;
+        transition: all .2s;
+        cursor: pointer;
+    }
+}
+
+tr{
+    border: 1px solid gray;
+
+    &:nth-child(3),
+    &:nth-child(6)
+    {
+        border-bottom: 2px solid black;
+    }
+}

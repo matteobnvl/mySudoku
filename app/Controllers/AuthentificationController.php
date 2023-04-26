@@ -7,8 +7,16 @@ use App\Models\User;
 
 class AuthentificationController extends Controller
 {
+    function __construct()
+    {   
+        
+    }
+
     public function login()
     {
+        if ($_SESSION) {
+            redirect('Dashboard');
+        }
         $error = $this->checkIfConnectionSent();
         return view('auth.login', compact('error'));
     }
@@ -21,6 +29,9 @@ class AuthentificationController extends Controller
 
     public function register()
     {
+        if ($_SESSION) {
+            redirect('Dashboard');
+        }
         $error = '';
         if ($_POST) {
             if ($_POST['email'] && $_POST['email'] ==! '' ||
