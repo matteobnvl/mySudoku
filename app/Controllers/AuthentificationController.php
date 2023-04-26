@@ -9,8 +9,8 @@ class AuthentificationController extends Controller
 {
     public function login()
     {
-        $checker = $this->checkIfConnectionSent();
-        return view('auth.login', compact('checker'));
+        $error = $this->checkIfConnectionSent();
+        return view('auth.login', compact('error'));
     }
 
     public function logout()
@@ -21,15 +21,34 @@ class AuthentificationController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $error = '';
+        if ($_POST) {
+            if ($_POST['email'] && $_POST['email'] ==! '' ||
+                $_POST['pseudo'] && $_POST['pseudo'] ==! '' ||
+                $_POST['password'] && $_POST['password'] ==! '') {
+                    if (User::checkMail($_POST['email'])) {
+                        if (User::register($_POST)) {
+                            User::login($_POST['email'], $_POST['password']);
+                            redirect('Dashboard');
+                        }
+
+                    } else {
+                        $error = "L'email renseigné existe déjà";
+                    }
+                }
+        }
+
+        return view('auth.register', [
+            'error' => $error
+        ]);
     }
 
     private function checkIfConnectionSent() {
 
-        if (isset($_POST['check']) && $_POST['check'] === 'ok') {
+        if ($_POST) {
             if (isset($_POST['email']) && $_POST['email'] !== '') {
                 if (isset($_POST['password']) && $_POST['password'] !== '') {
-                    if (!User::checkUser($_POST['email'], $_POST['password'])) {
+                    if (!User::login($_POST['email'], $_POST['password'])) {
                         return 'Les identifiants ne correspondent pas...';
                     } else {
                         redirect('Dashboard');
