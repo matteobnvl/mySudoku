@@ -13,3 +13,57 @@
         </tr>
     <?php } ?>
 </table>
+<section>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+</section>
+
+<script>
+
+const elements = document.querySelectorAll('td')
+const chiffres = document.querySelectorAll('div')
+let selected = null
+
+elements.forEach(function(item) {
+    item.addEventListener('click', function(event) {
+        elements.forEach(function(item) {
+            item.classList.remove('selected')
+        })
+        item.classList.add('selected')
+        selected = item
+    })
+})
+
+chiffres.forEach(function(item) {
+    item.addEventListener('click', function(event) {
+        if (selected !== null) {
+            selected.textContent = item.textContent
+        }
+    })
+})
+
+document.querySelector('table').addEventListener('click', function(event) {
+    if (!event.target.matches('td, section div')) {
+        if (selected !== null) {
+            selected.classList.remove('selected')
+            selected = null
+        }
+    }
+})
+
+
+
+
+
+
+
+
+
+</script>
