@@ -43,19 +43,10 @@ elements.forEach(function(item) {
 
 chiffres.forEach(function(item) {
     item.addEventListener('click', function(event) {
-        if (selected !== null) {
+        if (selected !== null && selected.textContent === '') {
             selected.textContent = item.textContent
         }
     })
-})
-
-document.querySelector('table').addEventListener('click', function(event) {
-    if (!event.target.matches('td, section div')) {
-        if (selected !== null) {
-            selected.classList.remove('selected')
-            selected = null
-        }
-    }
 })
 
 
