@@ -43,7 +43,7 @@ elements.forEach(function(item) {
 
 chiffres.forEach(function(item) {
     item.addEventListener('click', function(event) {
-        if (selected !== null && selected.textContent === '') {
+        if (selected !== null && $(selected).attr('data-td') === undefined) {
             selected.textContent = item.textContent
         }
     })
