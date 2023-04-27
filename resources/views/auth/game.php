@@ -4,11 +4,11 @@
 </a>
 <table>
     <?php
-    foreach(json_decode($sudoku[0]['tableau']) as $lignes){
+    foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes){
         ?>
         <tr>
-            <?php foreach ($lignes as $cases) { ?>
-                <td><?= ($cases ==! 0) ? $cases : '' ?></td>
+            <?php foreach ($lignes as $keyCases => $cases) { ?>
+                <td data-row="<?= $keyLignes.','.$keyCases ?>" <?= ($cases ==! 0) ? 'data-td='.$cases : '' ?>><?= ($cases ==! 0) ? $cases : '' ?></td>
             <?php } ?>
         </tr>
     <?php } ?>
