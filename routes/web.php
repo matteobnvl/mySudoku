@@ -15,3 +15,6 @@ Route::get(['/dashboard', 'App\Controllers\DashboardController@index'])->name('D
 
 // Route Game 
 Route::get(['/game', 'App\Controllers\GameController@index'])->name('Game');
+
+// Route Profil
+Route::get(['/profil', 'App\Controllers\ProfilController@index'])->name('Profil');
