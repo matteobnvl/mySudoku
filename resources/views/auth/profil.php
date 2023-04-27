@@ -1,17 +1,15 @@
 <h1>Page Profil</h1>
-<p>Pseudo : <?= $_SESSION['pseudo'] ?></p>
-<p>Email : <?= $_SESSION['email'] ?></p>
-
-
+<a href="<?= route('Dashboard')?>">Dashboard</a>
 <form action="<?= route('Profil') ?>" method="post">
-    <label for="mail">pseudo</label>
-    <input type="text" id="pseudo" name="pseudo" required autocomplete="off">
+    <label for="pseudo">pseudo</label>
+    <input type="text" id="pseudo" name="pseudo" required autocomplete="off" value="<?= $_SESSION['pseudo'] ?>">
 
     <label for="email">email</label>
-    <input type="email" id="email" name="email" required autocomplete="off">
+    <input type="email" id="email" name="email" required autocomplete="off" value="<?= $_SESSION['email'] ?>">
 
-    <label for="password">Mot de passe</label>
-    <input type="password" id="password" name="password" required autocomplete="off">
-    <p><?= $error ==! '' ? $error : '' ?></p>
     <button>Modifier</button>
 </form>
+
+<div>
+    <p>Score total : <?=  var_dump($_SESSION['score']) ?> </p>
+</div>

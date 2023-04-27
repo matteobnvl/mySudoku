@@ -51,4 +51,19 @@ class User extends Model
         ]);
         return true;
     }
+
+    public static function update($id_joueur, $pseudo, $email)
+    {
+        $db = self::db();
+        $qry = "UPDATE Joueur SET pseudo = :pseudo, email = :email  WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':pseudo' => htmlentities($pseudo),
+            ':email' => htmlentities($email),
+            ':id_joueur' => $id_joueur
+        ]);
+        $_SESSION['pseudo'] = htmlentities($pseudo);
+        $_SESSION['email'] = htmlentities($email);
+        return true;
+    }
 }
