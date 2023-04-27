@@ -22,7 +22,7 @@ td{
     }
 
     &:hover{
-        background-color: grey;
+        background-color: rgba(137, 136, 136, .3);
         transition: all .2s;
         cursor: pointer;
     }
@@ -35,5 +35,39 @@ tr{
     &:nth-child(6)
     {
         border-bottom: 2px solid black;
+    }
+}
+
+section{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5vh;
+    flex-wrap: wrap;
+
+    div{
+        width: 50px;
+        height: 50px;
+        background-color: rgba(137, 136, 136, .3);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        border-radius: 15px;
+        margin: 10px;
+
+        &:hover{
+            background-color: rgba(137, 136, 136, .5);
+            cursor: pointer;
+        }
+    }
+}
+
+.selected{
+    background-color: rgba($color: #ff0000, $alpha: .5);
+
+    &:hover{
+        background-color: rgba($color: #ff0000, $alpha: .5);
     }
 }
