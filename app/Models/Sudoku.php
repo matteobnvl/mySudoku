@@ -139,4 +139,38 @@ class Sudoku extends Model
     
         return false;
     }
+
+    public static function insert($index, $value, $sudoku, $id_partie)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = $value.'*';
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_partie' => $id_partie
+        ]);
+    }
+
+    public static function delete($index, $sudoku, $id_partie)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = 0;
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_partie' => $id_partie
+        ]);
+    }
 }
