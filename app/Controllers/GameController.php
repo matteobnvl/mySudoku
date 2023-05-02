@@ -30,7 +30,6 @@ class GameController extends Controller
 
     public function index()
     {
-
         if (!$_GET) {
             if ($_SESSION) {
                 if (Game::create($_SESSION['id_joueur'])) {
@@ -39,7 +38,6 @@ class GameController extends Controller
             } else {
                 if (Game::create()) {
                     $partie = Game::getLastGameCreate();
-                    
                 }
             }
             $sudoku = Sudoku::generateSudoku();
@@ -58,5 +56,23 @@ class GameController extends Controller
         return view('auth.game', [
             'sudoku' => $sudoku
         ]);
+    }
+
+    public function insert()
+    {
+        $index = array_map('intval', explode(',', $_POST['arrayCase']['key']));
+        $value = $_POST['arrayCase']['value'];
+        $id_partie = $_POST['id'];
+        $sudoku = Sudoku::getSudokuByPartie($id_partie);
+        Sudoku::insert($index, $value, $sudoku, $id_partie);
+        return 'true';
+    }
+
+    public function delete()
+    {
+        $index = array_map('intval', explode(',',$_POST['attrCase']));
+        $id_partie = intval($_POST['id']);
+        $sudoku = Sudoku::getSudokuByPartie($id_partie);
+        Sudoku::delete($index, $sudoku, $id_partie);
     }
 }

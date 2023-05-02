@@ -8,7 +8,12 @@
         ?>
         <tr>
             <?php foreach ($lignes as $keyCases => $cases) { ?>
-                <td data-row="<?= $keyLignes.','.$keyCases ?>" <?= ($cases ==! 0) ? 'data-td='.$cases : '' ?>><?= ($cases ==! 0) ? $cases : '' ?></td>
+                <td 
+                    data-row="<?= $keyLignes.','.$keyCases ?>" 
+                    <?= ($cases ==! 0 && !strpos($cases, '*')) ? 'data-td='.$cases : 'style="color:blue"' ?>
+                >
+                    <?php if ($cases ==! 0 && !strpos($cases, '*')){echo $cases;} elseif (strpos($cases, '*')) {echo substr($cases, 0, -1);} else {echo '';} ?>
+                </td>
             <?php } ?>
         </tr>
     <?php } ?>
@@ -56,11 +61,27 @@ chiffres.forEach(function(item) {
                     }
                     n++
                 })
+                $.ajax({
+                    url: '<?= env('APP_URL')?>/delete',
+                    type: 'POST',
+                    data: {attrCase: attrCase, id: <?= $_GET['sudoku'] ?>},
+                    success: function(response) {
+                        console.log(response);
+                    }
+                })
             } else {
                 selected.textContent = item.textContent
                 arrayCase = {key: attrCase , value: item.textContent}
                 isInArray(arrayCase, cases)
                 console.log(cases)
+                $.ajax({
+                    url: '<?= env('APP_URL')?>/insert',
+                    type: 'POST',
+                    data: {arrayCase: arrayCase, id: <?= $_GET['sudoku'] ?>},
+                    success: function(response) {
+                        console.log(response);
+                    }
+                })
             }
             cases.push(arrayCase)
         }
