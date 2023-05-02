@@ -1,3 +1,47 @@
-* {
-    background-color: white;
-}
+// responsive pour petit écran
+
+@media screen and (max-width: 768px) {
+    .row {
+      min-height: 80vh;
+      flex-direction: column;
+      
+      form {
+        width: 80%;
+        height: auto;
+        
+        div {
+          flex-direction: column;
+          width: 100%;
+          
+          input {
+            height: auto;
+            margin-bottom: 20px;
+          }
+        
+        }
+      }
+    }
+  }
+  
+// responsive pour grand écran
+  
+  @media screen and (min-width: 768px) {
+    .row {
+      min-height: 60vh;
+      
+      form {
+        width: 50%;
+        height: 50%;
+        
+        div {
+          width: 80%;
+          
+          input {
+            height: 5vh;
+            margin-bottom: 50px;
+          }
+          
+        }
+      }
+    }
+  }
