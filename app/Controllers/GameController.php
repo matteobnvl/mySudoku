@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Models\Game;
 use App\Models\Sudoku;
+use App\Models\User;
 
 class GameController extends Controller
 {
@@ -106,5 +107,45 @@ class GameController extends Controller
             }
         }
         return json_encode($arrayVerif);
+    }
+
+
+    public function finish()
+    {
+        if ($_POST) {
+            $id_partie = $_POST['id'];
+
+            $solutionSudoku = Sudoku::getSolutionSudokuByPartie($id_partie);
+            $solutionSudoku = json_decode($solutionSudoku[0]['solution']);
+
+            $sudoku = Sudoku::getSudokuByPartie($id_partie);
+            $sudoku = json_decode($sudoku[0]['tableau']);
+
+            $arrayVerif = [];
+
+            foreach ($sudoku as $keyLigne => $ligne) {
+                foreach ($ligne as $keyCase => $case) {
+                    if (strpos($case, '*')) {
+                        if (substr($case, 0, -1) != $solutionSudoku[$keyLigne][$keyCase]) {
+                            $array = [
+                                'key' => strval($keyLigne).','. strval($keyCase),
+                                'value' => false
+                            ];
+                            $arrayVerif[] = $array;
+                        }
+                    }
+                }
+                
+            }
+
+            if (empty($arrayVerif)) {
+                $score = Sudoku::getScoreByNiveau($id_partie);
+                User::addScore($score);
+                Sudoku::updateStatutSudoku($id_partie);
+
+                return 'true';
+            }
+            return json_encode($arrayVerif);
+        }
     }
 }

@@ -3,6 +3,7 @@
     <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
 </a>
 <table>
+    
     <?php
     foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes){
         ?>
@@ -92,5 +93,37 @@ $('div[data-check]').click(function () {
             })
         }
     })
+})
+
+$('div[data-verif]').click(function () {
+    var finish = true
+    elements.forEach(function (item) {
+        if (item.textContent == 0) {
+            finish = false
+        }
+    })
+    if (finish) {
+        $.ajax({
+            url: '<?= env('APP_URL')?>/finish',
+            type: 'POST',
+            data: {id: <?= $_GET['sudoku'] ?>},
+            success: function (response) {
+                if (response == 'true') {
+                    console.log('juste')
+                } else {
+                    response = JSON.parse(response)
+                    elements.forEach(function (item) {
+                        response.forEach(function (event) {
+                            if ($(item).attr('data-row') == event.key) {
+                                $(item).addClass((event.value)? 'true' : 'false')
+                            }
+                        })
+                    })
+                }
+            }
+        })
+    } else {
+        console.log('pas finis')
+    }
 })
 </script>

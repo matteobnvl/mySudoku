@@ -51,4 +51,19 @@ class User extends Model
         ]);
         return true;
     }
+
+    public static function addScore($score)
+    {
+        $newScore = $_SESSION['score'] + $score;
+        $db = self::db();
+        $qry = "UPDATE Joueur
+                SET score = :score
+                WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':score' => $newScore,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+        $_SESSION['score'] = $newScore;
+    }
 }

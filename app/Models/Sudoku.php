@@ -187,4 +187,33 @@ class Sudoku extends Model
 
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function getScoreByNiveau($id)
+    {
+        $db = self::db();
+        $qry = "SELECT Niveau.score
+                FROM Partie
+                INNER JOIN Niveau ON Niveau.id_niveau = Partie.id_niveau
+                WHERE Partie.id_partie = :id_partie";
+            
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function updateStatutSudoku($id_partie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET id_statut = :id_statut
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_statut' => 2,
+            'id_partie' => $id_partie
+        ]);
+    }
 }
