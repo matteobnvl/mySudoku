@@ -15,11 +15,6 @@
     height: auto;
     margin-bottom: 20px;
   }
-  .row form div button {
-    margin: auto;
-    margin-top: 20px;
-    width: 60%;
-  }
 }
 @media screen and (min-width: 768px) {
   .row {
@@ -35,8 +30,5 @@
   .row form div input {
     height: 5vh;
     margin-bottom: 50px;
-  }
-  .row form div button {
-    width: 35%;
   }
 }/*# sourceMappingURL=style_mobile.css.map */
