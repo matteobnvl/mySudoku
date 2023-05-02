@@ -60,19 +60,51 @@ class GameController extends Controller
 
     public function insert()
     {
-        $index = array_map('intval', explode(',', $_POST['arrayCase']['key']));
-        $value = $_POST['arrayCase']['value'];
-        $id_partie = $_POST['id'];
-        $sudoku = Sudoku::getSudokuByPartie($id_partie);
-        Sudoku::insert($index, $value, $sudoku, $id_partie);
-        return 'true';
+        if ($_POST) {
+            $index = array_map('intval', explode(',', $_POST['arrayCase']['key']));
+            $value = $_POST['arrayCase']['value'];
+            $id_partie = $_POST['id'];
+            $sudoku = Sudoku::getSudokuByPartie($id_partie);
+            Sudoku::insert($index, $value, $sudoku, $id_partie);
+        }
     }
 
     public function delete()
     {
-        $index = array_map('intval', explode(',',$_POST['attrCase']));
-        $id_partie = intval($_POST['id']);
-        $sudoku = Sudoku::getSudokuByPartie($id_partie);
-        Sudoku::delete($index, $sudoku, $id_partie);
+        if ($_POST) {
+            $index = array_map('intval', explode(',',$_POST['attrCase']));
+            $id_partie = intval($_POST['id']);
+            $sudoku = Sudoku::getSudokuByPartie($id_partie);
+            Sudoku::delete($index, $sudoku, $id_partie);
+        }
+    }
+
+    public function verif()
+    {
+        if ($_POST) {
+            $id_partie = $_POST['id'];
+
+            $solutionSudoku = Sudoku::getSolutionSudokuByPartie($id_partie);
+            $solutionSudoku = json_decode($solutionSudoku[0]['solution']);
+
+            $sudoku = Sudoku::getSudokuByPartie($id_partie);
+            $sudoku = json_decode($sudoku[0]['tableau']);
+
+            $arrayVerif = [];
+
+            foreach ($sudoku as $keyLigne => $ligne) {
+                foreach ($ligne as $keyCase => $case) {
+                    if (strpos($case, '*')) {
+                        $array = [
+                            'key' => strval($keyLigne).','. strval($keyCase),
+                            'value' => substr($case, 0, -1) == $solutionSudoku[$keyLigne][$keyCase]
+                        ];
+                        $arrayVerif[] = $array;
+                    }
+                }
+                
+            }
+        }
+        return json_encode($arrayVerif);
     }
 }

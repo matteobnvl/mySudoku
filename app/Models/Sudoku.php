@@ -173,4 +173,18 @@ class Sudoku extends Model
             ':id_partie' => $id_partie
         ]);
     }
+
+    public static function getSolutionSudokuByPartie($id)
+    {
+        $db = self::db();
+        $qry = "SELECT solution
+                FROM Sudoku
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
