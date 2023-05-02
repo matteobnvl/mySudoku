@@ -1,3 +1,42 @@
-* {
-  background-color: white;
+@media screen and (max-width: 768px) {
+  .row {
+    min-height: 80vh;
+    flex-direction: column;
+  }
+  .row form {
+    width: 80%;
+    height: auto;
+  }
+  .row form div {
+    flex-direction: column;
+    width: 100%;
+  }
+  .row form div input {
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .row form div button {
+    margin: auto;
+    margin-top: 20px;
+    width: 60%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .row {
+    min-height: 60vh;
+  }
+  .row form {
+    width: 50%;
+    height: 50%;
+  }
+  .row form div {
+    width: 80%;
+  }
+  .row form div input {
+    height: 5vh;
+    margin-bottom: 50px;
+  }
+  .row form div button {
+    width: 35%;
+  }
 }/*# sourceMappingURL=style_mobile.css.map */
