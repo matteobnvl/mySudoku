@@ -79,3 +79,12 @@ section{
         background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
     }
 }
+
+.toggle{
+    display: none;
+    text-align: center;
+    background-color: greenyellow;
+    &.active{
+        display: block;
+    }
+}

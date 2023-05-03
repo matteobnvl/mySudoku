@@ -2,8 +2,17 @@
 <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
     <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
 </a>
+<p class="toggle <?= ($statut['id_statut'] == 2) ? 'active' : '' ?>">
+    Bravo tu as réussi ce sudoku !! 
+    <br><br>
+    votre score : <span id="score"></span>
+    <br>
+    <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
+        <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
+    </a>
+</p>
 <table>
-    
+
     <?php
     foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes){
         ?>
@@ -12,6 +21,7 @@
                 <td 
                     data-row="<?= $keyLignes.','.$keyCases ?>" 
                     <?= ($cases ==! 0 && !strpos($cases, '*')) ? 'data-td='.$cases : 'style="color:blue"' ?>
+                    <?= ($statut['id_statut'] == 2) ? 'data-finish="1"' : '' ?>
                 >
                     <?php if ($cases ==! 0 && !strpos($cases, '*')){echo $cases;} elseif (strpos($cases, '*')) {echo substr($cases, 0, -1);} else {echo '';} ?>
                 </td>
@@ -34,6 +44,7 @@
     <div data-verif="1"><i class="fa-solid fa-check"></i></div>
 </section>
 
+
 <script>
 
 const elements = document.querySelectorAll('td')
@@ -43,12 +54,14 @@ let arrayCase = {}
 
 elements.forEach(function(item) {
     item.addEventListener('click', function(event) {
-        elements.forEach(function(item) {
-            item.classList.remove('selected')
+        if ($(item).attr('data-finish') != 1) {
+            elements.forEach(function(item) {
+                item.classList.remove('selected')
+            })
+            item.classList.add('selected')
+            selected = item
+            }
         })
-        item.classList.add('selected')
-        selected = item
-    })
 })
 
 chiffres.forEach(function(item) {
@@ -108,10 +121,14 @@ $('div[data-verif]').click(function () {
             type: 'POST',
             data: {id: <?= $_GET['sudoku'] ?>},
             success: function (response) {
-                if (response == 'true') {
-                    console.log('juste')
+                response = JSON.parse(response)
+                if (response.key == true) {
+                    elements.forEach(function (item) {
+                        item.setAttribute('data-finish', '1')
+                    })
+                    $('.toggle').addClass('active')
+                    $('#score').html(response.score.score)
                 } else {
-                    response = JSON.parse(response)
                     elements.forEach(function (item) {
                         response.forEach(function (event) {
                             if ($(item).attr('data-row') == event.key) {

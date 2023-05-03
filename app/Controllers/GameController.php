@@ -50,12 +50,14 @@ class GameController extends Controller
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {
             $sudoku = Sudoku::getSudokuByPartie($_GET['sudoku']);
+            $statut = Game::getStatutByIdPartie($_GET['sudoku']);
             if (empty($sudoku)) {
                 redirect('Dashboard');
             } 
         }
         return view('auth.game', [
-            'sudoku' => $sudoku
+            'sudoku' => $sudoku,
+            'statut' => $statut[0]
         ]);
     }
 
@@ -143,7 +145,7 @@ class GameController extends Controller
                 User::addScore($score);
                 Sudoku::updateStatutSudoku($id_partie);
 
-                return 'true';
+                return json_encode(['key' => true, 'score' => $score[0]]);
             }
             return json_encode($arrayVerif);
         }
