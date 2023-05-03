@@ -1,6 +1,7 @@
 <h1>Dashboard</h1>
 <a href="<?= route('Game')?>">Jouer</a>
 <a href="<?= route('Logout')?>">Déconnexion</a>
+<a href="<?= route('add_friends')?>">Demande amis <span>(<?= $demande_amis ?>)</span></a>
 <br>
 <hr>
 <br>
