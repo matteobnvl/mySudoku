@@ -19,3 +19,5 @@ Route::get(['/game', 'App\Controllers\GameController@index'])->name('Game');
 // Route Game Sudoku
 Route::get(['/insert', 'App\Controllers\GameController@insert'])->name('insert');
 Route::get(['/delete', 'App\Controllers\GameController@delete'])->name('delete');
+Route::get(['/verif', 'App\Controllers\GameController@verif'])->name('verif');
+Route::get(['/finish', 'App\Controllers\GameController@finish'])->name('finish');

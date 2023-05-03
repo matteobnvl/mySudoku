@@ -1,15 +1,13 @@
+<h1>Page Inscription</h1>
+<form action="<?= route('Register') ?>" method="post">
+    <label for="mail">pseudo</label>
+    <input type="text" id="pseudo" name="pseudo" required autocomplete="off">
 
-<div class="row">
-    <form action="<?= route('Register') ?>" method="post" class="form">
-    
-        <h1>Créer un compte</h1>
+    <label for="mail">email</label>
+    <input type="email" id="email" name="email" required autocomplete="off">
 
-        <div><input class="input" type="text" id="pseudo" name="pseudo" required autocomplete="off" placeholder="pseudo"></div>
-        <div><input class="input" type="email" id="email" name="email" required autocomplete="off" placeholder="email"></div>
-        <div><input class="input" type="password" id="password" name="password" required autocomplete="off" placeholder="mot de passe"></div>
-        <div><button>M'inscrire</button></div>
-        
-        <p><?= $error ==! '' ? $error : '' ?></p>
-        
-    </form>
-</div>
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" name="password" required autocomplete="off">
+    <p><?= $error ==! '' ? $error : '' ?></p>
+    <button>M'inscrire</button>
+</form>

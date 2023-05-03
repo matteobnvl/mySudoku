@@ -61,4 +61,19 @@ class Game extends Model
         ]);
         return $stt->fetch(\PDO::FETCH_ASSOC);
     }
+
+
+    public static function getStatutByIdPartie($id_partie)
+    {
+        $db = self::db();
+        $qry = "SELECT id_statut
+                FROM Partie
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id_partie
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
