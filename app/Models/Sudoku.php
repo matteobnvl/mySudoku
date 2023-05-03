@@ -139,4 +139,81 @@ class Sudoku extends Model
     
         return false;
     }
+
+    public static function insert($index, $value, $sudoku, $id_partie)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = $value.'*';
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_partie' => $id_partie
+        ]);
+    }
+
+    public static function delete($index, $sudoku, $id_partie)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = 0;
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_partie' => $id_partie
+        ]);
+    }
+
+    public static function getSolutionSudokuByPartie($id)
+    {
+        $db = self::db();
+        $qry = "SELECT solution
+                FROM Sudoku
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getScoreByNiveau($id)
+    {
+        $db = self::db();
+        $qry = "SELECT Niveau.score
+                FROM Partie
+                INNER JOIN Niveau ON Niveau.id_niveau = Partie.id_niveau
+                WHERE Partie.id_partie = :id_partie";
+            
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function updateStatutSudoku($id_partie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET id_statut = :id_statut
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_statut' => 2,
+            'id_partie' => $id_partie
+        ]);
+    }
 }

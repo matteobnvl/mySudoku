@@ -1,5 +1,6 @@
 <h1>Dashboard</h1>
 <a href="<?= route('Game')?>">Jouer</a>
+<a href="<?= route('Profil')?>">Profil</a>
 <a href="<?= route('Logout')?>">Déconnexion</a>
 <br>
 <hr>
