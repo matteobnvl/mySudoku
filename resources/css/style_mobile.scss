@@ -1,3 +1,120 @@
+$colorPrincipal : #0271C0;
+$colorSecondaire: rgb(255, 255, 255);
+$colorTertiaire: #B9E0FC;
 * {
-    background-color: white;
+    background-color: $colorSecondaire;
 }
+
+
+@mixin Transition($time:1s){
+    transition-property:all;
+    transition-duration:$time;
+    transition-timing-function:ease-in-out;
+ } 
+body {
+    margin: 0;
+    font-family: 'Rubik', sans-serif;  
+}
+.header{
+    box-shadow: 0 1px 0 $colorPrincipal;
+    padding-bottom: 2vh;
+    #headerDiv {
+        display: flex;
+        justify-content: space-between;
+        
+        div {
+            margin-top: 1vh;
+            h1 {
+                font-size: 12vw;
+                margin: 0; 
+                color: $colorPrincipal;
+                margin-right: 14vw;
+            }
+        }
+        #menuBT {
+            margin-top: 1.5vh;
+            .burgerMenu {
+                display: block;
+                width: 10vw;
+                height: 4px;
+                background-color: $colorPrincipal;
+                margin: 8px;
+                border-radius: 3px;
+                @include Transition($time:0.4s);
+            }
+        }
+    }
+    #pages {
+        display: none;
+        padding-top: 2vh;
+        
+        div {
+            display: flex;
+            justify-content: space-around;
+    
+            a{
+                text-decoration: none;
+               font-size: 4vw; 
+            }
+        }
+    }
+}
+.change {
+    .bar1 {
+        transform: rotate(-45deg) translate(-10px, 8px);
+    }
+    .bar2 {
+        opacity:0;
+    }
+    .bar3 {
+        transform: rotate(45deg) translate(-8px, -8px);
+    }
+}
+
+// responsive pour petit écran
+
+@media screen and (max-width: 768px) {
+    .row {
+      min-height: 80vh;
+      flex-direction: column;
+      
+      form {
+        width: 80%;
+        height: auto;
+        
+        div {
+          flex-direction: column;
+          width: 100%;
+          
+          input {
+            height: auto;
+            margin-bottom: 20px;
+          }
+        
+        }
+      }
+    }
+  }
+  
+// responsive pour grand écran
+  
+  @media screen and (min-width: 768px) {
+    .row {
+      min-height: 60vh;
+      
+      form {
+        width: 50%;
+        height: 50%;
+        
+        div {
+          width: 80%;
+          
+          input {
+            height: 5vh;
+            margin-bottom: 50px;
+          }
+          
+        }
+      }
+    }
+  }

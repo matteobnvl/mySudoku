@@ -1,3 +1,97 @@
 * {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+}
+
+body {
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+}
+
+.header {
+  box-shadow: 0 1px 0 #0271C0;
+  padding-bottom: 2vh;
+}
+.header #headerDiv {
+  display: flex;
+  justify-content: space-between;
+}
+.header #headerDiv div {
+  margin-top: 1vh;
+}
+.header #headerDiv div h1 {
+  font-size: 12vw;
+  margin: 0;
+  color: #0271C0;
+  margin-right: 14vw;
+}
+.header #headerDiv #menuBT {
+  margin-top: 1.5vh;
+}
+.header #headerDiv #menuBT .burgerMenu {
+  display: block;
+  width: 10vw;
+  height: 4px;
+  background-color: #0271C0;
+  margin: 8px;
+  border-radius: 3px;
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+}
+.header #pages {
+  display: none;
+  padding-top: 2vh;
+}
+.header #pages div {
+  display: flex;
+  justify-content: space-around;
+}
+.header #pages div a {
+  text-decoration: none;
+  font-size: 4vw;
+}
+
+.change .bar1 {
+  transform: rotate(-45deg) translate(-10px, 8px);
+}
+.change .bar2 {
+  opacity: 0;
+}
+.change .bar3 {
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    min-height: 80vh;
+    flex-direction: column;
+  }
+  .row form {
+    width: 80%;
+    height: auto;
+  }
+  .row form div {
+    flex-direction: column;
+    width: 100%;
+  }
+  .row form div input {
+    height: auto;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .row {
+    min-height: 60vh;
+  }
+  .row form {
+    width: 50%;
+    height: 50%;
+  }
+  .row form div {
+    width: 80%;
+  }
+  .row form div input {
+    height: 5vh;
+    margin-bottom: 50px;
+  }
 }/*# sourceMappingURL=style_mobile.css.map */
