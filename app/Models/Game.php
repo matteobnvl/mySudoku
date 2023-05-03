@@ -56,10 +56,22 @@ class Game extends Model
                 FROM Partie
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);
+
+        /*----------- En cours
+        if (isset($_SESSION['difficulte'])) {
+            $difficulte = $_SESSION['difficulte'];
+            $stmt->bindParam(':difficulte', $difficulte);
+        } else {
+            $difficulte = 'easy';
+            $stmt->bindParam(':difficulte', $difficulte);
+        }
+        -----------*/
+
         $stt->execute([
             ':id_partie' => $id_partie
         ]);
         return $stt->fetch(\PDO::FETCH_ASSOC);
+        
     }
 
 
