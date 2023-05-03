@@ -11,5 +11,5 @@
 </form>
 
 <div>
-    <p>Score total : <?=  var_dump($_SESSION['score']) ?> </p>
+    <p>Score total : <?=  $_SESSION['score'] ?> </p>
 </div>
