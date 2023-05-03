@@ -15,16 +15,10 @@ class Sudoku extends Model
         return $result;
     }
 
-    public static function generateSolutionSudoku($data)
+    public static function generateSolutionSudoku($grid)
     {
-        $curl_solution = curl_init();
-        curl_setopt($curl_solution, CURLOPT_URL, "https://sugoku.onrender.com/solve");
-        curl_setopt($curl_solution, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl_solution, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl_solution, CURLOPT_CUSTOMREQUEST, "POST");
-        $resultSolution = curl_exec($curl_solution);
-        curl_close($curl_solution);
-        return $resultSolution;
+        $grid = self::solveSudoku(json_decode($grid)->{'board'});
+        return json_encode($grid);
     }
 
     public static function createSudoku($tableau, $solution, $id_partie)
@@ -33,7 +27,6 @@ class Sudoku extends Model
         $qry = "INSERT INTO Sudoku (tableau, solution, id_partie)
                 VALUES (:tableau, :solution, :id_partie)";
         $stt = $db->prepare($qry);
-        
         $stt->execute([
             ':tableau' => $tableau,
             ':solution' => $solution,
@@ -67,5 +60,160 @@ class Sudoku extends Model
             ':id_joueur' => $id_joueur
         ]);
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function findEmpty($grid, &$row, &$col) {
+        for ($row = 0; $row < 9; $row++) {
+            for ($col = 0; $col < 9; $col++) {
+                if ($grid[$row][$col] == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static function usedInRow($grid, $row, $num) {
+        for ($col = 0; $col < 9; $col++) {
+            if ($grid[$row][$col] == $num) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static function usedInCol($grid, $col, $num) {
+        for ($row = 0; $row < 9; $row++) {
+            if ($grid[$row][$col] == $num) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static function usedInBox($grid, $boxStartRow, $boxStartCol, $num) {
+        for ($row = 0; $row < 3; $row++) {
+            for ($col = 0; $col < 3; $col++) {
+                if ($grid[$row + $boxStartRow][$col + $boxStartCol] == $num) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static function isSafe($grid, $row, $col, $num) {
+        return !self::usedInRow($grid, $row, $num) &&
+               !self::usedInCol($grid, $col, $num) &&
+               !self::usedInBox($grid, $row - ($row % 3), $col - ($col % 3), $num);
+    }
+
+    public static function findUnassignedLocation($grid) {
+        for ($row = 0; $row < 9; $row++) {
+            for ($col = 0; $col < 9; $col++) {
+                if ($grid[$row][$col] === 0) {
+                    return [$row, $col];
+                }
+            }
+        }
+        return null;
+    }
+    
+    public static function solveSudoku(&$grid) {
+        $row = 0;
+        $col = 0;
+    
+        if (!self::findEmpty($grid, $row, $col)) {
+            return $grid;
+        }
+    
+        for ($num = 1; $num <= 9; $num++) {
+            if (self::isSafe($grid, $row, $col, $num)) {
+                $grid[$row][$col] = $num;
+                if (self::solveSudoku($grid)) {
+                    return $grid;
+                }
+                $grid[$row][$col] = 0;
+            }
+        }
+    
+        return false;
+    }
+
+    public static function insert($index, $value, $sudoku, $id_partie)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = $value.'*';
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_partie' => $id_partie
+        ]);
+    }
+
+    public static function delete($index, $sudoku, $id_partie)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = 0;
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_partie' => $id_partie
+        ]);
+    }
+
+    public static function getSolutionSudokuByPartie($id)
+    {
+        $db = self::db();
+        $qry = "SELECT solution
+                FROM Sudoku
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getScoreByNiveau($id)
+    {
+        $db = self::db();
+        $qry = "SELECT Niveau.score
+                FROM Partie
+                INNER JOIN Niveau ON Niveau.id_niveau = Partie.id_niveau
+                WHERE Partie.id_partie = :id_partie";
+            
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function updateStatutSudoku($id_partie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET id_statut = :id_statut
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_statut' => 2,
+            'id_partie' => $id_partie
+        ]);
     }
 }
