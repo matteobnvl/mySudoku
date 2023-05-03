@@ -121,6 +121,7 @@ $('div[data-verif]').click(function () {
             type: 'POST',
             data: {id: <?= $_GET['sudoku'] ?>},
             success: function (response) {
+                console.log(response)
                 response = JSON.parse(response)
                 if (response.key == true) {
                     elements.forEach(function (item) {
