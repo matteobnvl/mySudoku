@@ -208,4 +208,21 @@ class User extends Model
             ':statut' => 1
         ]);
     }
+
+    public static function getScoresWithFriends()
+    {
+        $db = self::db();
+        $qry = "SELECT j.pseudo, j.score 
+                FROM Joueur j 
+                LEFT JOIN Amis a ON (j.id_joueur = a.id_amis OR j.id_joueur = a.id_amis_1) 
+                WHERE (a.id_amis = :id_joueur 
+                    OR a.id_amis_1 = :id_joueur 
+                    OR j.id_joueur = :id_joueur)
+                ORDER BY score DESC";
+        $stt = $db->prepare($qry);
+        $stt->bindParam(':id_joueur', $_SESSION['id_joueur'], PDO::PARAM_INT);
+        $stt->execute();
+        $amis = $stt->fetchAll(PDO::FETCH_OBJ);
+        return $amis;
+    }
 }

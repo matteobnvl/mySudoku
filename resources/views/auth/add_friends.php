@@ -1,3 +1,4 @@
+<a href="<?= route('Dashboard')?>">retour dashboard</a>
 <h1>Ajouter vos amis</h1>
 
 <p style="color:green"><?= (isset($_GET['message'])) ? $_GET['message'] : '' ?></p>
@@ -8,12 +9,12 @@
 <h2>liste demande d'amis</h2>
 <ul>
     <?php 
-    if (!empty($liste_demande_amis)){
-        foreach($liste_demande_amis as $amis) { ?>
+    if (!empty($liste_demande_amis)):
+        foreach($liste_demande_amis as $amis) : ?>
         <li><?= $amis['pseudo']?>  <a href="<?= route('accept')?>?id=<?= $amis['id'] ?>">accepter</a>   <a href="<?= route('refuse')?>?id=<?= $amis['id'] ?>">refuser</a></li>
-    <?php } } else {
+    <?php endforeach; else :
         echo 'Vous n\'avez aucune demande';
-    } ?>
+    endif ?>
 </ul>
 
 
