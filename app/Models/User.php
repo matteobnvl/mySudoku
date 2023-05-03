@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use PDO;
 
 class User extends Model
 {
@@ -65,5 +66,18 @@ class User extends Model
         $_SESSION['pseudo'] = htmlentities($pseudo);
         $_SESSION['email'] = htmlentities($email);
         return true;
+    }
+
+    public static function getAmis($id_joueur)
+    {
+        $db = self::db();
+        $qry = "SELECT pseudo FROM Joueur JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
+                WHERE (Amis.id_amis = :id_joueur OR Amis.id_amis_1 = :id_joueur) 
+                AND Joueur.id_joueur <> :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->bindParam(':id_joueur', $id_joueur, PDO::PARAM_INT);
+        $stt->execute();
+        $amis = $stt->fetchAll(PDO::FETCH_OBJ);
+        return $amis;
     }
 }

@@ -13,3 +13,15 @@
 <div>
     <p>Score total : <?=  $_SESSION['score'] ?> </p>
 </div>
+<div>
+    <h2>Liste d'amis :</h2>
+    <?php if(!empty($amis)): ?>
+        <ul>
+            <?php foreach($amis as $ami): ?>
+            <li><?= $ami->pseudo ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+        <p>Aucun ami pour le moment</p>
+    <?php endif; ?>
+</div>

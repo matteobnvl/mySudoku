@@ -22,6 +22,9 @@ class ProfilController extends Controller
                     User::update($_SESSION['id_joueur'] ,$_POST['pseudo'], $_POST['email']);
             }
         }
-        return view('auth.profil');
+        $amis = User::getAmis($_SESSION['id_joueur']);
+        return view('auth.profil', ['amis' => $amis]);
     }
+
+
 }
