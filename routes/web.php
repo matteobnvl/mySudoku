@@ -16,6 +16,10 @@ Route::get(['/dashboard', 'App\Controllers\DashboardController@index'])->name('D
 // Route Game 
 Route::get(['/game', 'App\Controllers\GameController@index'])->name('Game');
 
+// Route Profil
+Route::get(['/profil', 'App\Controllers\ProfilController@index'])->name('Profil');
+
+
 // Route Game Sudoku
 Route::get(['/insert', 'App\Controllers\GameController@insert'])->name('insert');
 Route::get(['/delete', 'App\Controllers\GameController@delete'])->name('delete');
@@ -27,3 +31,4 @@ Route::get(['/ajouter-amis', 'App\Controllers\DashboardController@addFriends'])-
 Route::get(['/search', 'App\Controllers\DashboardController@search'])->name('search');
 Route::get(['/accept', 'App\Controllers\DashboardController@accept'])->name('accept');
 Route::get(['/refuse', 'App\Controllers\DashboardController@refuse'])->name('refuse');
+
