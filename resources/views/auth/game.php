@@ -14,10 +14,10 @@
 <table>
 
     <?php
-    foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes){
+    foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes):
         ?>
         <tr>
-            <?php foreach ($lignes as $keyCases => $cases) { ?>
+            <?php foreach ($lignes as $keyCases => $cases) : ?>
                 <td 
                     data-row="<?= $keyLignes.','.$keyCases ?>" 
                     <?= ($cases ==! 0 && !strpos($cases, '*')) ? 'data-td='.$cases : 'style="color:blue"' ?>
@@ -25,9 +25,9 @@
                 >
                     <?php if ($cases ==! 0 && !strpos($cases, '*')){echo $cases;} elseif (strpos($cases, '*')) {echo substr($cases, 0, -1);} else {echo '';} ?>
                 </td>
-            <?php } ?>
+            <?php endforeach ?>
         </tr>
-    <?php } ?>
+    <?php endforeach ?>
 </table>
 <section>
     <div>1</div>
