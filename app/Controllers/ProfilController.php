@@ -23,7 +23,8 @@ class ProfilController extends Controller
             }
         }
         $amis = User::getAmis($_SESSION['id_joueur']);
-        return view('auth.profil', ['amis' => $amis]);
+        $scores = User::getScores();
+        return view('auth.profil', ['amis' => $amis, 'scores' => $scores]);
     }
 
 

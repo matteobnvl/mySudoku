@@ -80,4 +80,14 @@ class User extends Model
         $amis = $stt->fetchAll(PDO::FETCH_OBJ);
         return $amis;
     }
+
+    public static function getScores()
+    {
+        $db = self::db();
+        $qry = "SELECT pseudo, score FROM Joueur ORDER BY score DESC";
+        $stt = $db->prepare($qry);
+        $stt->execute();
+        $scores = $stt->fetchAll(PDO::FETCH_OBJ);
+        return $scores;
+    }
 }

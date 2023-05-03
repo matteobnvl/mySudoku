@@ -25,3 +25,22 @@
         <p>Aucun ami pour le moment</p>
     <?php endif; ?>
 </div>
+<div>
+    <h2>Classement des joueurs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($scores as $score): ?>
+                <tr>
+                    <td><?php echo $score->pseudo ?></td>
+                    <td><?php echo $score->score ?></td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+</div>
