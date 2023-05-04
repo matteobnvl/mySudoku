@@ -2,15 +2,18 @@
 <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
     <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
 </a>
-<p class="toggle <?= ($statut['id_statut'] == 2) ? 'active' : '' ?>">
-    Bravo tu as réussi ce sudoku !! 
+<p class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
+    <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
+    <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
     <br><br>
-    votre score : <span id="score"></span>
+    
+    <?= ($statut['statut'] == 2) ? 'votre score : <span id="score"></span>' : '' ?>
     <br>
     <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
         <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
     </a>
 </p>
+<p style="float:right; margin-right:100px;font-size:2rem"><span id="vie"></span> vie</p>
 <table>
 
     <?php
@@ -21,7 +24,7 @@
                 <td 
                     data-row="<?= $keyLignes.','.$keyCases ?>" 
                     <?= ($cases ==! 0 && !strpos($cases, '*')) ? 'data-td='.$cases : 'style="color:blue"' ?>
-                    <?= ($statut['id_statut'] == 2) ? 'data-finish="1"' : '' ?>
+                    <?= ($statut['statut'] == 2) ? 'data-finish="1"' : '' ?>
                 >
                     <?php if ($cases ==! 0 && !strpos($cases, '*')){echo $cases;} elseif (strpos($cases, '*')) {echo substr($cases, 0, -1);} else {echo '';} ?>
                 </td>
@@ -29,6 +32,11 @@
         </tr>
     <?php endforeach ?>
 </table>
+<p class="toggle" id="toggleVie">
+    Oh mince ! Vous n'avez pus de vie 
+    <a href="<?= route('Dashboard')?>">Arreter la partie</a>
+    <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
+</p>
 <section>
     <div>1</div>
     <div>2</div>
@@ -96,14 +104,29 @@ $('div[data-check]').click(function () {
         type: 'POST',
         data: {id: <?= $_GET['sudoku'] ?>},
         success: function (response) {
-            response = JSON.parse(response)
-            elements.forEach(function (item) {
-                response.forEach(function (event) {
-                    if ($(item).attr('data-row') == event.key) {
-                        $(item).addClass((event.value)? 'true' : 'false')
-                    }
+            console.log(response)
+            if (response != 'false') {
+                response = JSON.parse(response)
+                vie = parseInt($('#vie').html())
+                vie--
+                $('#vie').html(vie.toString())
+                console.log(response)
+                elements.forEach(function (item) {
+                    response.forEach(function (event) {
+                        if ($(item).attr('data-row') == event.key) {
+                            $(item).addClass((event.value)? 'true' : 'false')
+                        }
+                    })
                 })
-            })
+            } else {
+                vie = parseInt($('#vie').html())
+                vie--
+                $('#vie').html(vie.toString())
+                $('#toggleVie').addClass('active')
+                elements.forEach(function (item) {
+                        item.setAttribute('data-finish', '1')
+                })
+            }
         }
     })
 })
@@ -144,4 +167,6 @@ $('div[data-verif]').click(function () {
         console.log('pas finis')
     }
 })
+
+$('#vie').html(<?= $statut['vie'] ?>)
 </script>
