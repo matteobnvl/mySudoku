@@ -105,4 +105,12 @@ body {
     height: 5vh;
     margin-bottom: 50px;
   }
+}
+@media screen and (max-width: 768px) {
+  .sudoku {
+    width: 90%;
+  }
+  .center-play {
+    margin-top: 30%;
+  }
 }/*# sourceMappingURL=style_mobile.css.map */
