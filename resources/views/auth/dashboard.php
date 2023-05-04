@@ -1,6 +1,7 @@
 <h1>Dashboard</h1>
 <a href="<?= route('Game')?>">Jouer</a>
 <a href="<?= route('Profil')?>">Profil</a>
+<a href="<?= route('add_friends')?>">Ajouter amis <span>(<?= $demande_amis ?>)</span></a>
 <a href="<?= route('Logout')?>">Déconnexion</a>
 <br>
 <hr>
@@ -12,12 +13,12 @@
 <h3>Mes sudokus</h3>
 <br>
 <ul>
-    <?php foreach($sudokus as $sudoku) { ?>
+    <?php foreach($sudokus as $sudoku) : ?>
         <li>
-            sudoku n°<?= $sudoku['id_partie'] .' -  '. $sudoku['type'].'  -  '. $sudoku['difficulte']?>  -  
+            sudoku n°<?= $sudoku['id_partie'] .' -  '. $sudoku['statut'].'  -  '. $sudoku['difficulte']?>  -  
             <a href="<?= route('Game')?>?sudoku=<?= $sudoku['id_partie']?>">
-                <?= ($sudoku['type'] === 'en cours')? 'Reprendre' : 'Voir' ?>
+                <?= ($sudoku['statut'] === 1)? 'Reprendre' : 'Voir' ?>
             </a>
         </li>
-    <?php } ?>
+    <?php endforeach ?>
 </ul>

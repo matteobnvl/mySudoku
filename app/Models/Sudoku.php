@@ -50,9 +50,8 @@ class Sudoku extends Model
     public static function getAllSudokuJoueur($id_joueur)
     {
         $db = self::db();
-        $qry = "SELECT Partie.id_partie, Statut.type, Niveau.difficulte 
+        $qry = "SELECT Partie.id_partie, Partie.statut, Niveau.difficulte 
                 FROM Partie
-                INNER JOIN Statut ON Statut.id_statut = Partie.id_statut
                 INNER JOIN Niveau ON Niveau.id_niveau = Partie.id_niveau
                 WHERE id_joueur = :id_joueur";
         $stt = $db->prepare($qry);
@@ -204,15 +203,15 @@ class Sudoku extends Model
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function updateStatutSudoku($id_partie)
+    public static function updateStatutSudoku($id_partie, $statut)
     {
         $db = self::db();
         $qry = "UPDATE Partie
-                SET id_statut = :id_statut
+                SET statut = :statut
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);
         $stt->execute([
-            ':id_statut' => 2,
+            ':statut' => $statut,
             'id_partie' => $id_partie
         ]);
     }
