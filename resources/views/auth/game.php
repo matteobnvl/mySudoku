@@ -1,20 +1,27 @@
 <h1 class="title-h1">Sudoku niveau <?= $niveau[$statut['id_niveau']] ?></h1>
-<p id="toggleWin" class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
-    <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
-    <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
-    <span id="reussi"></span>
-    <br><br>
-    votre score : <span id="score"><?= ($statut['statut'] == 2) ? $statut['score'] : '' ?></span>
-    <br>
-    <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
-        <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
-    </a>
-</p>
-<p class="toggle" id="toggleVie">
-    <span id="plusDeVie">Oh mince ! Vous n'avez pus de vie</span> 
-    <a href="<?= route('Dashboard')?>">Arreter la partie</a>
-    <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
-</p>
+<section class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
+    <p id="toggleWin">
+        <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
+        <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
+        <span id="reussi"></span>
+        <br><br>
+        tu as obtenu <span id="score"><?= ($statut['statut'] == 2) ? $statut['score'] : '0' ?> points</span>
+        <br><br>
+        <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
+            <?= ($_SESSION) ? 'Retour home' : 'Retour home' ?>
+        </a>
+    </p>
+</section>
+<section class="toggle" id="toggleVie">
+    <p id="plusDeVie">
+        Oh mince ! Vous n'avez plus de vie
+    </p>
+    <div>
+        <a href="<?= route('Dashboard')?>">Arreter la partie</a>
+        <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
+    </div> 
+    
+</section>
 <section class="sudoku-gameplay">
     <p class="box-vie">Vos vies restantes : <span id="vie"></span></p>
     <table>
@@ -45,8 +52,8 @@
         <div>8</div>
         <div>9</div>
         <div data-del="1"><i class="fa-solid fa-eraser"></i></div>
-        <div data-check="1"><i class="fa-solid fa-lightbulb"></i></div>
-        <div data-verif="1"><i class="fa-solid fa-check"></i></div>
+        <div <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? '' : 'data-check="1"' ?>><i class="fa-solid fa-lightbulb"></i></div>
+        <div <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? '' : 'data-verif="1"' ?>><i class="fa-solid fa-check"></i></div>
     </section>
 </section>
 
