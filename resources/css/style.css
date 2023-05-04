@@ -1,3 +1,47 @@
+@media (min-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .header #headerDiv div #Home {
+    margin-left: 5vw !important;
+    padding-bottom: 0 !important;
+  }
+  .header #headerDiv #menuBT {
+    display: none;
+  }
+  .header #pages {
+    display: block !important;
+    width: 50vw;
+    margin-top: 1.5vw;
+  }
+  .header #pages div a {
+    background-color: #B9E0FC;
+    border-radius: 99vw;
+  }
+  .header #pages div a:hover {
+    background-color: #0271C0;
+    color: rgb(255, 255, 255) !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1400px) {
+  #headerDiv div #Home {
+    font-size: 5vw !important;
+  }
+  #pages a {
+    width: 12vw;
+    font-size: 2vw !important;
+  }
+}
+@media (min-width: 1400px) {
+  #headerDiv div #Home {
+    font-size: 4vw !important;
+  }
+  #pages a {
+    width: 8vw;
+    font-size: 1vw !important;
+  }
+}
 .sudoku-gameplay {
   display: flex;
   align-items: center;
@@ -81,6 +125,16 @@ tr:nth-child(3), tr:nth-child(6) {
 }
 .toggle.active {
   display: block;
+  background-color: rgba(110, 110, 110, 0.5);
+}
+
+.toggle {
+  display: none;
+  text-align: center;
+  background-color: greenyellow;
+}
+.toggle.active {
+  display: block;
 }
 
 .row {
@@ -134,4 +188,30 @@ tr:nth-child(3), tr:nth-child(6) {
   align-items: center;
   margin-left: auto;
   cursor: pointer;
+}
+
+.sudoku {
+  width: 30%;
+  filter: blur(1px);
+}
+
+.center-play {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-play {
+  position: absolute;
+  text-decoration: none;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 7px;
+  box-shadow: 5px;
+  font-size: 30px;
+  color: aliceblue;
+  background-color: #0271C0;
 }/*# sourceMappingURL=style.css.map */

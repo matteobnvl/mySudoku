@@ -4,6 +4,78 @@
     justify-content: center;
 }
 
+
+$colorPrincipal : #0271C0;
+$colorSecondaire: rgb(255, 255, 255);
+$colorTertiaire: #B9E0FC;
+@media (min-width: 768px){
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        #headerDiv {
+            div {
+                #Home {
+                    margin-left: 5vw !important;
+                    padding-bottom: 0 !important;
+                }
+            }
+
+            #menuBT {
+                display: none;
+            }
+        }
+
+        #pages{
+            display: block !important;
+            width: 50vw;
+            margin-top: 1.5vw;
+            
+            div {
+                a {
+                    background-color: $colorTertiaire;
+                    border-radius: 99vw;
+                    &:hover {                  
+                        background-color: $colorPrincipal;
+                        color: $colorSecondaire !important;
+                    }
+                }
+
+            }
+        }   
+    }   
+}
+@media (min-width: 768px) and (max-width: 1400px){
+    #headerDiv {
+        div {
+            #Home {
+                font-size: 5vw !important;
+            }
+        }
+    }
+    #pages {
+        a {
+            width: 12vw; 
+            font-size: 2vw !important;
+        }
+    }
+}
+@media  (min-width: 1400px) {
+    #headerDiv {
+        div {
+            #Home {
+                font-size: 4vw !important;
+            }
+        }
+    }
+    #pages {
+        a {
+            width: 8vw;
+            font-size: 1vw !important;
+        }
+    }
+    
+}
 table{
     margin: flex;
     width: 500px;
@@ -151,4 +223,30 @@ tr{
           }
       }
     }
+}
+
+
+.sudoku{
+    width: 30%;
+    filter: blur(1px);
+}
+.center-play{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    
+.btn-play{
+    position: absolute;
+    text-decoration: none;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 7px;
+    box-shadow: 5px;
+    font-size: 30px;
+    color: aliceblue;
+    background-color: #0271C0 ;
 }
