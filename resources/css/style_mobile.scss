@@ -4,7 +4,9 @@ $colorTertiaire: #B9E0FC;
 * {
     background-color: $colorSecondaire;
 }
-
+ main {
+    margin-top: 1vh;
+ }
 
 @mixin Transition($time:1s){
     transition-property:all;
@@ -17,14 +19,15 @@ body {
 }
 .header{
     box-shadow: 0 1px 0 $colorPrincipal;
-    padding-bottom: 2vh;
     #headerDiv {
         display: flex;
         justify-content: space-between;
+        padding-bottom: 2vh;
         
         div {
             margin-top: 1vh;
-            h1 {
+            #Home {
+                text-decoration: none;
                 font-size: 12vw;
                 margin: 0; 
                 color: $colorPrincipal;
@@ -32,7 +35,7 @@ body {
             }
         }
         #menuBT {
-            margin-top: 1.5vh;
+            margin-top: 4vw;
             .burgerMenu {
                 display: block;
                 width: 10vw;
@@ -46,16 +49,23 @@ body {
     }
     #pages {
         display: none;
-        padding-top: 2vh;
-        
         div {
             display: flex;
             justify-content: space-around;
+            padding-bottom: 2vh;
     
             a{
+                padding: 1vw;
                 text-decoration: none;
-               font-size: 4vw; 
+                font-size: 4vw; 
+                color: black;
+                transition: 200ms;
+                display: flex;
+                text-align: center;
+                justify-content: center;
             }
+
+            
         }
     }
 }
@@ -70,7 +80,6 @@ body {
         transform: rotate(45deg) translate(-8px, -8px);
     }
 }
-
 // responsive pour petit écran
 
 @media screen and (max-width: 768px) {

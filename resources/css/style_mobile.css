@@ -2,6 +2,10 @@
   background-color: rgb(255, 255, 255);
 }
 
+main {
+  margin-top: 1vh;
+}
+
 body {
   margin: 0;
   font-family: "Rubik", sans-serif;
@@ -9,23 +13,24 @@ body {
 
 .header {
   box-shadow: 0 1px 0 #0271C0;
-  padding-bottom: 2vh;
 }
 .header #headerDiv {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 2vh;
 }
 .header #headerDiv div {
   margin-top: 1vh;
 }
-.header #headerDiv div h1 {
+.header #headerDiv div #Home {
+  text-decoration: none;
   font-size: 12vw;
   margin: 0;
   color: #0271C0;
   margin-right: 14vw;
 }
 .header #headerDiv #menuBT {
-  margin-top: 1.5vh;
+  margin-top: 4vw;
 }
 .header #headerDiv #menuBT .burgerMenu {
   display: block;
@@ -40,15 +45,21 @@ body {
 }
 .header #pages {
   display: none;
-  padding-top: 2vh;
 }
 .header #pages div {
   display: flex;
   justify-content: space-around;
+  padding-bottom: 2vh;
 }
 .header #pages div a {
+  padding: 1vw;
   text-decoration: none;
   font-size: 4vw;
+  color: black;
+  transition: 200ms;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .change .bar1 {
