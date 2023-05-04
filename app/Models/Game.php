@@ -158,4 +158,21 @@ class Game extends Model
             ':id_partie' => $id_partie
         ]);
     }
+
+    public static function getLastFiveSudokusByUser($id_joueur)
+    {
+        $db = self::db();
+        $qry = "SELECT Partie.id_partie, Partie.statut, Partie.id_niveau, Sudoku.tableau
+                FROM Partie
+                INNER JOIN Sudoku ON Partie.id_partie = Sudoku.id_partie
+                WHERE id_joueur = :id_joueur AND statut = :statut
+                ORDER BY Partie.id_partie DESC
+                LIMIT 5";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $id_joueur,
+            ':statut' => 1
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
