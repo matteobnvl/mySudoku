@@ -17,7 +17,7 @@ class GameController extends Controller
                     redirect('Dashboard');
                 }
             } else {
-                $partie = Game::getGame($_GET['sudoku']);
+                $partie = Game::getGame($_GET['sudoku'],$_SESSION['difficulte']);
                 if (empty($sudoku)) {
                     redirect('Accueil');
                 } 
@@ -32,28 +32,29 @@ class GameController extends Controller
     public function index()
     {
         if (!$_GET) {
+            $niveau = Game::getIdNiveauByName($_POST['niveau']);
             if ($_SESSION) {
-                if (Game::create($_SESSION['id_joueur'])) {
+                if (Game::create($niveau[0]['id_niveau'], $_SESSION['id_joueur'])) {
                     $partie = Game::getLastGameCreate($_SESSION['id_joueur']);
                 }
             } else {
-                if (Game::create()) {
+                if (Game::create($niveau[0]['id_niveau'])) {
                     $partie = Game::getLastGameCreate();
                 }
             }
-            $sudoku = Sudoku::generateSudoku();
+            $sudoku = Sudoku::generateSudoku($_POST['niveau']);
             $solutionSudoku = json_decode(Sudoku::generateSolutionSudoku($sudoku));
             Sudoku::createSudoku(
-                json_encode(json_decode($sudoku)->{'board'}), 
-                json_encode($solutionSudoku), 
+                json_encode(json_decode($sudoku)->{'board'}),
+                json_encode($solutionSudoku),
                 $partie['id_partie']);
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {
             $sudoku = Sudoku::getSudokuByPartie($_GET['sudoku']);
-            $statut = Game::getStatutVieByIdPartie($_GET['sudoku']);
+            $statut = Game::getStatutAndVieByIdPartie($_GET['sudoku']);
             if (empty($sudoku)) {
                 redirect('Dashboard');
-            } 
+            }
         }
         return view('auth.game', [
             'sudoku' => $sudoku,

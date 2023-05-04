@@ -172,4 +172,30 @@ section div:hover {
   align-items: center;
   margin-left: auto;
   cursor: pointer;
+}
+
+.sudoku {
+  width: 30%;
+  filter: blur(1px);
+}
+
+.center-play {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-play {
+  position: absolute;
+  text-decoration: none;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 7px;
+  box-shadow: 5px;
+  font-size: 30px;
+  color: aliceblue;
+  background-color: #0271C0;
 }/*# sourceMappingURL=style.css.map */
