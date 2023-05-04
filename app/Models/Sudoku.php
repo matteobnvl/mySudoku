@@ -52,7 +52,7 @@ class Sudoku extends Model
         $db = self::db();
         $qry = "SELECT Partie.id_partie, Statut.type, Niveau.difficulte 
                 FROM Partie
-                INNER JOIN Statut ON Statut.id_statut = Partie.id_statut
+                INNER JOIN Statut ON Statut.id_statut = Partie.statut
                 INNER JOIN Niveau ON Niveau.id_niveau = Partie.id_niveau
                 WHERE id_joueur = :id_joueur";
         $stt = $db->prepare($qry);

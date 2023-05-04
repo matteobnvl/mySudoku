@@ -20,14 +20,14 @@ class Game extends Model
     public static function create($id_joueur = null)
     {
         $db = self::db();
-        $qry = "INSERT INTO Partie (date_partie, id_statut, id_joueur, id_niveau)
-                VALUES (:date_partie, :id_statut, :id_joueur, :id_niveau)";
+        $qry = "INSERT INTO Partie (date_partie, statut, id_joueur, id_niveau)
+                VALUES (:date_partie, :statut, :id_joueur, :id_niveau)";
         $stt = $db->prepare($qry);
         $date = new \DateTime();
         $date =$date->format('Y-m-d');
         $stt->execute([
             ':date_partie' => $date,
-            ':id_statut' => 1,
+            ':statut' => 1,
             ':id_joueur' => $id_joueur,
             ':id_niveau' => 1
         ]);
