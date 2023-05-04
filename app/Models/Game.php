@@ -144,4 +144,18 @@ class Game extends Model
 
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+
+    public static function addScore($score, $id_partie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET score = :score
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':score' => $score,
+            ':id_partie' => $id_partie
+        ]);
+    }
 }

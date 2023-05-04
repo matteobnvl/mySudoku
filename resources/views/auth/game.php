@@ -155,7 +155,7 @@ $('div[data-verif]').click(function () {
                     })
                     $('#toggleWin').addClass('active')
                     $('#reussi').html('Bravo tu as réussi ce sudoku !!')
-                    $('#score').html(response.score.score)
+                    $('#score').html(response.score)
                 } else {
                     elements.forEach(function (item) {
                         response.forEach(function (event) {
