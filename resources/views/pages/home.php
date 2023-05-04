@@ -1,4 +1,3 @@
-
 <main>
     <div class="center-play">
         <img class="sudoku" src="public\images\sudoku.png" alt="">

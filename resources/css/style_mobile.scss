@@ -1,16 +1,14 @@
 $colorPrincipal : #0271C0;
 $colorSecondaire: rgb(255, 255, 255);
 $colorTertiaire: #B9E0FC;
-* {
-    background-color: $colorSecondaire;
-}
+
 
 
 @mixin Transition($time:1s){
     transition-property:all;
     transition-duration:$time;
     transition-timing-function:ease-in-out;
- } 
+}
 body {
     margin: 0;
     font-family: 'Rubik', sans-serif;  
@@ -53,8 +51,8 @@ body {
             justify-content: space-around;
     
             a{
-                text-decoration: none;
-               font-size: 4vw; 
+              text-decoration: none;
+              font-size: 4vw; 
             }
         }
     }
@@ -118,3 +116,17 @@ body {
       }
     }
   }
+
+@media screen and (max-width: 768px) {
+  .center-play{
+    margin-top: 10vh;
+  }
+  .sudoku{
+      width: 90%;
+  }
+  
+}
+
+  
+
+

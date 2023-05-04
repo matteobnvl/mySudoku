@@ -1,7 +1,3 @@
-* {
-  background-color: rgb(255, 255, 255);
-}
-
 body {
   margin: 0;
   font-family: "Rubik", sans-serif;
@@ -93,5 +89,13 @@ body {
   .row form div input {
     height: 5vh;
     margin-bottom: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .center-play {
+    margin-top: 10vh;
+  }
+  .sudoku {
+    width: 90%;
   }
 }/*# sourceMappingURL=style_mobile.css.map */
