@@ -1,12 +1,6 @@
 $colorPrincipal : #0271C0;
 $colorSecondaire: rgb(255, 255, 255);
 $colorTertiaire: #B9E0FC;
-* {
-    background-color: $colorSecondaire;
-}
- main {
-    margin-top: 1vh;
- }
 
 @mixin Transition($time:1s){
     transition-property:all;
@@ -15,7 +9,9 @@ $colorTertiaire: #B9E0FC;
  } 
 body {
     margin: 0;
-    font-family: 'Rubik', sans-serif;  
+    font-family: 'Rubik', sans-serif; 
+    background-color: $colorSecondaire;
+ 
 }
 .header{
     box-shadow: 0 1px 0 $colorPrincipal;

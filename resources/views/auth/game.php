@@ -13,44 +13,47 @@
         <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
     </a>
 </p>
-<p style="float:right; margin-right:100px;font-size:2rem"><span id="vie"></span> vie</p>
-<table>
-
-    <?php
-    foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes):
-        ?>
-        <tr>
-            <?php foreach ($lignes as $keyCases => $cases) : ?>
-                <td 
-                    data-row="<?= $keyLignes.','.$keyCases ?>" 
-                    <?= ($cases ==! 0 && !strpos($cases, '*')) ? 'data-td='.$cases : 'style="color:blue"' ?>
-                    <?= ($statut['statut'] == 2) ? 'data-finish="1"' : '' ?>
-                >
-                    <?php if ($cases ==! 0 && !strpos($cases, '*')){echo $cases;} elseif (strpos($cases, '*')) {echo substr($cases, 0, -1);} else {echo '';} ?>
-                </td>
-            <?php endforeach ?>
-        </tr>
-    <?php endforeach ?>
-</table>
 <p class="toggle" id="toggleVie">
     Oh mince ! Vous n'avez pus de vie 
     <a href="<?= route('Dashboard')?>">Arreter la partie</a>
     <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
 </p>
-<section>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>
-    <div>7</div>
-    <div>8</div>
-    <div>9</div>
-    <div data-del="1"><i class="fa-solid fa-eraser"></i></div>
-    <div data-check="1"><i class="fa-solid fa-lightbulb"></i></div>
-    <div data-verif="1"><i class="fa-solid fa-check"></i></div>
+<p style="float:right; margin-right:100px;font-size:2rem"><span id="vie"></span> vie</p>
+<section class="sudoku-gameplay">
+    <table>
+
+        <?php
+        foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes):
+            ?>
+            <tr>
+                <?php foreach ($lignes as $keyCases => $cases) : ?>
+                    <td 
+                        data-row="<?= $keyLignes.','.$keyCases ?>" 
+                        <?= ($cases ==! 0 && !strpos($cases, '*')) ? 'data-td='.$cases : 'style="color:blue"' ?>
+                        <?= ($statut['statut'] == 2) ? 'data-finish="1"' : '' ?>
+                    >
+                        <?php if ($cases ==! 0 && !strpos($cases, '*')){echo $cases;} elseif (strpos($cases, '*')) {echo substr($cases, 0, -1);} else {echo '';} ?>
+                    </td>
+                <?php endforeach ?>
+            </tr>
+        <?php endforeach ?>
+    </table>
+    <section class="choose-number">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div data-del="1"><i class="fa-solid fa-eraser"></i></div>
+        <div data-check="1"><i class="fa-solid fa-lightbulb"></i></div>
+        <div data-verif="1"><i class="fa-solid fa-check"></i></div>
+    </section>
 </section>
+
 
 
 <script>

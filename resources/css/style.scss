@@ -1,3 +1,8 @@
+.sudoku-gameplay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 $colorPrincipal : #0271C0;
@@ -72,7 +77,7 @@ $colorTertiaire: #B9E0FC;
     
 }
 table{
-    margin: auto;
+    margin: flex;
     width: 500px;
     height: 500px;
     border:2px solid black;
@@ -118,24 +123,24 @@ tr{
     }
 }
 
-section{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 5vh;
-    flex-wrap: wrap;
+.choose-number{
+    width: 25%;
+    display: grid;
+    grid-template-columns: repeat(3, 25px);
+    grid-gap: 75px;
+    justify-content: center;
 
     div{
-        width: 50px;
-        height: 50px;
-        background-color: rgba(137, 136, 136, .3);
+        width: 75px;
+        height: 75px;
+        background-color: #B9E0FC;
         text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 2rem;
         border-radius: 15px;
-        margin: 10px;
+        margin: -25px;
 
         &:hover{
             background-color: rgba(137, 136, 136, .5);
