@@ -130,7 +130,7 @@ $colorTertiaire: #B9E0FC;
             margin-top: 1.5vw;
             
             div {
-                a {
+                .btn-header {
                     background-color: $colorTertiaire;
                     border-radius: 99vw;
                     &:hover {                  
@@ -152,7 +152,7 @@ $colorTertiaire: #B9E0FC;
         }
     }
     #pages {
-        a {
+        .btn-header {
             width: 12vw; 
             font-size: 2vw !important;
         }
@@ -267,4 +267,80 @@ $colorTertiaire: #B9E0FC;
     font-size: 30px;
     color: aliceblue;
     background-color: #0271C0 ;
+}
+
+
+// style header connecté profil
+
+.profil{
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    background-color: #B9E0FC;
+    padding-bottom: 0vh !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 90;
+
+    &:hover{
+        background-color: #0271C0;
+        transition: all .4s;
+    }
+    
+
+    i{
+        font-size: 2rem;
+        color: white;
+        z-index: 90;
+    }
+
+    .toggle-profil{
+        position: absolute;
+        width: 200px;
+        height: 0px;
+        border-radius: 15px;
+        background-color: #0271C0;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        visibility: hidden;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        hr{
+            width: 100%;
+        }
+
+
+        li{
+            margin: 10px 20px;
+            width: 100%;
+            list-style: none;
+
+
+            .btn-profil{
+                color: white;
+                text-decoration: none;
+                font-size: 1rem !important;
+                
+                i{
+                    font-size: 1rem;
+                    color: white;
+                    margin-right: 10px;
+                }
+            }
+        }
+        &.active{
+            height: 200px;
+            visibility: visible;
+            transition: all .4s;
+            opacity: 1;
+        }
+    }
 }
