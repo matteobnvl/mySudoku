@@ -2,19 +2,19 @@
 <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
     <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
 </a>
-<p class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
+<p id="toggleWin" class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
     <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
     <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
+    <span id="reussi"></span>
     <br><br>
-    
-    <?= ($statut['statut'] == 2) ? 'votre score : <span id="score"></span>' : '' ?>
+    votre score : <span id="score"><?= ($statut['statut'] == 2) ? 'a rajouter' : '' ?></span>
     <br>
     <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
         <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
     </a>
 </p>
 <p class="toggle" id="toggleVie">
-    Oh mince ! Vous n'avez pus de vie 
+    <span id="plusDeVie">Oh mince ! Vous n'avez pus de vie</span> 
     <a href="<?= route('Dashboard')?>">Arreter la partie</a>
     <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
 </p>
@@ -153,7 +153,8 @@ $('div[data-verif]').click(function () {
                     elements.forEach(function (item) {
                         item.setAttribute('data-finish', '1')
                     })
-                    $('.toggle').addClass('active')
+                    $('#toggleWin').addClass('active')
+                    $('#reussi').html('Bravo tu as réussi ce sudoku !!')
                     $('#score').html(response.score.score)
                 } else {
                     elements.forEach(function (item) {
