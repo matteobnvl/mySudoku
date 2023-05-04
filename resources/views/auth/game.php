@@ -11,6 +11,8 @@
         <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
     </a>
 </p>
+<section class="sudoku-gameplay">
+
 <table>
 
     <?php
@@ -29,7 +31,7 @@
         </tr>
     <?php } ?>
 </table>
-<section>
+<section class="choose-number">
     <div>1</div>
     <div>2</div>
     <div>3</div>
@@ -43,6 +45,8 @@
     <div data-check="1"><i class="fa-solid fa-lightbulb"></i></div>
     <div data-verif="1"><i class="fa-solid fa-check"></i></div>
 </section>
+</section>
+
 
 
 <script>
