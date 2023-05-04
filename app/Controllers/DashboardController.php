@@ -22,7 +22,7 @@ class DashboardController extends Controller
         } else {
             $difficulte = 'easy';
         }
-        $sudokus = Sudoku::getAllSudokuJoueur($_SESSION['id_joueur'], $difficulte);
+        $sudokus = Sudoku::getAllSudokuJoueur($_SESSION['id_joueur']);
         $demande_amis = User::countRequestFriends();
 
         return view('auth.dashboard',[

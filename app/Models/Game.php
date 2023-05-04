@@ -17,7 +17,7 @@ class Game extends Model
         return $stt->fetch(\PDO::FETCH_ASSOC) > 0;
     }
 
-    public static function create($id_joueur = null)
+    public static function create($niveau, $id_joueur = null)
     {
         $db = self::db();
         $qry = "INSERT INTO Partie (date_partie, statut, id_joueur, id_niveau)
@@ -29,7 +29,7 @@ class Game extends Model
             ':date_partie' => $date,
             ':statut' => 1,
             ':id_joueur' => $id_joueur,
-            ':id_niveau' => 1
+            ':id_niveau' => $niveau
         ]);
 
         return true;
@@ -56,15 +56,6 @@ class Game extends Model
                 FROM Partie
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);
-
-        if (isset($_SESSION['difficulte'])) {
-            $difficulte = $_SESSION['difficulte'];
-            $stmt->bindParam(':difficulte', $difficulte);
-        } else {
-            $difficulte = 'easy';
-            $stmt->bindParam(':difficulte', $difficulte);
-        }
-
         $stt->execute([
             ':id_partie' => $id_partie
         ]);
@@ -124,5 +115,19 @@ class Game extends Model
             ':vie' => $vie,
             ':id_partie' => $id
         ]);
+    }
+
+    public static function getIdNiveauByName($name)
+    {
+        $db = self::db();
+        $qry = "SELECT id_niveau
+                FROM Niveau
+                WHERE difficulte = :name";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':name' => $name
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
