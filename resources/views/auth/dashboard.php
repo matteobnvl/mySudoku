@@ -1,4 +1,4 @@
-<h2 class="title-dashboard">Bonjour <?= $_SESSION['pseudo'] ?></h2>
+<h2 class="title-dashboard">Bonjour <?= $_SESSION['pseudo'] ?> - <?= $_SESSION['score'] ?><i style="color:gold" class="fa-solid fa-trophy"></i></h2>
 <section class="box-game">
     <form action="<?= route('Game')?>" method="POST">
         <select name="niveau" title="Selectionner un niveau">
