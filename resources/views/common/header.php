@@ -21,11 +21,11 @@
                     <div class="profil">
                         <i class="fa-solid fa-user"></i>
                         <div class="toggle-profil">
-                            <li><a class="btn-profil" href=""><i class="fa-regular fa-user"></i>Profil</a></li>
+                            <li><a class="btn-profil" href="<?= route('Profil')?>"><i class="fa-regular fa-user"></i>Profil</a></li>
                             <hr>
-                            <li><a class="btn-profil" href=""><i class="fa-solid fa-user-plus"></i>Demande amis</a></li>
+                            <li><a class="btn-profil" href="<?= route('add_friends')?>"><i class="fa-solid fa-user-plus"></i>Demande amis</a></li>
                             <hr>
-                            <li><a class="btn-profil" href=""><i class="fa-solid fa-right-from-bracket"></i>Se déconnecter</a></li>
+                            <li><a class="btn-profil" href="<?= route('Logout')?>"><i class="fa-solid fa-right-from-bracket"></i>Se déconnecter</a></li>
                         </div>
                     </div>
                 <?php endif ?>
