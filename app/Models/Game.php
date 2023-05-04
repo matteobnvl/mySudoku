@@ -57,8 +57,7 @@ class Game extends Model
                 WHERE id_partie = :id_partie AND id_niveau = :id_niveau";
         $stt = $db->prepare($qry);
         $stt->execute([
-            ':id_partie' => $id_partie,
-            ':id_niveau' => $difficulte
+            ':id_partie' => $id_partie
         ]);
         return $stt->fetch(\PDO::FETCH_ASSOC);
         
@@ -127,6 +126,20 @@ class Game extends Model
         $stt = $db->prepare($qry);
         $stt->execute([
             ':name' => $name
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getStatutAndVieByIdPartie($id_partie)
+    {
+        $db = self::db();
+        $qry = "SELECT statut, vie
+                FROM Partie
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id_partie
         ]);
 
         return $stt->fetchAll(\PDO::FETCH_ASSOC);

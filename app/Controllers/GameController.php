@@ -51,7 +51,7 @@ class GameController extends Controller
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {
             $sudoku = Sudoku::getSudokuByPartie($_GET['sudoku']);
-            $statut = Game::getStatutByIdPartie($_GET['sudoku']);
+            $statut = Game::getStatutAndVieByIdPartie($_GET['sudoku']);
             if (empty($sudoku)) {
                 redirect('Dashboard');
             }
