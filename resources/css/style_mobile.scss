@@ -127,3 +127,14 @@ body {
       }
     }
   }
+
+
+  @media screen and (max-width: 768px) {
+    .sudoku{
+      width: 90%;
+    }
+
+    .center-play{
+      margin-top: 30%;
+    }
+  }
