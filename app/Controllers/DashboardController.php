@@ -17,9 +17,13 @@ class DashboardController extends Controller
 
     public function index()
     {
+        if (isset($_SESSION['difficulte'])) {
+            $difficulte = $_SESSION['difficulte'];
+        } else {
+            $difficulte = 'easy';
+        }
         $sudokus = Sudoku::getAllSudokuJoueur($_SESSION['id_joueur']);
         $demande_amis = User::countRequestFriends();
-        
 
         return view('auth.dashboard',[
             'sudokus' => $sudokus,
