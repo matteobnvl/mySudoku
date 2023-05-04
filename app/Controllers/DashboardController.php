@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Models\Sudoku;
 use App\Models\User;
+use App\Models\Game;
 
 class DashboardController extends Controller
 {
@@ -17,17 +18,18 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if (isset($_SESSION['difficulte'])) {
-            $difficulte = $_SESSION['difficulte'];
-        } else {
-            $difficulte = 'easy';
-        }
-        $sudokus = Sudoku::getAllSudokuJoueur($_SESSION['id_joueur']);
+        $sudokus = Game::getLastFiveSudokusByUser($_SESSION['id_joueur']);
         $demande_amis = User::countRequestFriends();
-
+        $arrayNiveau = [
+            1 => 'Facile',
+            2 => 'Moyen',
+            3 => 'Difficile',
+            4 => 'Aléatoire'
+        ];
         return view('auth.dashboard',[
             'sudokus' => $sudokus,
-            'demande_amis' => $demande_amis[0]['nbdemande']
+            'demande_amis' => $demande_amis[0]['nbdemande'],
+            'niveau' => $arrayNiveau,
         ]);
     }
 

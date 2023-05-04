@@ -331,4 +331,120 @@
 }
 .toggle.active {
   display: flex;
+}
+
+.title-dashboard {
+  margin-top: 2%;
+  margin-left: 5%;
+  font-size: 2rem;
+  color: #0271C0;
+}
+
+.box-game {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.box-game select {
+  cursor: pointer;
+  padding: 8px;
+  border: 3px solid #0271C0;
+  border-radius: 20px;
+  color: #0271C0;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+.box-game button {
+  width: 200px;
+  padding: 8px;
+  border: 3px solid #0271C0;
+  border-radius: 20px;
+  color: white;
+  background-color: #0271C0;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.title-h3 {
+  margin-left: 5%;
+  opacity: 0.5;
+  color: #0271C0;
+}
+
+.section-sudoku {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.section-sudoku a {
+  text-decoration: none;
+}
+.section-sudoku .box-sudoku {
+  width: 300px;
+  height: 300px;
+  margin: 20px 50px;
+  background-color: rgba(185, 224, 252, 0.3);
+  border-radius: 20px;
+  transition: all 0.1s;
+  position: relative;
+}
+.section-sudoku .box-sudoku:hover {
+  transform: scale(1.05);
+  transition: all 0.4s;
+}
+.section-sudoku .box-sudoku:hover:after {
+  opacity: 1;
+}
+.section-sudoku .box-sudoku:after {
+  content: "Reprendre";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #0271C0;
+  background-color: #0271C0;
+  border-radius: 999px;
+  color: white;
+  padding: 10px;
+  font-size: 1.5rem;
+  opacity: 0;
+}
+.section-sudoku .box-sudoku h4 {
+  color: #0271C0;
+  text-align: center;
+  margin-top: 20px;
+}
+.section-sudoku .box-sudoku table {
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  border: 2px solid #0271C0;
+  border-collapse: collapse;
+  margin: auto;
+}
+.section-sudoku .box-sudoku table td {
+  border: 1px solid gray;
+  color: #0271C0;
+  text-decoration: none;
+}
+.section-sudoku .box-sudoku table td:nth-child(3), .section-sudoku .box-sudoku table td:nth-child(6) {
+  border-right: 2px solid #0271C0;
+}
+.section-sudoku .box-sudoku table tr {
+  border: 1px solid gray;
+}
+.section-sudoku .box-sudoku table tr:nth-child(3), .section-sudoku .box-sudoku table tr:nth-child(6) {
+  border-bottom: 2px solid #0271C0;
+}
+.section-sudoku .box {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section-sudoku .box i {
+  color: #0271C0;
+  font-size: 5rem;
 }/*# sourceMappingURL=style.css.map */

@@ -414,3 +414,139 @@ $colorTertiaire: #B9E0FC;
         display: flex;
     }
 }
+
+
+// style page dashboard
+
+.title-dashboard{
+    margin-top: 2%;
+    margin-left: 5%;
+    font-size: 2rem;
+    color: #0271C0;
+}
+
+.box-game{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    select{
+        cursor: pointer;
+        padding: 8px;
+        border: 3px solid #0271C0;
+        border-radius: 20px;
+        color: #0271C0;
+        background-color: transparent;
+        font-size: 1.2rem;
+    }
+
+    button{
+        width: 200px;
+        padding: 8px;
+        border: 3px solid #0271C0;
+        border-radius: 20px;
+        color: white;
+        background-color: #0271C0;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
+
+.title-h3{
+    margin-left:5% ;
+    opacity: .5;
+    color: #0271C0;
+}
+
+.section-sudoku{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    a{
+        text-decoration: none;
+    }
+
+    .box-sudoku{
+        width: 300px;
+        height: 300px;
+        margin: 20px 50px;
+        background-color: rgba($color: #B9E0FC, $alpha: .3);
+        border-radius: 20px;
+        transition: all .1s;
+        position: relative;
+
+        &:hover{
+            transform: scale(1.05);
+            transition: all .4s;
+            &:after{
+                opacity: 1;
+            }
+        }
+        &:after{
+            content: "Reprendre";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid #0271C0;
+            background-color: #0271C0;
+            border-radius: 999px;
+            color: white;
+            padding: 10px;
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+
+        h4{
+            color: #0271C0;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        table{
+            width: 80%;
+            height: 80%;
+            text-align: center;
+            border: 2px solid #0271C0;
+            border-collapse: collapse;
+            margin: auto;
+
+            td{
+                border: 1px solid gray;
+                color: #0271C0;
+                text-decoration: none;
+            
+                &:nth-child(3),
+                &:nth-child(6){
+                    border-right: 2px solid #0271C0;
+                }
+            }
+            
+            tr{
+                border: 1px solid gray;
+            
+                &:nth-child(3),
+                &:nth-child(6)
+                {
+                    border-bottom: 2px solid #0271C0;
+                }
+            }
+        }
+    }
+
+    .box{
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i{
+            color: #0271C0;
+            font-size: 5rem;
+        }
+
+    }
+}
