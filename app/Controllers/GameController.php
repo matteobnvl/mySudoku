@@ -17,7 +17,7 @@ class GameController extends Controller
                     redirect('Dashboard');
                 }
             } else {
-                $partie = Game::getGame($_GET['sudoku']);
+                $partie = Game::getGame($_GET['sudoku'],$_SESSION['difficulte']);
                 if (empty($sudoku)) {
                     redirect('Accueil');
                 } 
