@@ -1,3 +1,9 @@
+.sudoku-gameplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (min-width: 768px) {
   .header {
     display: flex;
@@ -42,12 +48,6 @@
     font-size: 1vw !important;
   }
 }
-.sudoku-gameplay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 table {
   margin: flex;
   width: 500px;
@@ -115,16 +115,6 @@ tr:nth-child(3), tr:nth-child(6) {
   background-color: rgba(110, 110, 110, 0.5);
 }
 .selected:hover {
-  background-color: rgba(110, 110, 110, 0.5);
-}
-
-.toggle {
-  display: none;
-  text-align: center;
-  background-color: greenyellow;
-}
-.toggle.active {
-  display: block;
   background-color: rgba(110, 110, 110, 0.5);
 }
 
