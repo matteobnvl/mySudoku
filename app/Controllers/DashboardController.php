@@ -17,13 +17,11 @@ class DashboardController extends Controller
 
     public static function index()
     {
-        /*----------- En cours
         if (isset($_SESSION['difficulte'])) {
             $difficulte = $_SESSION['difficulte'];
         } else {
             $difficulte = 'easy';
         }
-        -----------*/
         $sudokus = Sudoku::getAllSudokuJoueur($_SESSION['id_joueur'], $difficulte);
 
         return view('auth.dashboard',[

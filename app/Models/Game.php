@@ -49,7 +49,7 @@ class Game extends Model
         return $stt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function getGame($id_partie)
+    public static function getGame($id_partie, $difficulte)
     {
         $db = self::db();
         $qry = "SELECT id_joueur
@@ -57,7 +57,6 @@ class Game extends Model
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);
 
-        /*----------- En cours
         if (isset($_SESSION['difficulte'])) {
             $difficulte = $_SESSION['difficulte'];
             $stmt->bindParam(':difficulte', $difficulte);
@@ -65,7 +64,6 @@ class Game extends Model
             $difficulte = 'easy';
             $stmt->bindParam(':difficulte', $difficulte);
         }
-        -----------*/
 
         $stt->execute([
             ':id_partie' => $id_partie

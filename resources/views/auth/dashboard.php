@@ -19,15 +19,14 @@
     <br>
     <h3>Nouvelle partie : </h3>
     <p>Choisissez votre niveau de difficulté :</p>
-<!-------- En Cour
     <form action="<?= route('Game')?>" method="POST">
+        <select>
             <option value="easy">Facile</option>
             <option value="medium">Moyen</option>
             <option value="hard">Difficile</option>
         </select>
         <button type="submit">Jouer</button>
     </form>
---------->
     <br>
     <h3>Mes sudokus</h3>
     <br>
