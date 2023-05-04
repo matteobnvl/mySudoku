@@ -1,4 +1,7 @@
-<h1>Hello World !</h1>
-<a href="<?= route('Login')?>">Connexion</a>
-<a href="<?= route('Register')?>">Inscription</a>
-<a href="<?= route('Game')?>">Jouer</a>
+
+<main>
+    <div class="center-play">
+        <img class="sudoku" src="public\images\sudoku.png" alt="">
+        <a class="btn-play" href="<?= route('Game')?>">Jouer</a>
+    </div>
+</main>

@@ -20,14 +20,14 @@ class Game extends Model
     public static function create($id_joueur = null)
     {
         $db = self::db();
-        $qry = "INSERT INTO Partie (date_partie, id_statut, id_joueur, id_niveau)
-                VALUES (:date_partie, :id_statut, :id_joueur, :id_niveau)";
+        $qry = "INSERT INTO Partie (date_partie, statut, id_joueur, id_niveau)
+                VALUES (:date_partie, :statut, :id_joueur, :id_niveau)";
         $stt = $db->prepare($qry);
         $date = new \DateTime();
         $date =$date->format('Y-m-d');
         $stt->execute([
             ':date_partie' => $date,
-            ':id_statut' => 1,
+            ':statut' => 1,
             ':id_joueur' => $id_joueur,
             ':id_niveau' => 1
         ]);
@@ -73,10 +73,10 @@ class Game extends Model
     }
 
 
-    public static function getStatutByIdPartie($id_partie)
+    public static function getStatutVieByIdPartie($id_partie)
     {
         $db = self::db();
-        $qry = "SELECT id_statut
+        $qry = "SELECT statut, vie
                 FROM Partie
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);
@@ -85,5 +85,44 @@ class Game extends Model
         ]);
 
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getVieById($id_partie)
+    {
+        $db = self::db();
+        $qry = "SELECT vie
+                FROM Partie
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_partie' => $id_partie
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function updateScoreById($id, $vie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET vie = :vie
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':vie' => $vie,
+            ':id_partie' => $id
+        ]);
+    }
+
+    public static function updateVieById($id, $vie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET vie = :vie
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':vie' => $vie,
+            ':id_partie' => $id
+        ]);
     }
 }

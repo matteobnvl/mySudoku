@@ -25,3 +25,11 @@ Route::get(['/insert', 'App\Controllers\GameController@insert'])->name('insert')
 Route::get(['/delete', 'App\Controllers\GameController@delete'])->name('delete');
 Route::get(['/verif', 'App\Controllers\GameController@verif'])->name('verif');
 Route::get(['/finish', 'App\Controllers\GameController@finish'])->name('finish');
+Route::get(['/retry', 'App\Controllers\GameController@retry'])->name('retry');
+
+//Route Amis
+Route::get(['/ajouter-amis', 'App\Controllers\DashboardController@addFriends'])->name('add_friends');
+Route::get(['/search', 'App\Controllers\DashboardController@search'])->name('search');
+Route::get(['/accept', 'App\Controllers\DashboardController@accept'])->name('accept');
+Route::get(['/refuse', 'App\Controllers\DashboardController@refuse'])->name('refuse');
+

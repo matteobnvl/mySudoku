@@ -105,4 +105,124 @@ class User extends Model
         ]);
         $_SESSION['score'] = $newScore;
     }
+
+    public static function searchUserByPseudo($pseudo)
+    {
+        $db = self::db();
+        $qry = "SELECT J.id_joueur, J.pseudo
+                FROM Joueur AS J
+                LEFT JOIN Amis AS A ON J.id_joueur = A.id_amis
+                WHERE pseudo LIKE :pseudo 
+                    AND pseudo != :pseudo_user";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':pseudo' => '%'.htmlentities($pseudo).'%',
+            ':pseudo_user' => $_SESSION['pseudo']
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function addFriends($id_joueur)
+    {
+        $db = self::db();
+        $qry = "INSERT INTO Amis
+                (id_amis, id_amis_1, statut, `date`)
+                VALUES (:id_amis, :id_amis_1, :statut, :date)";
+        $stt = $db->prepare($qry);
+        $stt = $db->prepare($qry);
+        $date = new \DateTime();
+        $date =$date->format('Y-m-d');
+        $stt->execute([
+            ':id_amis' => $_SESSION['id_joueur'],
+            ':id_amis_1' => $id_joueur,
+            ':statut' => 0,
+            ':date' => $date
+        ]);
+    }
+
+    public static function countRequestFriends()
+    {
+        $db = self::db();
+        $qry = "SELECT COUNT(id) as nbDemande
+                FROM Amis
+                WHERE id_amis_1 = :id_joueur AND statut = :statut";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur'],
+            ':statut' => 0
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getListRequestFriends()
+    {
+        $db = self::db();
+        $qry = "SELECT Amis.id, Joueur.id_joueur, Joueur.pseudo
+                FROM Amis
+                INNER JOIN Joueur ON Joueur.id_joueur = Amis.id_amis
+                WHERE Amis.id_amis_1 = :id_joueur AND statut = :statut";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur'],
+            ':statut' => 0
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getCheckDemandeAmis($id)
+    {
+        $db = self::db();
+        $qry = "SELECT *
+                FROM Amis 
+                WHERE id_amis = :id_joueur AND id_amis_1 = :id_demande";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur'],
+            ':id_demande' => $id
+        ]);
+        return empty($stt->fetchAll(\PDO::FETCH_ASSOC));
+    }
+
+    public static function acceptFriendsRequest($id)
+    {
+        $db = self::db();
+        $qry = "UPDATE Amis 
+                SET statut = :statut 
+                WHERE id = :id";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id' => $id,
+            ':statut' => 1
+        ]);
+    }
+
+    public static function deleteFriendsRequest($id)
+    {
+        $db = self::db();
+        $qry = "DELETE FROM Amis
+                WHERE id = :id";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id' => $id,
+            ':statut' => 1
+        ]);
+    }
+
+    public static function getScoresWithFriends()
+    {
+        $db = self::db();
+        $qry = "SELECT j.pseudo, j.score 
+                FROM Joueur j 
+                LEFT JOIN Amis a ON (j.id_joueur = a.id_amis OR j.id_joueur = a.id_amis_1) 
+                WHERE (a.id_amis = :id_joueur 
+                    OR a.id_amis_1 = :id_joueur 
+                    OR j.id_joueur = :id_joueur)
+                ORDER BY score DESC";
+        $stt = $db->prepare($qry);
+        $stt->bindParam(':id_joueur', $_SESSION['id_joueur'], PDO::PARAM_INT);
+        $stt->execute();
+        $amis = $stt->fetchAll(PDO::FETCH_OBJ);
+        return $amis;
+    }
 }
