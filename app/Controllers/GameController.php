@@ -50,7 +50,7 @@ class GameController extends Controller
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {
             $sudoku = Sudoku::getSudokuByPartie($_GET['sudoku']);
-            $statut = Game::getStatutByIdPartie($_GET['sudoku']);
+            $statut = Game::getStatutVieByIdPartie($_GET['sudoku']);
             if (empty($sudoku)) {
                 redirect('Dashboard');
             } 
@@ -87,6 +87,13 @@ class GameController extends Controller
         if ($_POST) {
             $id_partie = $_POST['id'];
 
+            $score = Game::getVieById($id_partie);
+            $score = $score[0]['vie'] -1;
+            Game::updateScoreById($id_partie, $score);
+            if ($score == 0) {
+                Sudoku::updateStatutSudoku($id_partie, 3);
+                return 'false';
+            }
             $solutionSudoku = Sudoku::getSolutionSudokuByPartie($id_partie);
             $solutionSudoku = json_decode($solutionSudoku[0]['solution']);
 
@@ -105,10 +112,9 @@ class GameController extends Controller
                         $arrayVerif[] = $array;
                     }
                 }
-                
             }
+            return json_encode($arrayVerif);
         }
-        return json_encode($arrayVerif);
     }
 
 
@@ -143,11 +149,22 @@ class GameController extends Controller
             if (empty($arrayVerif)) {
                 $score = Sudoku::getScoreByNiveau($id_partie);
                 User::addScore($score[0]['score']);
-                Sudoku::updateStatutSudoku($id_partie);
+                Sudoku::updateStatutSudoku($id_partie, 2);
 
                 return json_encode(['key' => true, 'score' => $score[0]]);
             }
             return json_encode($arrayVerif);
+        }
+    }
+
+    public function retry()
+    {
+        if ($_GET) {
+            $id_partie = $_GET['sudoku'];
+
+            Sudoku::updateStatutSudoku($id_partie, 1);
+            Game::updateVieById($id_partie, 5);
+            redirect('Game', '?sudoku='.$id_partie);
         }
     }
 }

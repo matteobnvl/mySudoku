@@ -15,9 +15,9 @@
 <ul>
     <?php foreach($sudokus as $sudoku) : ?>
         <li>
-            sudoku n°<?= $sudoku['id_partie'] .' -  '. $sudoku['type'].'  -  '. $sudoku['difficulte']?>  -  
+            sudoku n°<?= $sudoku['id_partie'] .' -  '. $sudoku['statut'].'  -  '. $sudoku['difficulte']?>  -  
             <a href="<?= route('Game')?>?sudoku=<?= $sudoku['id_partie']?>">
-                <?= ($sudoku['type'] === 'en cours')? 'Reprendre' : 'Voir' ?>
+                <?= ($sudoku['statut'] === 1)? 'Reprendre' : 'Voir' ?>
             </a>
         </li>
     <?php endforeach ?>
