@@ -33,27 +33,39 @@ class GameController extends Controller
     {
         if (!$_GET) {
             if ($_SESSION) {
-                if (Game::create($_SESSION['id_joueur'])) {
-                    $partie = Game::getLastGameCreate($_SESSION['id_joueur']);
+                if (isset($_SESSION['difficulte'])) {
+                    if (Game::create($_SESSION['id_joueur'], $_SESSION['difficulte'])) {
+                        $partie = Game::getLastGameCreate($_SESSION['id_joueur']);
+                    }
+                } else {
+                    if (Game::create($_SESSION['id_joueur'])) {
+                        $partie = Game::getLastGameCreate($_SESSION['id_joueur']);
+                    }
                 }
             } else {
-                if (Game::create()) {
-                    $partie = Game::getLastGameCreate();
+                if (isset($_SESSION['difficulte'])) {
+                    if (Game::create(null, $_SESSION['difficulte'])) {
+                        $partie = Game::getLastGameCreate();
+                    }
+                } else {
+                    if (Game::create()) {
+                        $partie = Game::getLastGameCreate();
+                    }
                 }
             }
             $sudoku = Sudoku::generateSudoku();
             $solutionSudoku = json_decode(Sudoku::generateSolutionSudoku($sudoku));
             Sudoku::createSudoku(
-                json_encode(json_decode($sudoku)->{'board'}), 
-                json_encode($solutionSudoku), 
+                json_encode(json_decode($sudoku)->{'board'}),
+                json_encode($solutionSudoku),
                 $partie['id_partie']);
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {
             $sudoku = Sudoku::getSudokuByPartie($_GET['sudoku']);
-            $statut = Game::getStatutVieByIdPartie($_GET['sudoku']);
+            $statut = Game::getStatutByIdPartie($_GET['sudoku']);
             if (empty($sudoku)) {
                 redirect('Dashboard');
-            } 
+            }
         }
         return view('auth.game', [
             'sudoku' => $sudoku,

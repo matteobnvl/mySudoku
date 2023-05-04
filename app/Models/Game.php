@@ -17,21 +17,21 @@ class Game extends Model
         return $stt->fetch(\PDO::FETCH_ASSOC) > 0;
     }
 
-    public static function create($id_joueur = null)
+    public static function create($id_joueur = null, $difficulte = 1)
     {
         $db = self::db();
         $qry = "INSERT INTO Partie (date_partie, statut, id_joueur, id_niveau)
                 VALUES (:date_partie, :statut, :id_joueur, :id_niveau)";
         $stt = $db->prepare($qry);
         $date = new \DateTime();
-        $date =$date->format('Y-m-d');
+        $date = $date->format('Y-m-d');
         $stt->execute([
             ':date_partie' => $date,
             ':statut' => 1,
             ':id_joueur' => $id_joueur,
-            ':id_niveau' => 1
+            ':id_niveau' => $difficulte
         ]);
-
+    
         return true;
     }
 
@@ -49,24 +49,23 @@ class Game extends Model
         return $stt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function getGame($id_partie, $difficulte)
+    public static function getGame($id_partie)
     {
         $db = self::db();
         $qry = "SELECT id_joueur
                 FROM Partie
-                WHERE id_partie = :id_partie";
+                WHERE id_partie = :id_partie AND id_niveau = :id_niveau";
         $stt = $db->prepare($qry);
-
+    
         if (isset($_SESSION['difficulte'])) {
             $difficulte = $_SESSION['difficulte'];
-            $stmt->bindParam(':difficulte', $difficulte);
         } else {
             $difficulte = 'easy';
-            $stmt->bindParam(':difficulte', $difficulte);
         }
-
+    
         $stt->execute([
-            ':id_partie' => $id_partie
+            ':id_partie' => $id_partie,
+            ':id_niveau' => $difficulte
         ]);
         return $stt->fetch(\PDO::FETCH_ASSOC);
         
