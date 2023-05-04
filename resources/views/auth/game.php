@@ -4,7 +4,7 @@
     <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
     <span id="reussi"></span>
     <br><br>
-    votre score : <span id="score"><?= ($statut['statut'] == 2) ? 'a rajouter' : '' ?></span>
+    votre score : <span id="score"><?= ($statut['statut'] == 2) ? $statut['score'] : '' ?></span>
     <br>
     <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
         <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
