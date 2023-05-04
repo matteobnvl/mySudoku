@@ -134,7 +134,7 @@ class Game extends Model
     public static function getStatutAndVieByIdPartie($id_partie)
     {
         $db = self::db();
-        $qry = "SELECT statut, vie
+        $qry = "SELECT statut, vie, id_niveau
                 FROM Partie
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);

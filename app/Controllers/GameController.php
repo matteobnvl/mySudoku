@@ -56,9 +56,16 @@ class GameController extends Controller
                 redirect('Dashboard');
             }
         }
+        $arrayNiveau = [
+            1 => 'Facile',
+            2 => 'Moyen',
+            3 => 'Difficile',
+            4 => 'Aléatoire'
+        ];
         return view('auth.game', [
             'sudoku' => $sudoku,
-            'statut' => $statut[0]
+            'statut' => $statut[0],
+            'niveau' => $arrayNiveau
         ]);
     }
 
