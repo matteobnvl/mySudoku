@@ -45,16 +45,16 @@ class GameController extends Controller
             $sudoku = Sudoku::generateSudoku($_POST['niveau']);
             $solutionSudoku = json_decode(Sudoku::generateSolutionSudoku($sudoku));
             Sudoku::createSudoku(
-                json_encode(json_decode($sudoku)->{'board'}), 
-                json_encode($solutionSudoku), 
+                json_encode(json_decode($sudoku)->{'board'}),
+                json_encode($solutionSudoku),
                 $partie['id_partie']);
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {
             $sudoku = Sudoku::getSudokuByPartie($_GET['sudoku']);
-            $statut = Game::getStatutVieByIdPartie($_GET['sudoku']);
+            $statut = Game::getStatutByIdPartie($_GET['sudoku']);
             if (empty($sudoku)) {
                 redirect('Dashboard');
-            } 
+            }
         }
         return view('auth.game', [
             'sudoku' => $sudoku,
