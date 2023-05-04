@@ -156,10 +156,14 @@ class GameController extends Controller
 
             if (empty($arrayVerif)) {
                 $score = Sudoku::getScoreByNiveau($id_partie);
-                User::addScore($score[0]['score']);
+                $vie = Game::getStatutAndVieByIdPartie($id_partie);
+                $vie = $vie[0]['vie'];
+                $score = $score[0]['score'] + ($vie *2);
+                User::addScore($score);
+                Game::addScore($score, $id_partie);
                 Sudoku::updateStatutSudoku($id_partie, 2);
 
-                return json_encode(['key' => true, 'score' => $score[0]]);
+                return json_encode(['key' => true, 'score' => $score]);
             }
             return json_encode($arrayVerif);
         }
