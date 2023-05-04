@@ -1,7 +1,86 @@
 .sudoku-gameplay {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  flex-wrap: wrap;
+}
+.sudoku-gameplay .box-vie {
+  position: absolute;
+  top: -10%;
+  right: 10%;
+  font-size: 1.5rem;
+}
+.sudoku-gameplay table {
+  margin: flex;
+  width: 500px;
+  height: 500px;
+  border: 2px solid black;
+  text-align: center;
+  border-collapse: collapse;
+}
+.sudoku-gameplay td {
+  padding: 5px;
+  width: 10%;
+  height: 10%;
+  font-size: 2rem;
+  border: 1px solid gray;
+  transition: all 0.4s;
+}
+.sudoku-gameplay td:nth-child(3), .sudoku-gameplay td:nth-child(6) {
+  border-right: 2px solid black;
+}
+.sudoku-gameplay td:hover {
+  background-color: rgba(137, 136, 136, 0.3);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.sudoku-gameplay td.true {
+  background-color: rgba(72, 196, 1, 0.21);
+}
+.sudoku-gameplay td.false {
+  background-color: rgba(255, 66, 66, 0.5);
+}
+.sudoku-gameplay tr {
+  border: 1px solid gray;
+}
+.sudoku-gameplay tr:nth-child(3), .sudoku-gameplay tr:nth-child(6) {
+  border-bottom: 2px solid black;
+}
+.sudoku-gameplay .choose-number {
+  width: 25%;
+  display: grid;
+  grid-template-columns: repeat(3, 25px);
+  grid-gap: 75px;
   justify-content: center;
+}
+.sudoku-gameplay .choose-number div {
+  width: 75px;
+  height: 75px;
+  background-color: #B9E0FC;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border-radius: 15px;
+  margin: -25px;
+}
+.sudoku-gameplay .choose-number div:hover {
+  background-color: rgba(137, 136, 136, 0.5);
+  cursor: pointer;
+}
+.sudoku-gameplay .selected {
+  background-color: rgba(110, 110, 110, 0.5);
+}
+.sudoku-gameplay .selected:hover {
+  background-color: rgba(110, 110, 110, 0.5);
+}
+
+.title-h1 {
+  margin-left: 5%;
 }
 
 @media (min-width: 768px) {
@@ -48,76 +127,6 @@
     font-size: 1vw !important;
   }
 }
-table {
-  margin: flex;
-  width: 500px;
-  height: 500px;
-  border: 2px solid black;
-  text-align: center;
-  border-collapse: collapse;
-}
-
-td {
-  padding: 5px;
-  width: 10%;
-  height: 10%;
-  font-size: 2rem;
-  border: 1px solid gray;
-  transition: all 0.4s;
-}
-td:nth-child(3), td:nth-child(6) {
-  border-right: 2px solid black;
-}
-td:hover {
-  background-color: rgba(137, 136, 136, 0.3);
-  transition: all 0.2s;
-  cursor: pointer;
-}
-td.true {
-  background-color: rgba(72, 196, 1, 0.21);
-}
-td.false {
-  background-color: rgba(255, 66, 66, 0.5);
-}
-
-tr {
-  border: 1px solid gray;
-}
-tr:nth-child(3), tr:nth-child(6) {
-  border-bottom: 2px solid black;
-}
-
-.choose-number {
-  width: 25%;
-  display: grid;
-  grid-template-columns: repeat(3, 25px);
-  grid-gap: 75px;
-  justify-content: center;
-}
-.choose-number div {
-  width: 75px;
-  height: 75px;
-  background-color: #B9E0FC;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  border-radius: 15px;
-  margin: -25px;
-}
-.choose-number div:hover {
-  background-color: rgba(137, 136, 136, 0.5);
-  cursor: pointer;
-}
-
-.selected {
-  background-color: rgba(110, 110, 110, 0.5);
-}
-.selected:hover {
-  background-color: rgba(110, 110, 110, 0.5);
-}
-
 .toggle {
   display: none;
   text-align: center;

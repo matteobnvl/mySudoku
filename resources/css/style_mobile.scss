@@ -6,12 +6,11 @@ $colorTertiaire: #B9E0FC;
     transition-property:all;
     transition-duration:$time;
     transition-timing-function:ease-in-out;
- } 
+} 
 body {
     margin: 0;
     font-family: 'Rubik', sans-serif; 
     background-color: $colorSecondaire;
- 
 }
 .header{
     box-shadow: 0 1px 0 $colorPrincipal;
@@ -99,7 +98,7 @@ body {
         }
       }
     }
-  }
+}
   
 // responsive pour grand écran
   
@@ -134,3 +133,67 @@ body {
       margin-top: 30%;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .title-h1{
+      display: none;
+    }
+    .sudoku-gameplay{
+
+  
+      .box-vie{
+        position: relative;
+      }
+      table{
+        width: 100%;
+        height: 100%;
+
+        td{
+          font-size: 1.5rem;
+        }
+      }
+      .choose-number{
+        width: 100%;
+        margin-top: 40px;
+        grid-template-columns: repeat(3, 20px);
+        grid-gap: 70px;
+
+        div{
+          width: 60px;
+          height: 60px;
+        }
+      }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+  .title-h1{
+    display: none;
+  }
+  .sudoku-gameplay{
+
+
+    .box-vie{
+      position: relative;
+    }
+    table{
+      width: 700px;
+      height: 700px;
+
+      td{
+        font-size: 1.5rem;
+      }
+    }
+    .choose-number{
+      width: 100%;
+      margin-top: 40px;
+      grid-template-columns: repeat(4, 20px);
+      grid-gap: 70px;
+
+      div{
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+}

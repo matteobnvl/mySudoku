@@ -1,7 +1,4 @@
-<a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
-    <?= ($_SESSION) ? 'Retour dashboard' : 'Retour home' ?>
-</a>
-<h1>Sudoku niveau <?= $niveau[$statut['id_niveau']] ?></h1>
+<h1 class="title-h1">Sudoku niveau <?= $niveau[$statut['id_niveau']] ?></h1>
 <p id="toggleWin" class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
     <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
     <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
@@ -18,10 +15,9 @@
     <a href="<?= route('Dashboard')?>">Arreter la partie</a>
     <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
 </p>
-<p style="float:right; margin-right:100px;font-size:2rem"><span id="vie"></span> vie</p>
 <section class="sudoku-gameplay">
+    <p class="box-vie">Vos vies restantes : <span id="vie"></span></p>
     <table>
-
         <?php
         foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes):
             ?>
