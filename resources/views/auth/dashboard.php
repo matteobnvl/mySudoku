@@ -1,13 +1,3 @@
-<h1>Dashboard</h1>
-<a href="<?= route('Game')?>">Jouer</a>
-<a href="<?= route('Profil')?>">Profil</a>
-<a href="<?= route('add_friends')?>">Ajouter amis <span>(<?= $demande_amis ?>)</span></a>
-<a href="<?= route('Logout')?>">Déconnexion</a>
-<br>
-<hr>
-<br>
-
-
 <h2>Bonjour <?= $_SESSION['pseudo'] ?></h2>
 <br>
 <h3>Nouvelle partie : </h3>

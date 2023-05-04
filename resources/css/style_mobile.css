@@ -44,7 +44,7 @@ body {
   justify-content: space-around;
   padding-bottom: 2vh;
 }
-.header #pages div a {
+.header #pages div .btn-header {
   padding: 1vw;
   text-decoration: none;
   font-size: 4vw;
