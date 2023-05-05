@@ -13,7 +13,7 @@ class User extends Model
         $stt = $db->prepare($qry);
         $stt->execute([
             ':email' => htmlentities($email),
-            ':mdp' => md5($mdp)
+            ':mdp' => hash('sha256', $mdp)
         ]);
         $user = $stt->fetch(\PDO::FETCH_ASSOC);
 
@@ -27,13 +27,14 @@ class User extends Model
         return false;
     }
 
-    public static function checkMail($email)
+    public static function checkMailAndPseudo($email, $pseudo)
     {
         $db = self::db();
-        $qry = "SELECT * FROM Joueur WHERE email = :email";
+        $qry = "SELECT * FROM Joueur WHERE email = :email OR pseudo = :pseudo";
         $stt = $db->prepare($qry);
         $stt->execute([
-            ':email' => $email
+            ':email' => $email,
+            ':pseudo' => $pseudo
         ]);
         
         return $stt->fetch(\PDO::FETCH_ASSOC) > 0 ? false : true;
@@ -48,7 +49,7 @@ class User extends Model
         $stt->execute([
             ':pseudo' => htmlentities($post['pseudo']),
             ':email' => htmlentities($post['email']),
-            ':mdp' => md5($post['password'])
+            ':mdp' => hash('sha256',$post['password'])
         ]);
         return true;
     }

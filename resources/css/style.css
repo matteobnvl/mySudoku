@@ -263,7 +263,7 @@
   margin-right: 10px;
 }
 .profil .toggle-profil.active {
-  height: 200px;
+  height: 300px;
   visibility: visible;
   transition: all 0.4s;
   opacity: 1;

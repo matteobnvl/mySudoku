@@ -79,4 +79,15 @@ class DashboardController extends Controller
             redirect('add_friends', '?message='.$message_valid);
         }
     }
+
+    public function classement()
+    {
+        $scores = User::getScores();
+        $scoresAmis = User::getScoresWithFriends();
+
+        return view('auth.classement', [
+            'scores' => $scores,
+            'scores_amis' => $scoresAmis
+        ]);
+    }
 }
