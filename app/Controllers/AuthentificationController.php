@@ -37,14 +37,14 @@ class AuthentificationController extends Controller
             if ($_POST['email'] && $_POST['email'] ==! '' ||
                 $_POST['pseudo'] && $_POST['pseudo'] ==! '' ||
                 $_POST['password'] && $_POST['password'] ==! '') {
-                    if (User::checkMail($_POST['email'])) {
+                    if (User::checkMailAndPseudo($_POST['email'], $_POST['pseudo'])) {
                         if (User::register($_POST)) {
                             User::login($_POST['email'], $_POST['password']);
                             redirect('Dashboard');
                         }
 
                     } else {
-                        $error = "L'email renseigné existe déjà";
+                        $error = "L'email ou le pseudo existe déjà";
                     }
                 }
         }
