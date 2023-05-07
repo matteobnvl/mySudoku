@@ -8,6 +8,7 @@
             <option value="random">Aléatoire</option>
         </select>
         <button title="lancer une nouvelle partie" type="submit">Jouer</button>
+        <a href="<?= route('multi') ?>">Jouer en multi</a>
     </form>
 </section>
 <h3 class="title-h3">Mes derniers sudokus :</h3>
