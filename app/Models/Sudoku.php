@@ -274,4 +274,18 @@ class Sudoku extends Model
         ]);
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function getSolutionSudokuByIdSudoku($id_sudoku)
+    {
+        $db = self::db();
+        $qry = "SELECT solution
+                FROM Sudoku
+                WHERE id_sudoku = :id_sudoku";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_sudoku' => $id_sudoku
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

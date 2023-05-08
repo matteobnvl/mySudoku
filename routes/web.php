@@ -28,6 +28,8 @@ Route::get(['/vie', 'App\Controllers\MultijoueurController@vie'])->name('vie_adv
 Route::get(['/win', 'App\Controllers\MultijoueurController@win'])->name('win');
 Route::get(['/lose', 'App\Controllers\MultijoueurController@lose'])->name('lose');
 Route::get(['/check-vainqueur', 'App\Controllers\MultijoueurController@checkVainqueur'])->name('check_vainqueur');
+Route::get(['/verif-multi', 'App\Controllers\MultijoueurController@verifMulti'])->name('verif_multi');
+Route::get(['/finish-multi', 'App\Controllers\MultijoueurController@finishMulti'])->name('finish_multi');
 
 // Route Profil
 Route::get(['/profil', 'App\Controllers\ProfilController@index'])->name('Profil');

@@ -1,5 +1,27 @@
 <h1>jeux multi  -   Vous jouez contre <?= $adversaire['pseudo']?></h1>
-
+<section id="toggleWin" class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
+    <p >
+        <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
+        <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
+        <span id="reussi"></span>
+        <br><br>
+        tu as obtenu <span id="score"><?= ($statut['statut'] == 2) ? $statut['score'] : '0' ?> points</span>
+        <br><br>
+        <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
+            <?= ($_SESSION) ? 'Retour home' : 'Retour home' ?>
+        </a>
+    </p>
+</section>
+<section class="toggle" id="toggleVie">
+    <p id="plusDeVie">
+        Oh mince ! Vous n'avez plus de vie
+    </p>
+    <div>
+        <a href="<?= route('Dashboard')?>">Arreter la partie</a>
+        <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
+    </div> 
+    
+</section>
 <section class="sudoku-gameplay">
     <p class="box-vie">Vos vies restantes : <span id="vie"></span></p>
     <table>
@@ -34,7 +56,7 @@
         <div <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? '' : 'data-verif="1"' ?>><i class="fa-solid fa-check"></i></div>
     </section>
     <p>vie adverse <span id="vieAdverse"></span></p>
-    <section id="sudoku"></section>
+    <section id="sudokuAdverse"></section>
 </section>
 
 <script>
@@ -84,9 +106,9 @@ chiffres.forEach(function(item) {
 
 $('div[data-check]').click(function () {
     $.ajax({
-        url: '<?= env('APP_URL')?>/verif',
+        url: '<?= env('APP_URL')?>/verif-multi',
         type: 'POST',
-        data: {id: <?= $_GET['sudoku'] ?>},
+        data: {id_duel: <?= $_GET['duel'] ?>, id_sudoku: <?= $_GET['sudoku'] ?>},
         success: function (response) {
             console.log(response)
             if (response != 'false') {
@@ -124,7 +146,7 @@ $('div[data-verif]').click(function () {
     })
     if (finish) {
         $.ajax({
-            url: '<?= env('APP_URL')?>/finish',
+            url: '<?= env('APP_URL')?>/finish-multi',
             type: 'POST',
             data: {id: <?= $_GET['sudoku'] ?>},
             success: function (response) {
@@ -164,7 +186,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 var sudoku = JSON.parse(data);
-                $('#sudoku').empty()
+                $('#sudokuAdverse').empty()
                 for (var i = 0; i < sudoku.length; i++) {
                     var row = "<tr>"
                     for (var j = 0; j < sudoku[i].length; j++) {
@@ -179,7 +201,7 @@ $(document).ready(function() {
                         }
                     }
                     row += "</tr>"
-                    $("#sudoku").append(row)
+                    $("#sudokuAdverse").append(row)
                 }
             }
         })
@@ -193,6 +215,7 @@ $(document).ready(function() {
             success: function (data) {
                 $('#vieAdverse').html(data)
                 if (data == 0) {
+                    console.log('lautre a perdu')
                     joueurWin()
                 }
             }
@@ -216,15 +239,27 @@ $(document).ready(function() {
         $.ajax({
             url: '<?= env('APP_URL')?>/win',
             type: 'POST',
-            data: {id_duel: <?= $_GET['duel']?>}
+            data: {id_duel: <?= $_GET['duel']?>, id_sudoku: <?= $_GET['sudoku'] ?>},
+            success: function () {
+                $('#toggleWin').addClass('active')
+                elements.forEach(function (item) {
+                    item.setAttribute('data-finish', '1')
+                })
+            }
         })
     }
 
-    function joueurWin() {
+    function joueurLose() {
         $.ajax({
             url: '<?= env('APP_URL')?>/lose',
             type: 'POST',
-            data: {id_duel: <?= $_GET['duel']?>}
+            data: {id_duel: <?= $_GET['duel']?>, id_sudoku: <?= $_GET['sudoku'] ?>},
+            success: function () {
+                elements.forEach(function (item) {
+                    item.setAttribute('data-finish', '1')
+                })
+                $('#toggleVie').addClass('active')
+            }
         })
     }
     getSudoku()

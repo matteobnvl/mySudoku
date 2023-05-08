@@ -176,7 +176,7 @@ class Multijoueur extends Model{
     public static function getVieAndStatutByIdDuel($id_multi)
     {
         $db = self::db();
-        $qry = "SELECT vie, statut
+        $qry = "SELECT vie, statut, score
                 FROM Duel
                 WHERE id_multi = :id_multi AND id_joueur = :id_joueur";
         $stt = $db->prepare($qry);
@@ -227,5 +227,61 @@ class Multijoueur extends Model{
         ]);
         $vainqueur = $stt->fetchAll(\PDO::FETCH_ASSOC);
         return ($vainqueur[0]['vainqueur'] == 1) ? 'true' : 'false';
+    }
+
+    public static function updateVieById($id_multi, $vie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Duel
+                SET vie = :vie
+                WHERE id_multi = :id_multi AND id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':vie' => $vie,
+            ':id_multi' => $id_multi,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+    }
+
+    public static function updateStatutDuelById($id_multi, $statut)
+    {
+        $db = self::db();
+        $qry = "UPDATE Duel
+                SET statut = :statut
+                WHERE id_multi = :id_multi AND id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':statut' => $statut,
+            ':id_multi' => $id_multi,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+    }
+
+    public static function UpdateJoueurVainqueurDuelById($id_multi)
+    {
+        $db = self::db();
+        $qry = "UPDATE Duel
+                SET vainqueur = :vainqueur
+                WHERE id_multi = :id_multi AND id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':vainqueur' => 1,
+            ':id_multi' => $id_multi,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+    }
+
+    public static function updateScorePartie($id_multi)
+    {
+        $db = self::db();
+        $qry = "UPDATE Duel
+                SET score = :score
+                WHERE id_multi = :id_multi AND id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':score' => 50,
+            ':id_multi' => $id_multi,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
     }
 }
