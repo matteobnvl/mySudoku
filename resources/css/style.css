@@ -10,8 +10,18 @@
 .sudoku-gameplay .box-vie {
   position: absolute;
   top: -10%;
-  right: 10%;
+  left: 10%;
   font-size: 1.5rem;
+}
+.sudoku-gameplay #sudokuAdverse {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  right: 2%;
+  top: -10%;
+}
+.sudoku-gameplay #sudokuAdverse td {
+  font-size: 0.8rem;
 }
 .sudoku-gameplay table {
   margin: flex;

@@ -21,7 +21,7 @@ class Sudoku extends Model
         return json_encode($grid);
     }
 
-    public static function createSudoku($tableau, $solution, $id_partie)
+    public static function createSudoku($tableau, $solution, $id_partie = null)
     {
         $db = self::db();
         $qry = "INSERT INTO Sudoku (tableau, solution, id_partie)
@@ -32,7 +32,7 @@ class Sudoku extends Model
             ':solution' => $solution,
             ':id_partie' => $id_partie
         ]);
-        return true;
+        return $db->lastInsertId();
     }
 
     public static function getSudokuByPartie($id_partie)
@@ -214,5 +214,78 @@ class Sudoku extends Model
             ':statut' => $statut,
             'id_partie' => $id_partie
         ]);
+    }
+
+    public static function getTableauByIdSudoku($id_sudoku)
+    {
+        $db = self::db();
+        $qry = "SELECT tableau
+                FROM Sudoku
+                WHERE id_sudoku = :id_sudoku";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_sudoku' => $id_sudoku
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function insertMulti($index, $value, $sudoku, $id_sudoku)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = $value.'*';
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_sudoku = :id_sudoku";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_sudoku' => $id_sudoku
+        ]);
+    }
+
+    public static function deleteMulti($index, $sudoku, $id_sudoku)
+    {
+        $sudoku = json_decode($sudoku[0]['tableau']);
+        $sudoku[$index[0]][$index[1]] = 0;
+        $sudoku = json_encode($sudoku);
+
+        $db = self::db();
+        $qry = "UPDATE Sudoku
+                SET tableau = :tableau
+                WHERE id_sudoku = :id_sudoku";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':tableau' => $sudoku,
+            ':id_sudoku' => $id_sudoku
+        ]);
+    }
+
+    public static function getSudokuById($id_sudoku)
+    {
+        $db = self::db();
+        $qry = "SELECT tableau FROM Sudoku
+                WHERE id_sudoku = :id_sudoku";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_sudoku' => $id_sudoku
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getSolutionSudokuByIdSudoku($id_sudoku)
+    {
+        $db = self::db();
+        $qry = "SELECT solution
+                FROM Sudoku
+                WHERE id_sudoku = :id_sudoku";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_sudoku' => $id_sudoku
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
