@@ -15,6 +15,7 @@ Route::get(['/new-password', 'App\Controllers\AuthentificationController@ResetPa
 // Route Dashboard
 Route::get(['/dashboard', 'App\Controllers\DashboardController@index'])->name('Dashboard');
 Route::get(['/classement', 'App\Controllers\DashboardController@classement'])->name('classement');
+Route::get(['/mes-sudokus', 'App\Controllers\DashboardController@allSudoku'])->name('all_sudoku');
 
 // Route Game 
 Route::get(['/game', 'App\Controllers\GameController@index'])->name('Game');

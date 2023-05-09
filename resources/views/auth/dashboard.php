@@ -33,7 +33,7 @@
             </div>
         </a>
     <?php endforeach ?>
-    <a href="" title="Tous mes sudokus">
+    <a href="<?= route('all_sudoku') ?>" title="Tous mes sudokus">
         <div class="box">
             <i class="fa-solid fa-arrow-right"></i>
         </div>
