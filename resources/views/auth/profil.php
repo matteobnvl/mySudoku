@@ -35,26 +35,26 @@
 </section>
 
 <script>
-    var options = {
-          series: [<?= $nbWin ?>, <?= $nbLose ?>, <?= $nbInProgress ?>],
-          chart: {
-          width: 380,
-          type: 'pie',
-        },
-        labels: ['gagné', 'perdu', 'en cours'],
-        responsive: [{
-          breakpoint: 480,
-          options: {
+var options = {
+        series: [<?= $nbWin ?>, <?= $nbLose ?>, <?= $nbInProgress ?>],
+        chart: {
+        width: 380,
+        type: 'pie',
+    },
+    labels: ['gagné', 'perdu', 'en cours'],
+    responsive: [{
+        breakpoint: 480,
+        options: {
             chart: {
-              width: 200
+            width: 200
             },
             legend: {
-              position: 'bottom'
+            position: 'bottom'
             }
-          }
-        }]
-        };
+        }
+    }]
+};
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
 </script>

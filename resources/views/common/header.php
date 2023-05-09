@@ -25,8 +25,6 @@
                             <hr>
                             <li><a class="btn-profil" href="<?= route('classement')?>"><i class="fa-solid fa-ranking-star"></i>Classement</a></li>
                             <hr>
-                            <li><a class="btn-profil" href=""><i class="fa-solid fa-chart-line"></i>Statistiques</a></li>
-                            <hr>
                             <li><a class="btn-profil" href="<?= route('add_friends')?>"><i class="fa-solid fa-user-plus"></i>Demande amis</a></li>
                             <hr>
                             <li><a class="btn-profil" href="<?= route('Logout')?>"><i class="fa-solid fa-right-from-bracket"></i>Se déconnecter</a></li>
