@@ -192,4 +192,19 @@ class Game extends Model
 
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function countPartieByStatut($statut)
+    {
+        $db = self::db();
+        $qry = "SELECT COUNT(id_partie) AS nbGame
+                FROM Partie
+                WHERE id_joueur = :id_joueur AND statut = :statut";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur'],
+            ':statut' => $statut
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
