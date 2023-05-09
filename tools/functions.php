@@ -203,3 +203,12 @@ if (!function_exists('isConnected')) {
         return isset($_SESSION['id']);
     }
 }
+
+if (!function_exists('dateDiff')) {
+    function datediff($date1, $date2)
+    {
+        $date2 = strtotime($date2);
+        $date1 = strtotime($date1);
+        return abs($date1 - $date2);
+    }
+}

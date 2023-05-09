@@ -562,3 +562,57 @@ $colorTertiaire: #B9E0FC;
 
     }
 }
+
+// style toggle mot de passe oublié
+
+.toggle-contact{
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+    background-color: #0271C0;
+    border-radius: 15px;
+    z-index: 9999;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-size: 1.5rem;
+    display: none;
+    
+    h3{
+        margin-top: 50px;
+    }
+
+    i{
+        color: black;
+        float: right;
+        font-size: 1.7rem;
+        margin-top: 5px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .check{
+        width: 80px;
+        height: 80px;
+        margin: auto;
+        border-radius: 999px;
+        border: 3px solid green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 80px;
+
+        i{
+            color: green;
+            transform: translateX(15%);
+            font-size: 3rem;
+        }
+    }
+}
+
+.toggle-contact.active{
+    display: block;
+}
