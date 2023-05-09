@@ -19,6 +19,7 @@ if (window.location.pathname === "/mySudoku/game" && window.innerWidth > "768") 
 } else if(window.location.pathname === "/mySudoku/game" && window.innerWidth < "768") {
     $("#Game").css("box-shadow","0 2px 0 #0271C0").css("color","#0271C0");
 };
+const test = 'titis'
 
 $('.profil').click(function () {
     $('.toggle-profil').toggleClass('active')
