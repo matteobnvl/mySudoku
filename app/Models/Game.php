@@ -175,4 +175,21 @@ class Game extends Model
         ]);
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function getGameByJoueurLimit($offset, $limit)
+    {
+        $db = self::db();
+        $qry = "SELECT statut, Partie.id_niveau, tableau, date_partie, vie, score, Partie.id_partie
+                FROM Partie
+                INNER JOIN Sudoku ON Partie.id_partie = Sudoku.id_partie
+                WHERE id_joueur = :id_joueur
+                ORDER BY Partie.id_partie DESC
+                LIMIT {$offset}, {$limit}";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

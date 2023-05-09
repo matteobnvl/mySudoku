@@ -92,4 +92,16 @@ class DashboardController extends Controller
             'scores_amis' => $scoresAmis
         ]);
     }
+
+    public function allSudoku()
+    {
+        if ($_POST) {
+            $offset = $_POST['offset'];
+            $sudokus = Game::getGameByJoueurLimit($offset, 5);
+            return json_encode($sudokus);
+        }
+
+
+        return view('auth.all_sudoku');
+    }
 }

@@ -616,3 +616,86 @@ $colorTertiaire: #B9E0FC;
 .toggle-contact.active{
     display: block;
 }
+
+// style page all sudokus
+
+.contain-box-sudoku{
+    width: 90%;
+    margin: auto;
+
+    .box-sudoku{
+        width: 100%;
+
+        .box{
+            width: 70%;
+            height: 150px;
+            border-radius: 20px;
+            background-color: #B9E0FC;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .sudoku{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                filter: none;
+
+                .table{
+                    width: 130px;
+                    height: 130px;
+                    border: 1px solid black;
+
+                    table{
+                        width: 100%;
+                        height: 100%;
+                        border: 2px solid #0271C0;
+                        border-collapse: collapse;
+
+                        td{
+                            border: 1px solid gray;
+                            color: #0271C0;
+                            text-decoration: none;
+                            font-size: .5rem;
+                            font-weight: bold;
+                        
+                            &:nth-child(3),
+                            &:nth-child(6){
+                                border-right: 2px solid #0271C0;
+                            }
+                        }
+                        
+                        tr{
+                            border: 1px solid gray;
+                        
+                            &:nth-child(3),
+                            &:nth-child(6)
+                            {
+                                border-bottom: 2px solid #0271C0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .statut {
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .win{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
