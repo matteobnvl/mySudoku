@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use PDO;
+use DateTime;
 
 class User extends Model
 {
@@ -225,5 +226,108 @@ class User extends Model
         $stt->execute();
         $amis = $stt->fetchAll(PDO::FETCH_OBJ);
         return $amis;
+    }
+
+
+    public static function verifAskResetPassword($mail) {
+        $db = self::db();
+        $qry = "SELECT token_recovery_password
+                FROM Joueur
+                WHERE email = :email";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':email' => htmlentities($mail)
+        ]);
+        $token = $stt->fetchAll(\PDO::FETCH_ASSOC);
+        if ($token[0]['token_recovery_password'] !== null) {
+            $dateToken = self::checkDatePassword($mail);
+            $dateDay = new DateTime();
+            $dateDay = $dateDay->format('Y-m-d H:i:s');
+            $dateToken = $dateToken[0]['date_recovery_password'];
+            
+            if (datediff($dateDay,$dateToken) < 5000) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static function checkDatePassword($mail) {
+        $db = self::db();
+        $qry = "SELECT date_recovery_password
+                FROM Joueur
+                WHERE email = :email";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':email' => $mail,
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public static function InsertTokenDate($mail, $token) {
+        $db = self::db();
+        $qry = "UPDATE Joueur
+                SET token_recovery_password = :token_recovery_password, date_recovery_password = :date_recovery_password
+                WHERE email = :email";
+        $stt = $db->prepare($qry);
+        $date = new \DateTime();
+        $date =$date->format('Y-m-d-H-i-s');
+        $stt->execute([
+            ':token_recovery_password' => hash('sha256', $token),
+            ':date_recovery_password' => $date,
+            ':email' => $mail
+        ]);
+    }
+
+    public static function UserByToken($token) {
+        $db = self::db();
+        $qry = "SELECT * 
+                FROM Joueur
+                WHERE token_recovery_password = :token";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token' => hash('sha256', $token)
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public static function ResetPassword($post, $token) {
+        $db = self::db();
+        $qry = "UPDATE Joueur
+                SET token_recovery_password = :token_recovery_password, 
+                    date_recovery_password = :date_recovery_password, 
+                    `mot_de_passe` = :pwd
+                WHERE token_recovery_password = :token";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token_recovery_password' => null,
+            ':date_recovery_password' => null,
+            ':pwd' => hash('sha256', $post['password']),
+            ':token' => hash('sha256', $token)
+        ]);
+    }
+
+
+    public static function VerifToken($token) {
+        $db = self::db();
+        $qry = "SELECT *
+                FROM Joueur
+                WHERE token_recovery_password = :token";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token' => hash('sha256', $token)
+        ]);
+        $user = $stt->fetchAll(\PDO::FETCH_ASSOC);
+        if($stt->rowCount() > 0) {
+            $dateDay = new DateTime();
+            $dateDay = $dateDay->format('Y-m-d H:i:s');
+            $dateToken = $user[0]['date_recovery_password'];
+            if (datediff($dateDay,$dateToken) < 5000) {
+                return true;
+            }
+        }
+        return false;
     }
 }

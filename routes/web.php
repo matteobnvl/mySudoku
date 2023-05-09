@@ -9,6 +9,8 @@ Route::get(['/', 'App\Controllers\HomeController@index'])->name('Accueil');
 Route::get(['/login', 'App\Controllers\AuthentificationController@login'])->name('Login');
 Route::get(['/logout', 'App\Controllers\AuthentificationController@logout'])->name('Logout');
 Route::get(['/register', 'App\Controllers\AuthentificationController@register'])->name('Register');
+Route::get(['/new-password', 'App\Controllers\AuthentificationController@ResetPassword'])->name('ResetPassword');
+
 
 // Route Dashboard
 Route::get(['/dashboard', 'App\Controllers\DashboardController@index'])->name('Dashboard');
