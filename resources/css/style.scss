@@ -261,15 +261,18 @@ $colorTertiaire: #B9E0FC;
 .btn-play{
     position: absolute;
     text-decoration: none;
-    padding-left: 70px;
-    padding-right: 70px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 70px;
     border-radius: 7px;
     box-shadow: 5px;
     font-size: 30px;
     color: aliceblue;
     background-color: #0271C0 ;
+    transition: all .4s;
+
+    &:hover{
+        transform: scale(1.05);
+        transition: all .4s;
+    }
 }
 
 
@@ -778,7 +781,7 @@ $colorTertiaire: #B9E0FC;
             i{font-size: 2.5rem;color: #0271C0;}
             background-color: transparent;
             border: none;
-
+            cursor: pointer;
         }
     }
 }
