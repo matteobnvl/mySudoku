@@ -699,3 +699,86 @@ $colorTertiaire: #B9E0FC;
         }
     }
 }
+
+
+// page profil
+
+.section-profil{
+    width: 100%;
+    display: flex;  
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .list-amis{
+        width: 500px;
+
+
+        .box-amis{
+            width: 100%;
+            height: 40vh;
+            overflow: auto;
+            border-radius: 8px;
+            //background-color: rgba($color: #B9E0FC, $alpha: .4);
+
+            .box{
+                width: 95%;
+                height: 8vh;
+                background-color: #0271C0;
+                margin: 10px auto;
+                border-radius: 999px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                color: white;
+            }
+
+            p{
+                text-align: center;
+            }
+        }
+    }
+}
+
+.section-update{
+    width: 100%;
+    margin-bottom: 50px;
+
+    form{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        div{
+            width: 30%;
+
+            label{
+                width: 100%;
+                margin-left: 20px;
+            }
+
+            input{
+                padding: 7px;
+                padding-left:15px ;
+                border: 0;
+                border-radius: 999px;
+                width: 100%;
+                height: 5vh;
+                margin: auto;
+                font-size: 1.5rem;
+                border:3px solid #0271C0;
+                color: #0271C0;
+                background-color: white;
+            }
+        }
+
+        button{
+            padding: 7px;
+            height: 5vh;
+            i{font-size: 2.5rem;color: #0271C0;}
+            background-color: transparent;
+            border: none;
+
+        }
+    }
+}

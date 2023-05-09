@@ -212,3 +212,21 @@ if (!function_exists('dateDiff')) {
         return abs($date1 - $date2);
     }
 }
+
+function intervalleDate($date = null) {
+    // Si aucune date n'est fournie, utilisez la date d'aujourd'hui
+    if ($date === null) {
+        $date = new DateTime();
+    }
+    
+    $dateActuelle = new DateTime();
+    $date = new DateTime($date);
+    $interval = $date->diff($dateActuelle);
+    
+    if ($interval->y > 0) {
+        return $interval->format('%y ans, %m mois, %d jours');
+    } elseif ($interval->m > 0) {
+        return $interval->format('%m mois, %d jours');
+    }
+    return $interval->format('%d jours');
+}

@@ -73,7 +73,9 @@ class User extends Model
     public static function getAmis($id_joueur)
     {
         $db = self::db();
-        $qry = "SELECT pseudo FROM Joueur JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
+        $qry = "SELECT pseudo, score, Amis.date
+                FROM Joueur 
+                JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
                 WHERE (Amis.id_amis = :id_joueur OR Amis.id_amis_1 = :id_joueur) 
                 AND Joueur.id_joueur <> :id_joueur";
         $stt = $db->prepare($qry);
