@@ -1,3 +1,24 @@
+body::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: #0271C0 ;
+    border-radius:5px ;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+body::-webkit-scrollbar-track{
+    background: transparent;
+    cursor: pointer;
+}
+
+
+
 // style page game sudoku
 
 .sudoku-gameplay{
