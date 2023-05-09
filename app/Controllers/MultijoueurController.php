@@ -154,10 +154,8 @@ class MultijoueurController extends Controller{
         if ($_POST) {
             $id_multi = $_POST['id_duel'];
             $id_sudoku = $_POST['id_sudoku'];
-            if (Multijoueur::checkAdverseIsVainqueur($_POST['id_duel'])) {
+            if (Multijoueur::checkAdverseIsVainqueur($_POST['id_duel']) == 'true') {
                 Multijoueur::updateStatutDuelById($id_multi, 3);
-                // a voir si on lui met des points 
-                redirect('game_multi', '?duel='.$id_multi.'&sudoku='.$id_sudoku);
             }
         }
     }

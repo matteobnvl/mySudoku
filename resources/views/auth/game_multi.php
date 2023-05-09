@@ -148,7 +148,7 @@ $('div[data-verif]').click(function () {
         $.ajax({
             url: '<?= env('APP_URL')?>/finish-multi',
             type: 'POST',
-            data: {id: <?= $_GET['sudoku'] ?>},
+            data: {id_duel: <?= $_GET['sudoku'] ?>},
             success: function (response) {
                 console.log(response)
                 response = JSON.parse(response)
@@ -215,7 +215,6 @@ $(document).ready(function() {
             success: function (data) {
                 $('#vieAdverse').html(data)
                 if (data == 0) {
-                    console.log('lautre a perdu')
                     joueurWin()
                 }
             }
@@ -228,7 +227,7 @@ $(document).ready(function() {
             type: 'POST',
             data: {id_duel: <?= $_GET['duel']?>},
             success: function (data) {
-                if (data === 'true') {
+                if (data == 'true') {
                     joueurLose()
                 }
             }
