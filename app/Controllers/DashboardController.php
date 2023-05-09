@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-use App\Models\Sudoku;
+use App\Models\Mail;
 use App\Models\User;
 use App\Models\Game;
 
@@ -40,6 +40,8 @@ class DashboardController extends Controller
         if (isset($_GET['id'])) {
             if (User::getCheckDemandeAmis($_GET['id'])) {
                 User::addFriends($_GET['id']);
+                $amis = User::getJoueur($_GET['id']);
+                Mail::sendMailDemandeAmis($amis[0]);
                 $message_valid = ' amis ajouté';
             } else {
                 $message_valid = 'déjà ajouté';

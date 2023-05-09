@@ -330,4 +330,17 @@ class User extends Model
         }
         return false;
     }
+
+    public static function getJoueur($id_joueur)
+    {
+        $db = self::db();
+        $qry = "SELECT *
+                FROM Joueur
+                WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $id_joueur
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

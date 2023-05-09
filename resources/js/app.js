@@ -26,3 +26,10 @@ $('.profil').click(function () {
 $('main').click(function () {
     $('.toggle-profil').removeClass('active')
 })
+
+const close = document.getElementById('close');
+
+close.addEventListener('click', function(){
+    document.getElementById('toggle').classList.remove('active');
+    document.getElementById('toggle-page').classList.remove('active');
+})
