@@ -226,4 +226,32 @@ body {
     width: 60px;
     height: 60px;
   }
+}
+@media screen and (max-width: 600px) {
+  .classement-buttons button {
+    width: 40%;
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .classement {
+    width: 90%;
+  }
+  .classement table {
+    font-size: 0.8rem;
+  }
+  .classement table thead th {
+    padding: 5px;
+  }
+  .classement table thead th:first-child {
+    font-size: 1.2rem;
+  }
+  .classement table tbody tr td {
+    padding: 5px;
+  }
+  .classement table tbody tr td:first-child img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
 }/*# sourceMappingURL=style_mobile.css.map */

@@ -218,7 +218,7 @@ class User extends Model
         $db = self::db();
         $qry = "SELECT j.pseudo, j.score 
                 FROM Joueur j 
-                LEFT JOIN Amis a ON (j.id_joueur = a.id_amis OR j.id_joueur = a.id_amis_1) 
+                LEFT JOIN Amis a ON (j.id_joueur = a.id_amis) 
                 WHERE (a.id_amis = :id_joueur 
                     OR a.id_amis_1 = :id_joueur 
                     OR j.id_joueur = :id_joueur)

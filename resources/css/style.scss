@@ -806,3 +806,103 @@ $colorTertiaire: #B9E0FC;
         }
     }
 }
+
+//classement
+
+.classement-buttons {
+    text-align: center;
+  
+    h1 {
+      color: #0271C0;
+    }
+  
+    button {
+      width: 10%;
+      margin: 2%;
+      border: none;
+      background-color: #0271C0;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: all 0.2s ease-in-out;
+  
+      
+    }
+  
+    button:hover {
+      background-color: #02589F;
+    }
+  
+    button.active {
+      background-color: #014580;
+      box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.25);
+      outline: none;
+    }
+  }
+  
+  .classement {
+    width: 50%;
+    max-width: 1080px;
+    margin: 0 auto;
+  
+    &.classement--amis {
+      background-color: #f7f7f7;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      thead {
+        th {
+            color: #0271C0;
+            background-color: #ffffff;
+            padding: 10px;
+  
+            &:first-child {
+              text-align: left;
+            }
+          
+            &:not(:first-child) {
+              text-align: center;
+            }
+        }
+      }
+  
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background-color: #b9e0fc;
+          }
+  
+          td {
+            padding: 10px;
+            text-align: center;
+  
+            &:first-child {
+              width: 30%;
+              display: flex;
+              align-items: center;
+  
+              img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

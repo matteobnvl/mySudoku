@@ -277,3 +277,49 @@ body {
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .classement-buttons{
+      button{
+          width: 40%;
+          font-size: 1rem;
+      }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .classement {
+    width: 90%;
+
+    table {
+      font-size: 0.8rem;
+    
+      thead {
+        th {
+          padding: 5px;
+        
+          &:first-child {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    
+      tbody {
+        tr {
+          td {
+            padding: 5px;
+          
+            &:first-child {
+              img {
+                width: 30px;
+                height: 30px;
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
