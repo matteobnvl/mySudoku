@@ -1,7 +1,138 @@
+body::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: #0271C0 ;
+    border-radius:5px ;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+body::-webkit-scrollbar-track{
+    background: transparent;
+    cursor: pointer;
+}
+
+
+
+// style page game sudoku
+
 .sudoku-gameplay{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    flex-wrap: wrap;
+
+    .box-vie{
+        position: absolute;
+        top: -10%;
+        left: 10%;
+        font-size: 1.5rem;
+    }
+
+    #sudokuAdverse{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        right: 2%;
+        top: -10%;
+
+        td{
+            font-size: .8rem;
+        }
+    }
+
+    table{
+        margin: flex;
+        width: 500px;
+        height: 500px;
+        border:2px solid black;
+        text-align: center;
+        border-collapse: collapse; 
+    }
+    
+    td{
+        padding: 5px;
+        width: 10%;
+        height: 10%;
+        font-size: 2rem;
+        border: 1px solid gray;
+        transition: all .4s;
+    
+        &:nth-child(3),
+        &:nth-child(6){
+            border-right: 2px solid black;
+        }
+    
+        &:hover{
+            background-color: rgba(137, 136, 136, .3);
+            transition: all .2s;
+            cursor: pointer;
+        }
+    
+        &.true{
+            background-color: rgba(72, 196, 1, 0.21);
+        }
+    
+        &.false {
+            background-color: rgba(255, 66, 66, 0.5);
+        }
+    }
+    
+    tr{
+        border: 1px solid gray;
+    
+        &:nth-child(3),
+        &:nth-child(6)
+        {
+            border-bottom: 2px solid black;
+        }
+    }
+    
+    .choose-number{
+        width: 25%;
+        display: grid;
+        grid-template-columns: repeat(3, 25px);
+        grid-gap: 75px;
+        justify-content: center;
+    
+        div{
+            width: 75px;
+            height: 75px;
+            background-color: #B9E0FC;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            border-radius: 15px;
+            margin: -25px;
+    
+            &:hover{
+                background-color: rgba(137, 136, 136, .5);
+                cursor: pointer;
+            }
+        }
+    }
+    
+    .selected{
+        background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
+    
+        &:hover{
+            background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
+        }
+    }
+}
+
+.title-h1{
+    margin-left: 5%;
 }
 
 
@@ -32,7 +163,7 @@ $colorTertiaire: #B9E0FC;
             margin-top: 1.5vw;
             
             div {
-                a {
+                .btn-header {
                     background-color: $colorTertiaire;
                     border-radius: 99vw;
                     &:hover {                  
@@ -54,7 +185,7 @@ $colorTertiaire: #B9E0FC;
         }
     }
     #pages {
-        a {
+        .btn-header {
             width: 12vw; 
             font-size: 2vw !important;
         }
@@ -76,95 +207,6 @@ $colorTertiaire: #B9E0FC;
     }
     
 }
-table{
-    margin: flex;
-    width: 500px;
-    height: 500px;
-    border:2px solid black;
-    text-align: center;
-    border-collapse: collapse; 
-}
-
-td{
-    padding: 5px;
-    width: 10%;
-    height: 10%;
-    font-size: 2rem;
-    border: 1px solid gray;
-    transition: all .4s;
-
-    &:nth-child(3),
-    &:nth-child(6){
-        border-right: 2px solid black;
-    }
-
-    &:hover{
-        background-color: rgba(137, 136, 136, .3);
-        transition: all .2s;
-        cursor: pointer;
-    }
-
-    &.true{
-        background-color: rgba(72, 196, 1, 0.21);
-    }
-
-    &.false {
-        background-color: rgba(255, 66, 66, 0.5);
-    }
-}
-
-tr{
-    border: 1px solid gray;
-
-    &:nth-child(3),
-    &:nth-child(6)
-    {
-        border-bottom: 2px solid black;
-    }
-}
-
-.choose-number{
-    width: 25%;
-    display: grid;
-    grid-template-columns: repeat(3, 25px);
-    grid-gap: 75px;
-    justify-content: center;
-
-    div{
-        width: 75px;
-        height: 75px;
-        background-color: #B9E0FC;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2rem;
-        border-radius: 15px;
-        margin: -25px;
-
-        &:hover{
-            background-color: rgba(137, 136, 136, .5);
-            cursor: pointer;
-        }
-    }
-}
-
-.selected{
-    background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
-
-    &:hover{
-        background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
-    }
-}
-
-.toggle{
-    display: none;
-    text-align: center;
-    background-color: greenyellow;
-    &.active{
-        display: block;
-    }
-}
 //// code css lucas register
 
 .row {
@@ -173,55 +215,55 @@ tr{
     display: flex;
     justify-content: center;
     align-items: center;
-  
-    form {
-      width: 50%;
-      height: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  
-      h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #0271C0;
-        font-weight: 1000;
-      }
-  
-      div {
-        width: 80%;
-        margin: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-  
-        input {
-          padding: 10px;
-          border: 0;
-          border-radius: 7px;
-          width: 100%;
-          height: 7vh;
-          margin: auto;
-          font-size: 2rem;
-          margin-bottom: 50px;
-          background-color: #B9E0FC;
-        }
 
-        button {
-            padding: 10px;
-            border: 0;
-            border-radius: 7px;
-            font-size: 2rem;
-            background-color: #B9E0FC;
+    form {
+        width: 50%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-left: auto;
-            cursor: pointer;
-          }
-      }
+            color: #0271C0;
+            font-weight: 1000;
+        }
+
+        div {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+                padding: 10px;
+                border: 0;
+                border-radius: 7px;
+                width: 100%;
+                height: 7vh;
+                margin: auto;
+                font-size: 2rem;
+                margin-bottom: 50px;
+                background-color: #B9E0FC;
+            }
+
+            button {
+                padding: 10px;
+                border: 0;
+                border-radius: 7px;
+                font-size: 2rem;
+                background-color: #B9E0FC;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+            }
+        }
     }
 }
 
@@ -240,13 +282,527 @@ tr{
 .btn-play{
     position: absolute;
     text-decoration: none;
-    padding-left: 70px;
-    padding-right: 70px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 70px;
     border-radius: 7px;
     box-shadow: 5px;
     font-size: 30px;
     color: aliceblue;
     background-color: #0271C0 ;
+    transition: all .4s;
+
+    &:hover{
+        transform: scale(1.05);
+        transition: all .4s;
+    }
+}
+
+
+// style header connecté profil
+
+.profil{
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    background-color: #B9E0FC;
+    padding-bottom: 0vh !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 90;
+
+    &:hover{
+        background-color: #0271C0;
+        transition: all .4s;
+    }
+    
+
+    i{
+        font-size: 2rem;
+        color: white;
+        z-index: 90;
+    }
+
+    .toggle-profil{
+        position: absolute;
+        width: 200px;
+        height: 0px;
+        border-radius: 15px;
+        background-color: #0271C0;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        visibility: hidden;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        hr{
+            width: 100%;
+        }
+
+
+        li{
+            margin: 10px 20px;
+            width: 100%;
+            list-style: none;
+
+
+            .btn-profil{
+                color: white;
+                text-decoration: none;
+                font-size: 1rem !important;
+                
+                i{
+                    font-size: 1rem;
+                    color: white;
+                    margin-right: 10px;
+                }
+            }
+        }
+        &.active{
+            height: 300px;
+            visibility: visible;
+            transition: all .4s;
+            opacity: 1;
+        }
+    }
+}
+
+
+
+// style page game toggle
+
+
+.toggle{
+    display: none;
+    text-align: center;
+    background-color: #0271C0;
+    width: 50vw;
+    height: 40vh;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+
+    button{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+
+        i{
+            color: white;
+            font-size: 2rem;
+        }
+    }
+
+    p{
+        width: 70%;
+        color: white;
+        font-size: 2rem;
+
+        a{
+            color: white;
+            text-decoration: none;
+            border: 3px solid #B9E0FC;
+            border-radius: 999px;
+            transition: all .4s;
+            padding: 10px;
+
+            &:hover{
+                background-color: #B9E0FC;
+                transition: all .4s;
+                color: #0271C0;
+            }
+
+        }
+    }
+    a{
+        color: white;
+        text-decoration: none;
+        border: 3px solid #B9E0FC;
+        border-radius: 999px;
+        transition: all .4s;
+        padding: 10px;
+        font-size: 1.5rem;
+
+        &:hover{
+            background-color: #B9E0FC;
+            transition: all .4s;
+            color: #0271C0;
+        }
+
+    }
+
+
+    &.active{
+        display: flex;
+    }
+}
+
+
+// style page dashboard
+
+.title-dashboard{
+    margin-top: 2%;
+    margin-left: 5%;
+    font-size: 2rem;
+    color: #0271C0;
+}
+
+.box-game{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    select{
+        cursor: pointer;
+        padding: 8px;
+        border: 3px solid #0271C0;
+        border-radius: 20px;
+        color: #0271C0;
+        background-color: transparent;
+        font-size: 1.2rem;
+    }
+
+    button{
+        width: 200px;
+        padding: 8px;
+        border: 3px solid #0271C0;
+        border-radius: 20px;
+        color: white;
+        background-color: #0271C0;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
+
+.title-h3{
+    margin-left:5% ;
+    opacity: .5;
+    color: #0271C0;
+}
+
+.section-sudoku{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    a{
+        text-decoration: none;
+    }
+
+    .box-sudoku{
+        width: 300px;
+        height: 300px;
+        margin: 20px 50px;
+        background-color: rgba($color: #B9E0FC, $alpha: .3);
+        border-radius: 20px;
+        transition: all .1s;
+        position: relative;
+
+        &:hover{
+            transform: scale(1.05);
+            transition: all .4s;
+            &:after{
+                opacity: 1;
+            }
+        }
+        &:after{
+            content: "Reprendre";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid #0271C0;
+            background-color: #0271C0;
+            border-radius: 999px;
+            color: white;
+            padding: 10px;
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+
+        h4{
+            color: #0271C0;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        table{
+            width: 80%;
+            height: 80%;
+            text-align: center;
+            border: 2px solid #0271C0;
+            border-collapse: collapse;
+            margin: auto;
+
+            td{
+                border: 1px solid gray;
+                color: #0271C0;
+                text-decoration: none;
+            
+                &:nth-child(3),
+                &:nth-child(6){
+                    border-right: 2px solid #0271C0;
+                }
+            }
+            
+            tr{
+                border: 1px solid gray;
+            
+                &:nth-child(3),
+                &:nth-child(6)
+                {
+                    border-bottom: 2px solid #0271C0;
+                }
+            }
+        }
+    }
+
+    .box{
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i{
+            color: #0271C0;
+            font-size: 5rem;
+        }
+
+    }
+}
+
+// style toggle mot de passe oublié
+
+.toggle-contact{
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+    background-color: #0271C0;
+    border-radius: 15px;
+    z-index: 9999;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-size: 1.5rem;
+    display: none;
+    
+    h3{
+        margin-top: 50px;
+    }
+
+    i{
+        color: black;
+        float: right;
+        font-size: 1.7rem;
+        margin-top: 5px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .check{
+        width: 80px;
+        height: 80px;
+        margin: auto;
+        border-radius: 999px;
+        border: 3px solid green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 80px;
+
+        i{
+            color: green;
+            transform: translateX(15%);
+            font-size: 3rem;
+        }
+    }
+}
+
+.toggle-contact.active{
+    display: block;
+}
+
+// style page all sudokus
+
+.contain-box-sudoku{
+    width: 90%;
+    margin: auto;
+
+    .box-sudoku{
+        width: 100%;
+
+        .box{
+            width: 70%;
+            height: 150px;
+            border-radius: 20px;
+            background-color: #B9E0FC;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .sudoku{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                filter: none;
+
+                .table{
+                    width: 130px;
+                    height: 130px;
+                    border: 1px solid black;
+
+                    table{
+                        width: 100%;
+                        height: 100%;
+                        border: 2px solid #0271C0;
+                        border-collapse: collapse;
+
+                        td{
+                            border: 1px solid gray;
+                            color: #0271C0;
+                            text-decoration: none;
+                            font-size: .5rem;
+                            font-weight: bold;
+                        
+                            &:nth-child(3),
+                            &:nth-child(6){
+                                border-right: 2px solid #0271C0;
+                            }
+                        }
+                        
+                        tr{
+                            border: 1px solid gray;
+                        
+                            &:nth-child(3),
+                            &:nth-child(6)
+                            {
+                                border-bottom: 2px solid #0271C0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .statut {
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .win{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+
+// page profil
+
+.section-profil{
+    width: 100%;
+    display: flex;  
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .list-amis{
+        width: 500px;
+
+
+        .box-amis{
+            width: 100%;
+            height: 40vh;
+            overflow: auto;
+            border-radius: 8px;
+            //background-color: rgba($color: #B9E0FC, $alpha: .4);
+
+            .box{
+                width: 95%;
+                height: 8vh;
+                background-color: #0271C0;
+                margin: 10px auto;
+                border-radius: 999px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                color: white;
+            }
+
+            p{
+                text-align: center;
+            }
+        }
+    }
+}
+
+.section-update{
+    width: 100%;
+    margin-bottom: 50px;
+
+    form{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        div{
+            width: 30%;
+
+            label{
+                width: 100%;
+                margin-left: 20px;
+            }
+
+            input{
+                padding: 7px;
+                padding-left:15px ;
+                border: 0;
+                border-radius: 999px;
+                width: 100%;
+                height: 5vh;
+                margin: auto;
+                font-size: 1.5rem;
+                border:3px solid #0271C0;
+                color: #0271C0;
+                background-color: white;
+            }
+        }
+
+        button{
+            padding: 7px;
+            height: 5vh;
+            i{font-size: 2.5rem;color: #0271C0;}
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
 }

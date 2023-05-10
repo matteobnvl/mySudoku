@@ -19,3 +19,17 @@ if (window.location.pathname === "/mySudoku/game" && window.innerWidth > "768") 
 } else if(window.location.pathname === "/mySudoku/game" && window.innerWidth < "768") {
     $("#Game").css("box-shadow","0 2px 0 #0271C0").css("color","#0271C0");
 };
+
+$('.profil').click(function () {
+    $('.toggle-profil').toggleClass('active')
+})
+$('main').click(function () {
+    $('.toggle-profil').removeClass('active')
+})
+
+const close = document.getElementById('close');
+
+close.addEventListener('click', function(){
+    document.getElementById('toggle').classList.remove('active');
+    document.getElementById('toggle-page').classList.remove('active');
+})

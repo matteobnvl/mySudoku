@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Controller;
 use App\Models\User;
+use App\Models\Game;
 
 class ProfilController extends Controller
 {
@@ -23,12 +24,16 @@ class ProfilController extends Controller
             }
         }
         $amis = User::getAmis($_SESSION['id_joueur']);
-        $scores = User::getScores();
-        $scoresAmis = User::getScoresWithFriends();
+
+        $nbWin = Game::countPartieByStatut(2);
+        $nbLose = Game::countPartieByStatut(3);
+        $nbInProgress = Game::countPartieByStatut(1);
+        
         return view('auth.profil', [
-            'amis' => $amis, 
-            'scores' => $scores,
-            'scores_amis' => $scoresAmis
+            'amis' => $amis,
+            'nbWin' => $nbWin[0]['nbgame'],
+            'nbLose' => $nbLose[0]['nbgame'],
+            'nbInProgress' => $nbInProgress[0]['nbgame'],
         ]);
     }
 

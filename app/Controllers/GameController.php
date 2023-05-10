@@ -56,9 +56,16 @@ class GameController extends Controller
                 redirect('Dashboard');
             }
         }
+        $arrayNiveau = [
+            1 => 'Facile',
+            2 => 'Moyen',
+            3 => 'Difficile',
+            4 => 'Aléatoire'
+        ];
         return view('auth.game', [
             'sudoku' => $sudoku,
-            'statut' => $statut[0]
+            'statut' => $statut[0],
+            'niveau' => $arrayNiveau
         ]);
     }
 
@@ -149,10 +156,14 @@ class GameController extends Controller
 
             if (empty($arrayVerif)) {
                 $score = Sudoku::getScoreByNiveau($id_partie);
-                User::addScore($score[0]['score']);
+                $vie = Game::getStatutAndVieByIdPartie($id_partie);
+                $vie = $vie[0]['vie'];
+                $score = $score[0]['score'] + ($vie *2);
+                User::addScore($score);
+                Game::addScore($score, $id_partie);
                 Sudoku::updateStatutSudoku($id_partie, 2);
 
-                return json_encode(['key' => true, 'score' => $score[0]]);
+                return json_encode(['key' => true, 'score' => $score]);
             }
             return json_encode($arrayVerif);
         }

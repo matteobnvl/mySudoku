@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-use App\Models\Sudoku;
+use App\Models\Mail;
 use App\Models\User;
+use App\Models\Game;
 
 class DashboardController extends Controller
 {
@@ -17,17 +18,18 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if (isset($_SESSION['difficulte'])) {
-            $difficulte = $_SESSION['difficulte'];
-        } else {
-            $difficulte = 'easy';
-        }
-        $sudokus = Sudoku::getAllSudokuJoueur($_SESSION['id_joueur']);
+        $sudokus = Game::getLastFiveSudokusByUser($_SESSION['id_joueur']);
         $demande_amis = User::countRequestFriends();
-
+        $arrayNiveau = [
+            1 => 'Facile',
+            2 => 'Moyen',
+            3 => 'Difficile',
+            4 => 'Aléatoire'
+        ];
         return view('auth.dashboard',[
             'sudokus' => $sudokus,
-            'demande_amis' => $demande_amis[0]['nbdemande']
+            'demande_amis' => $demande_amis[0]['nbdemande'],
+            'niveau' => $arrayNiveau,
         ]);
     }
 
@@ -38,6 +40,8 @@ class DashboardController extends Controller
         if (isset($_GET['id'])) {
             if (User::getCheckDemandeAmis($_GET['id'])) {
                 User::addFriends($_GET['id']);
+                $amis = User::getJoueur($_GET['id']);
+                Mail::sendMailDemandeAmis($amis[0]);
                 $message_valid = ' amis ajouté';
             } else {
                 $message_valid = 'déjà ajouté';
@@ -76,5 +80,28 @@ class DashboardController extends Controller
             $message_valid = 'demande d\'amis refusée !';
             redirect('add_friends', '?message='.$message_valid);
         }
+    }
+
+    public function classement()
+    {
+        $scores = User::getScores();
+        $scoresAmis = User::getScoresWithFriends();
+
+        return view('auth.classement', [
+            'scores' => $scores,
+            'scores_amis' => $scoresAmis
+        ]);
+    }
+
+    public function allSudoku()
+    {
+        if ($_POST) {
+            $offset = $_POST['offset'];
+            $sudokus = Game::getGameByJoueurLimit($offset, 5);
+            return json_encode($sudokus);
+        }
+
+
+        return view('auth.all_sudoku');
     }
 }

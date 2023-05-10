@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use PDO;
+use DateTime;
 
 class User extends Model
 {
@@ -13,7 +14,7 @@ class User extends Model
         $stt = $db->prepare($qry);
         $stt->execute([
             ':email' => htmlentities($email),
-            ':mdp' => md5($mdp)
+            ':mdp' => hash('sha256', $mdp)
         ]);
         $user = $stt->fetch(\PDO::FETCH_ASSOC);
 
@@ -27,13 +28,14 @@ class User extends Model
         return false;
     }
 
-    public static function checkMail($email)
+    public static function checkMailAndPseudo($email, $pseudo)
     {
         $db = self::db();
-        $qry = "SELECT * FROM Joueur WHERE email = :email";
+        $qry = "SELECT * FROM Joueur WHERE email = :email OR pseudo = :pseudo";
         $stt = $db->prepare($qry);
         $stt->execute([
-            ':email' => $email
+            ':email' => $email,
+            ':pseudo' => $pseudo
         ]);
         
         return $stt->fetch(\PDO::FETCH_ASSOC) > 0 ? false : true;
@@ -48,7 +50,7 @@ class User extends Model
         $stt->execute([
             ':pseudo' => htmlentities($post['pseudo']),
             ':email' => htmlentities($post['email']),
-            ':mdp' => md5($post['password'])
+            ':mdp' => hash('sha256',$post['password'])
         ]);
         return true;
     }
@@ -71,7 +73,9 @@ class User extends Model
     public static function getAmis($id_joueur)
     {
         $db = self::db();
-        $qry = "SELECT pseudo FROM Joueur JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
+        $qry = "SELECT pseudo, score, Amis.date
+                FROM Joueur 
+                JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
                 WHERE (Amis.id_amis = :id_joueur OR Amis.id_amis_1 = :id_joueur) 
                 AND Joueur.id_joueur <> :id_joueur";
         $stt = $db->prepare($qry);
@@ -224,5 +228,121 @@ class User extends Model
         $stt->execute();
         $amis = $stt->fetchAll(PDO::FETCH_OBJ);
         return $amis;
+    }
+
+
+    public static function verifAskResetPassword($mail) {
+        $db = self::db();
+        $qry = "SELECT token_recovery_password
+                FROM Joueur
+                WHERE email = :email";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':email' => htmlentities($mail)
+        ]);
+        $token = $stt->fetchAll(\PDO::FETCH_ASSOC);
+        if ($token[0]['token_recovery_password'] !== null) {
+            $dateToken = self::checkDatePassword($mail);
+            $dateDay = new DateTime();
+            $dateDay = $dateDay->format('Y-m-d H:i:s');
+            $dateToken = $dateToken[0]['date_recovery_password'];
+            
+            if (datediff($dateDay,$dateToken) < 5000) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static function checkDatePassword($mail) {
+        $db = self::db();
+        $qry = "SELECT date_recovery_password
+                FROM Joueur
+                WHERE email = :email";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':email' => $mail,
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public static function InsertTokenDate($mail, $token) {
+        $db = self::db();
+        $qry = "UPDATE Joueur
+                SET token_recovery_password = :token_recovery_password, date_recovery_password = :date_recovery_password
+                WHERE email = :email";
+        $stt = $db->prepare($qry);
+        $date = new \DateTime();
+        $date =$date->format('Y-m-d-H-i-s');
+        $stt->execute([
+            ':token_recovery_password' => hash('sha256', $token),
+            ':date_recovery_password' => $date,
+            ':email' => $mail
+        ]);
+    }
+
+    public static function UserByToken($token) {
+        $db = self::db();
+        $qry = "SELECT * 
+                FROM Joueur
+                WHERE token_recovery_password = :token";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token' => hash('sha256', $token)
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public static function ResetPassword($post, $token) {
+        $db = self::db();
+        $qry = "UPDATE Joueur
+                SET token_recovery_password = :token_recovery_password, 
+                    date_recovery_password = :date_recovery_password, 
+                    `mot_de_passe` = :pwd
+                WHERE token_recovery_password = :token";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token_recovery_password' => null,
+            ':date_recovery_password' => null,
+            ':pwd' => hash('sha256', $post['password']),
+            ':token' => hash('sha256', $token)
+        ]);
+    }
+
+
+    public static function VerifToken($token) {
+        $db = self::db();
+        $qry = "SELECT *
+                FROM Joueur
+                WHERE token_recovery_password = :token";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token' => hash('sha256', $token)
+        ]);
+        $user = $stt->fetchAll(\PDO::FETCH_ASSOC);
+        if($stt->rowCount() > 0) {
+            $dateDay = new DateTime();
+            $dateDay = $dateDay->format('Y-m-d H:i:s');
+            $dateToken = $user[0]['date_recovery_password'];
+            if (datediff($dateDay,$dateToken) < 5000) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function getJoueur($id_joueur)
+    {
+        $db = self::db();
+        $qry = "SELECT *
+                FROM Joueur
+                WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $id_joueur
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

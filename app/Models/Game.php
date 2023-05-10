@@ -134,12 +134,75 @@ class Game extends Model
     public static function getStatutAndVieByIdPartie($id_partie)
     {
         $db = self::db();
-        $qry = "SELECT statut, vie
+        $qry = "SELECT statut, vie, id_niveau, score
                 FROM Partie
                 WHERE id_partie = :id_partie";
         $stt = $db->prepare($qry);
         $stt->execute([
             ':id_partie' => $id_partie
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public static function addScore($score, $id_partie)
+    {
+        $db = self::db();
+        $qry = "UPDATE Partie
+                SET score = :score
+                WHERE id_partie = :id_partie";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':score' => $score,
+            ':id_partie' => $id_partie
+        ]);
+    }
+
+    public static function getLastFiveSudokusByUser($id_joueur)
+    {
+        $db = self::db();
+        $qry = "SELECT Partie.id_partie, Partie.statut, Partie.id_niveau, Sudoku.tableau
+                FROM Partie
+                INNER JOIN Sudoku ON Partie.id_partie = Sudoku.id_partie
+                WHERE id_joueur = :id_joueur AND statut = :statut
+                ORDER BY Partie.id_partie DESC
+                LIMIT 5";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $id_joueur,
+            ':statut' => 1
+        ]);
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getGameByJoueurLimit($offset, $limit)
+    {
+        $db = self::db();
+        $qry = "SELECT statut, Partie.id_niveau, tableau, date_partie, vie, score, Partie.id_partie
+                FROM Partie
+                INNER JOIN Sudoku ON Partie.id_partie = Sudoku.id_partie
+                WHERE id_joueur = :id_joueur
+                ORDER BY Partie.id_partie DESC
+                LIMIT {$offset}, {$limit}";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+
+        return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function countPartieByStatut($statut)
+    {
+        $db = self::db();
+        $qry = "SELECT COUNT(id_partie) AS nbGame
+                FROM Partie
+                WHERE id_joueur = :id_joueur AND statut = :statut";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur'],
+            ':statut' => $statut
         ]);
 
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
