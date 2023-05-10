@@ -16,6 +16,7 @@
                 <?php else: ?>
                     <a class="btn-header" href="<?= route('Dashboard')?>"><i class="fa-solid fa-house"></i></a>
                 <?php endif ?>
+                <a class="btn-header" id="Game" href="<?= route('Contact')?>">Contact</a>
                 <a class="btn-header" id="Game" href="<?= route('Game')?>">Jouer</a>
                 <?php if($_SESSION): ?>
                     <div class="profil">
