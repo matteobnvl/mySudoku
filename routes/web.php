@@ -17,6 +17,9 @@ Route::get(['/dashboard', 'App\Controllers\DashboardController@index'])->name('D
 Route::get(['/classement', 'App\Controllers\DashboardController@classement'])->name('classement');
 Route::get(['/mes-sudokus', 'App\Controllers\DashboardController@allSudoku'])->name('all_sudoku');
 
+// Route Contact
+Route::get(['/contact', 'App\Controllers\ContactController@index'])->name('Contact');
+
 // Route Game 
 Route::get(['/game', 'App\Controllers\GameController@index'])->name('Game');
 
