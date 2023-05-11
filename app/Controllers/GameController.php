@@ -43,12 +43,9 @@ class GameController extends Controller
                 }
             }
             $sudoku = Sudoku::generateSudoku($_POST['niveau']);
-            var_dump($sudoku);
-            exit;
-            $solutionSudoku = json_decode(Sudoku::generateSolutionSudoku($sudoku));
             Sudoku::createSudoku(
-                json_encode(json_decode($sudoku)->{'board'}),
-                json_encode($solutionSudoku),
+                json_encode($sudoku->{'value'}),
+                json_encode($sudoku->{'solution'}),
                 $partie['id_partie']);
             redirect('Game', '?sudoku='.$partie['id_partie']);
         } else {

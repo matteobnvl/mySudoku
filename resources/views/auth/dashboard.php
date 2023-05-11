@@ -2,10 +2,9 @@
 <section class="box-game">
     <form action="<?= route('Game')?>" method="POST">
         <select name="niveau" title="Selectionner un niveau">
-            <option value="easy">Facile</option>
-            <option value="medium">Moyen</option>
-            <option value="hard">Difficile</option>
-            <option value="random">Aléatoire</option>
+            <option value="Easy">Facile</option>
+            <option value="Medium">Moyen</option>
+            <option value="Hard">Difficile</option>
         </select>
         <button title="lancer une nouvelle partie" type="submit">Jouer</button>
         <a href="<?= route('multi') ?>">Jouer en multi</a>
