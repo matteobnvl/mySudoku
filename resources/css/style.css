@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -15,6 +16,59 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
   background: transparent;
   cursor: pointer;
+}
+
+body.active {
+  overflow: hidden;
+}
+
+#loader {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  background-color: #014580;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  opacity: 0.6;
+  display: none;
+}
+#loader i {
+  color: white;
+}
+#loader.active {
+  display: flex;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes slice {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#loader #load {
+  width: 50px; /* Largeur du loader */
+  height: 50px; /* Hauteur du loader */
+  border-radius: 50%; /* Pour créer la forme circulaire */
+  border: 3px solid #ccc; /* Couleur de la bordure */
+  border-top: 3px solid black; /* Couleur de la bordure supérieure */
+  animation: spin 2s linear infinite; /* Animation de rotation */
+  position: relative;
+  overflow: hidden;
 }
 
 .sudoku-gameplay {
@@ -341,6 +395,7 @@ body::-webkit-scrollbar-track {
   color: white;
   text-decoration: none;
   font-size: 1rem !important;
+  width: 100%;
 }
 .profil .toggle-profil li .btn-profil i {
   font-size: 1rem;
@@ -348,7 +403,7 @@ body::-webkit-scrollbar-track {
   margin-right: 10px;
 }
 .profil .toggle-profil.active {
-  height: 300px;
+  height: 200px;
   visibility: visible;
   transition: all 0.4s;
   opacity: 1;
@@ -658,11 +713,52 @@ body::-webkit-scrollbar-track {
 .section-profil .list-amis {
   width: 500px;
 }
+.section-profil .list-amis .box-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-profil .list-amis .box-btn button {
+  width: 12vw;
+  height: 8vh;
+  border: none;
+  background-color: #0271C0;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 999px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.section-profil .list-amis .box-btn button:hover {
+  background-color: #02589F;
+}
+.section-profil .list-amis .box-btn button.active {
+  background-color: #014580;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
 .section-profil .list-amis .box-amis {
   width: 100%;
   height: 40vh;
   overflow: auto;
   border-radius: 8px;
+  display: none;
+}
+.section-profil .list-amis .box-amis::-webkit-scrollbar {
+  width: 2px;
+  border-radius: 999Px;
+}
+.section-profil .list-amis .box-amis::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.section-profil .list-amis .box-amis::-webkit-scrollbar-thumb {
+  background-color: #014580;
+}
+.section-profil .list-amis .box-amis::-webkit-scrollbar-thumb:hover {
+  background-color: #014580;
+}
+.section-profil .list-amis .box-amis.active {
+  display: block;
 }
 .section-profil .list-amis .box-amis .box {
   width: 95%;
@@ -674,6 +770,22 @@ body::-webkit-scrollbar-track {
   justify-content: space-around;
   align-items: center;
   color: white;
+}
+.section-profil .list-amis .box-amis .box.classement-box:nth-child(1) {
+  background-color: gold;
+}
+.section-profil .list-amis .box-amis .box.classement-box:nth-child(2) {
+  background-color: silver;
+}
+.section-profil .list-amis .box-amis .box.classement-box:nth-child(3) {
+  background-color: #A07155;
+}
+.section-profil .list-amis .box-amis .box table {
+  width: 90%;
+  margin: auto;
+}
+.section-profil .list-amis .box-amis .box table td {
+  width: 33%;
 }
 .section-profil .list-amis .box-amis p {
   text-align: center;
@@ -719,4 +831,79 @@ body::-webkit-scrollbar-track {
 .section-update form button i {
   font-size: 2.5rem;
   color: #0271C0;
+}
+
+.classement-buttons {
+  text-align: center;
+}
+.classement-buttons h1 {
+  color: #0271C0;
+}
+.classement-buttons button {
+  width: 10%;
+  margin: 2%;
+  border: none;
+  background-color: #0271C0;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+.classement-buttons button:hover {
+  background-color: #02589F;
+}
+.classement-buttons button.active {
+  background-color: #014580;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.classement {
+  width: 50%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.classement.classement--amis {
+  background-color: #f7f7f7;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.classement h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.classement table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.classement table thead th {
+  color: #0271C0;
+  background-color: #ffffff;
+  padding: 10px;
+}
+.classement table thead th:first-child {
+  text-align: left;
+}
+.classement table thead th:not(:first-child) {
+  text-align: center;
+}
+.classement table tbody tr:nth-child(odd) {
+  background-color: #b9e0fc;
+}
+.classement table tbody tr td {
+  padding: 10px;
+  text-align: center;
+}
+.classement table tbody tr td:first-child {
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+.classement table tbody tr td:first-child img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }/*# sourceMappingURL=style.css.map */

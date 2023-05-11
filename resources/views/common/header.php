@@ -16,14 +16,13 @@
                 <?php else: ?>
                     <a class="btn-header" href="<?= route('Dashboard')?>"><i class="fa-solid fa-house"></i></a>
                 <?php endif ?>
+                <a class="btn-header" id="Game" href="<?= route('Contact')?>">Contact</a>
                 <a class="btn-header" id="Game" href="<?= route('Game')?>">Jouer</a>
                 <?php if($_SESSION): ?>
                     <div class="profil">
                         <i class="fa-solid fa-user"></i>
                         <div class="toggle-profil">
                             <li><a class="btn-profil" href="<?= route('Profil')?>"><i class="fa-regular fa-user"></i>Profil</a></li>
-                            <hr>
-                            <li><a class="btn-profil" href="<?= route('classement')?>"><i class="fa-solid fa-ranking-star"></i>Classement</a></li>
                             <hr>
                             <li><a class="btn-profil" href="<?= route('add_friends')?>"><i class="fa-solid fa-user-plus"></i>Demande amis</a></li>
                             <hr>

@@ -17,7 +17,7 @@ class Game extends Model
         return $stt->fetch(\PDO::FETCH_ASSOC) > 0;
     }
 
-    public static function create($niveau, $id_joueur = null)
+    public static function create($niveau = 1, $id_joueur = null)
     {
         $db = self::db();
         $qry = "INSERT INTO Partie (date_partie, statut, id_joueur, id_niveau)

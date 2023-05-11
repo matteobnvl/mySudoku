@@ -17,6 +17,52 @@ body::-webkit-scrollbar-track{
     cursor: pointer;
 }
 
+body.active{
+    overflow: hidden;
+}
+
+
+#loader{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    background-color: #014580;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    opacity: .6;
+    display: none;
+
+    i{
+        color: white;
+    }
+
+    &.active{
+        display: flex;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    @keyframes slice {
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(180deg); }
+        100% { transform: rotate(360deg); }
+    }
+    #load {
+        width: 50px; /* Largeur du loader */
+        height: 50px; /* Hauteur du loader */
+        border-radius: 50%; /* Pour créer la forme circulaire */
+        border: 3px solid #ccc; /* Couleur de la bordure */
+        border-top: 3px solid black; /* Couleur de la bordure supérieure */
+        animation: spin 2s linear infinite; /* Animation de rotation */
+        position: relative;
+        overflow: hidden;
+    }
+}
 
 
 // style page game sudoku
@@ -409,6 +455,7 @@ $colorTertiaire: #B9E0FC;
                 color: white;
                 text-decoration: none;
                 font-size: 1rem !important;
+                width: 100%;
                 
                 i{
                     font-size: 1rem;
@@ -418,7 +465,7 @@ $colorTertiaire: #B9E0FC;
             }
         }
         &.active{
-            height: 300px;
+            height: 200px;
             visibility: visible;
             transition: all .4s;
             opacity: 1;
@@ -790,13 +837,63 @@ $colorTertiaire: #B9E0FC;
     .list-amis{
         width: 500px;
 
+        .box-btn{
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                width: 12vw;
+                height: 8vh;
+                border: none;
+                background-color: #0271C0;
+                color: #fff;
+                font-size: 1rem;
+                border-radius: 999px;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+    
+                &:hover {
+                    background-color: #02589F;
+                }
+                
+                &.active {
+                    background-color: #014580;
+                    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.25);
+                    outline: none;
+                }
+            }
+        }
+
 
         .box-amis{
             width: 100%;
             height: 40vh;
             overflow: auto;
             border-radius: 8px;
-            //background-color: rgba($color: #B9E0FC, $alpha: .4);
+            display: none;
+
+            &::-webkit-scrollbar {
+                width: 2px;
+                border-radius: 999Px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: #f1f1f1;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background-color: #014580;
+            }
+            
+            &::-webkit-scrollbar-thumb:hover {
+                background-color: #014580;
+            }
+
+
+            &.active{
+                display: block;
+            }
 
             .box{
                 width: 95%;
@@ -808,6 +905,29 @@ $colorTertiaire: #B9E0FC;
                 justify-content: space-around;
                 align-items: center;
                 color: white;
+
+                &.classement-box{
+                    &:nth-child(1) {
+                        background-color: gold;
+                    }
+
+                    &:nth-child(2) {
+                        background-color: silver;
+                    }
+
+                    &:nth-child(3) {
+                        background-color: 	#A07155;
+                    }
+                }
+
+                table{
+                    width: 90%;
+                    margin: auto;
+
+                    td{
+                        width: 33%;
+                    }
+                }
             }
 
             p{
@@ -860,3 +980,103 @@ $colorTertiaire: #B9E0FC;
         }
     }
 }
+
+//classement
+
+.classement-buttons {
+    text-align: center;
+  
+    h1 {
+      color: #0271C0;
+    }
+  
+    button {
+      width: 10%;
+      margin: 2%;
+      border: none;
+      background-color: #0271C0;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: all 0.2s ease-in-out;
+  
+      
+    }
+  
+    button:hover {
+      background-color: #02589F;
+    }
+  
+    button.active {
+      background-color: #014580;
+      box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.25);
+      outline: none;
+    }
+  }
+  
+  .classement {
+    width: 50%;
+    max-width: 1080px;
+    margin: 0 auto;
+  
+    &.classement--amis {
+      background-color: #f7f7f7;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      thead {
+        th {
+            color: #0271C0;
+            background-color: #ffffff;
+            padding: 10px;
+  
+            &:first-child {
+              text-align: left;
+            }
+          
+            &:not(:first-child) {
+              text-align: center;
+            }
+        }
+      }
+  
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background-color: #b9e0fc;
+          }
+  
+          td {
+            padding: 10px;
+            text-align: center;
+  
+            &:first-child {
+              width: 30%;
+              display: flex;
+              align-items: center;
+  
+              img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

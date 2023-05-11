@@ -4,15 +4,20 @@ namespace App\Models;
 
 class Sudoku extends Model
 {
-    public static function generateSudoku($niveau = 'easy')
+    public static function generateSudoku($niveau = 'Easy')
     {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://sugoku.onrender.com/board?difficulty='.$niveau);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
-        $result = curl_exec($curl);
-        curl_close($curl);
-        return $result;
+        do {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://sudoku-api.vercel.app/api/dosuku');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+            $result = curl_exec($curl);
+            curl_close($curl);
+            // voir faire continue; si pas étirable
+            $sudoku = json_decode($result);
+            $sudoku = $sudoku->{'newboard'}->{'grids'};
+        } while (is_array($sudoku) && $niveau != $sudoku[0]->{'difficulty'});
+        return $sudoku[0];
     }
 
     public static function generateSolutionSudoku($grid)

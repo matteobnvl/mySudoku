@@ -27,6 +27,13 @@ $('main').click(function () {
     $('.toggle-profil').removeClass('active')
 })
 
+const loader = document.getElementById("loader");
+
+document.getElementById('play').addEventListener('click', function() {
+    loader.classList.add('active')
+    document.querySelector('body').classList.add('active')
+});
+
 const close = document.getElementById('close');
 
 close.addEventListener('click', function(){

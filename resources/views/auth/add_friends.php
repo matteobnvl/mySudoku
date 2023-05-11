@@ -1,22 +1,23 @@
-<a href="<?= route('Dashboard')?>">retour dashboard</a>
-<h1>Ajouter vos amis</h1>
+<div class="addFriend">
+    <h1>Ajouter vos amis</h1>
 
-<p style="color:green"><?= (isset($_GET['message'])) ? $_GET['message'] : '' ?></p>
-<label for="searchFriends">Recherche le pseudo</label>
-<input type="text" name="search" id="searchFriends">
-<div id="listFriends"></div>
+    <p style="color:green"><?= (isset($_GET['message'])) ? $_GET['message'] : '' ?></p>
+    <div class="pseudo">    
+        <input type="text" name="search" id="searchFriends" placeholder="Recherchez le pseudo">
+    </div>
+    <div id="listFriends"></div>
 
-<h2>liste demande d'amis</h2>
-<ul>
-    <?php 
-    if (!empty($liste_demande_amis)):
-        foreach($liste_demande_amis as $amis) : ?>
-        <li><?= $amis['pseudo']?>  <a href="<?= route('accept')?>?id=<?= $amis['id'] ?>">accepter</a>   <a href="<?= route('refuse')?>?id=<?= $amis['id'] ?>">refuser</a></li>
-    <?php endforeach; else :
-        echo 'Vous n\'avez aucune demande';
-    endif ?>
-</ul>
-
+    <h2>liste demande d'amis</h2>
+    <ul>
+        <?php 
+        if (!empty($liste_demande_amis)):
+            foreach($liste_demande_amis as $amis) : ?>
+            <li><?= $amis['pseudo']?>  <a href="<?= route('accept')?>?id=<?= $amis['id'] ?>">accepter</a>   <a href="<?= route('refuse')?>?id=<?= $amis['id'] ?>">refuser</a></li>
+        <?php endforeach; else :
+            echo 'Vous n\'avez aucune demande';
+        endif ?>
+    </ul>
+</div>
 
 <script>
         function debounce(func, wait, immediate) {

@@ -87,4 +87,36 @@ class Mail extends Model{
         }
     }
 
+    public static function sendComment($email, $comment)
+    {
+        $mail = new PHPMailer();
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'contact_mysudoku@matteo-bonneval.fr';
+            $mail->Password = '!Epsi2023Sudoku';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
+
+            //Recipients
+            $mail->setFrom('contact_mysudoku@matteo-bonneval.fr');
+            $mail->addAddress('contact_mysudoku@matteo-bonneval.fr');     //Add a recipient
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Nouveau commentaire';
+            $mail->Body = 'Nouveau commentaire sur le site. '.'<br><br>
+                            Commentaire : ' . $comment . ' <br><br>
+                            Email : ' . $email . ' <br><br>';
+
+            $mail->send();
+            return 'Le commentaire a bien été envoyé !';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
+
 }

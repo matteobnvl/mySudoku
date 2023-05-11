@@ -82,17 +82,6 @@ class DashboardController extends Controller
         }
     }
 
-    public function classement()
-    {
-        $scores = User::getScores();
-        $scoresAmis = User::getScoresWithFriends();
-
-        return view('auth.classement', [
-            'scores' => $scores,
-            'scores_amis' => $scoresAmis
-        ]);
-    }
-
     public function allSudoku()
     {
         if ($_POST) {
