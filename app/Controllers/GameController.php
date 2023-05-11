@@ -32,9 +32,14 @@ class GameController extends Controller
     public function index()
     {
         if (!$_GET) {
-            $niveau = Game::getIdNiveauByName($_POST['niveau']);
+            if ($_POST) {
+                $niveau = Game::getIdNiveauByName($_POST['niveau']);
+                $niveau = $niveau[0]['id_niveau'];
+            } else {
+                $niveau  = 1;
+            }
             if ($_SESSION) {
-                if (Game::create($niveau[0]['id_niveau'], $_SESSION['id_joueur'])) {
+                if (Game::create($niveau, $_SESSION['id_joueur'])) {
                     $partie = Game::getLastGameCreate($_SESSION['id_joueur']);
                 }
             } else {
@@ -42,7 +47,9 @@ class GameController extends Controller
                     $partie = Game::getLastGameCreate();
                 }
             }
-            $sudoku = Sudoku::generateSudoku($_POST['niveau']);
+            $sudoku = ($_POST)
+                        ? Sudoku::generateSudoku($_POST['niveau'])
+                        : Sudoku::generateSudoku();
             Sudoku::createSudoku(
                 json_encode($sudoku->{'value'}),
                 json_encode($sudoku->{'solution'}),

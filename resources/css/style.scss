@@ -18,6 +18,48 @@ body::-webkit-scrollbar-track{
 }
 
 
+#loader{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    background-color: #014580;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    opacity: .6;
+    display: none;
+
+    i{
+        color: white;
+    }
+
+    &.active{
+        display: flex;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    @keyframes slice {
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(180deg); }
+        100% { transform: rotate(360deg); }
+    }
+    #load {
+        width: 50px; /* Largeur du loader */
+        height: 50px; /* Hauteur du loader */
+        border-radius: 50%; /* Pour créer la forme circulaire */
+        border: 3px solid #ccc; /* Couleur de la bordure */
+        border-top: 3px solid black; /* Couleur de la bordure supérieure */
+        animation: spin 2s linear infinite; /* Animation de rotation */
+        position: relative;
+        overflow: hidden;
+    }
+}
+
 
 // style page game sudoku
 
@@ -355,6 +397,7 @@ $colorTertiaire: #B9E0FC;
                 color: white;
                 text-decoration: none;
                 font-size: 1rem !important;
+                width: 100%;
                 
                 i{
                     font-size: 1rem;
@@ -364,7 +407,7 @@ $colorTertiaire: #B9E0FC;
             }
         }
         &.active{
-            height: 300px;
+            height: 200px;
             visibility: visible;
             transition: all .4s;
             opacity: 1;

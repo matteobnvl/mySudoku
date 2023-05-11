@@ -6,7 +6,7 @@
             <option value="Medium">Moyen</option>
             <option value="Hard">Difficile</option>
         </select>
-        <button title="lancer une nouvelle partie" type="submit">Jouer</button>
+        <button id="play" title="lancer une nouvelle partie" type="submit">Jouer</button>
         <a href="<?= route('multi') ?>">Jouer en multi</a>
     </form>
 </section>

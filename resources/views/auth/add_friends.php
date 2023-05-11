@@ -3,7 +3,7 @@
 
     <p style="color:green"><?= (isset($_GET['message'])) ? $_GET['message'] : '' ?></p>
     <div class="pseudo">    
-        <input type="text" name="search" id="searchFriends" placeholder="Recherche le pseudo :">
+        <input type="text" name="search" id="searchFriends" placeholder="Recherchez le pseudo">
     </div>
     <div id="listFriends"></div>
 

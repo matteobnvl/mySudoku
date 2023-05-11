@@ -26,6 +26,7 @@ $title = (isset($current['name'])) ? ' - ' . ucfirst($current['name']) : '';
 <?php require_once __BASEPATH__ . '/resources/views/common/header.php' ?>
 
 <main>
+    <div id="loader"><div id="load"></div></div>
 
     <?php require_once __BASEPATH__ . '/resources/views/' . $page . '.php' ?>
 
