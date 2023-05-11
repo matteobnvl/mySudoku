@@ -17,7 +17,7 @@ class GameController extends Controller
                     redirect('Dashboard');
                 }
             } else {
-                $partie = Game::getGame($_GET['sudoku'],$_SESSION['difficulte']);
+                $partie = Game::getGame($_GET['sudoku']);
                 if (empty($sudoku)) {
                     redirect('Accueil');
                 } 
@@ -43,6 +43,8 @@ class GameController extends Controller
                 }
             }
             $sudoku = Sudoku::generateSudoku($_POST['niveau']);
+            var_dump($sudoku);
+            exit;
             $solutionSudoku = json_decode(Sudoku::generateSolutionSudoku($sudoku));
             Sudoku::createSudoku(
                 json_encode(json_decode($sudoku)->{'board'}),
