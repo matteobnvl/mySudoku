@@ -17,6 +17,10 @@ body::-webkit-scrollbar-track{
     cursor: pointer;
 }
 
+body.active{
+    overflow: hidden;
+}
+
 
 #loader{
     position: absolute;
