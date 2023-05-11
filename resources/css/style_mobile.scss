@@ -47,6 +47,7 @@ body {
         div {
             display: flex;
             justify-content: space-around;
+            align-items: center;
             padding-bottom: 2vh;
     
             .btn-header{
@@ -243,6 +244,72 @@ body {
 
     .toggle{
       width: 100%;
+    }
+
+    .row-home{
+      .col{
+        width: 95%;
+        h2{
+          width: 100%;
+          text-align: left;
+        }
+
+        .text1{
+          img{
+            width: 300px;
+          }
+          .box-p{
+            width: 100%;
+            margin-top: 20px;
+          }
+        }
+
+        .box{
+          justify-content: center;
+          img{
+            width: 300px !important;
+            
+            &:nth-child(odd){
+              float: right;
+            }
+
+            &:nth-child(even){
+              float: left;
+            }
+          }
+          p{
+            text-align: center;
+            font-size: 1.8rem;
+          }
+        }
+
+        .box-img{
+          img {
+            width: 100%;
+          }
+        }
+
+        .box-contact {
+          form{
+            width: 100%;
+
+            div{
+              width: 100%;
+
+              input{
+                width: 100%;
+              }
+              textarea{
+                max-width: 95%;
+                min-width: 95%;
+              }
+              button{
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
     }
 }
 

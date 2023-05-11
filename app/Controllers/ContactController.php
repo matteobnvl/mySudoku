@@ -11,16 +11,18 @@ class ContactController extends Controller
     {
         if ($_POST) {
             // récupérer les données du formulaire
+            $name = $_POST['name'];
             $email = $_POST['email'];
             $comment = $_POST['comment'];
     
             // envoyer le mail à l'admin
-            $result = Mail::sendComment($email, $comment);
+            $result = Mail::sendComment($name, $email, $comment);
 
-        }  
+            Mail::sendRemerciementContact($name, $email);
 
-        //return view('pages.home', ['users' => $users]);
-        return view('auth.contact');
+
+        }
+        redirect('Accueil', '#contact?message='.$result);
 
     }
 

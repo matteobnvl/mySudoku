@@ -87,7 +87,7 @@ class Mail extends Model{
         }
     }
 
-    public static function sendComment($email, $comment)
+    public static function sendComment($name, $email, $comment)
     {
         $mail = new PHPMailer();
         try {
@@ -102,14 +102,47 @@ class Mail extends Model{
 
             //Recipients
             $mail->setFrom('contact_mysudoku@matteo-bonneval.fr');
-            $mail->addAddress('contact_mysudoku@matteo-bonneval.fr');     //Add a recipient
+            $mail->addAddress('matteobonneval19@gmail.com');     //Add a recipient
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Nouveau commentaire';
-            $mail->Body = 'Nouveau commentaire sur le site. '.'<br><br>
-                            Commentaire : ' . $comment . ' <br><br>
+            $mail->Subject = 'Nouveau message';
+            $mail->Body = 'Nouveau message depuis le site de la part de '. $name .'.<br><br>
+                            Message : ' . $comment . ' <br><br>
                             Email : ' . $email . ' <br><br>';
+
+            $mail->send();
+            return 'Le messave nous a bien été envoyé. Merci pour votre soutien !';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
+
+    public static function sendRemerciementContact($name, $email)
+    {
+        $mail = new PHPMailer();
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'contact_mysudoku@matteo-bonneval.fr';
+            $mail->Password = '!Epsi2023Sudoku';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
+
+            //Recipients
+            $mail->setFrom('contact_mysudoku@matteo-bonneval.fr');
+            $mail->addAddress($email);     //Add a recipient
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Suite à votre contact';
+            $mail->Body = 'Bonjour '. $name .', toute l\'équipe de MySudoku vous remercie pour votre message.<br><br>
+                            Nous le traiterons dans les plus brefs délais, pour vous faire le meilleur retour possible.
+                            En attendant vous pouvez compléter une grille de sudoku pour gagner encore plus de points !<br><br>
+                            Bonne journée.<br><br>Cordialement,<br><br>L\'équipe MySudoku.';
 
             $mail->send();
             return 'Le commentaire a bien été envoyé !';

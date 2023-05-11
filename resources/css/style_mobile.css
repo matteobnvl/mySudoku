@@ -42,6 +42,7 @@ body {
 .header #pages div {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding-bottom: 2vh;
 }
 .header #pages div .btn-header {
@@ -199,6 +200,55 @@ body {
     height: 60px;
   }
   .toggle {
+    width: 100%;
+  }
+  .row-home .col {
+    width: 95%;
+  }
+  .row-home .col h2 {
+    width: 100%;
+    text-align: left;
+  }
+  .row-home .col .text1 img {
+    width: 300px;
+  }
+  .row-home .col .text1 .box-p {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .row-home .col .box {
+    justify-content: center;
+  }
+  .row-home .col .box img {
+    width: 300px !important;
+  }
+  .row-home .col .box img:nth-child(odd) {
+    float: right;
+  }
+  .row-home .col .box img:nth-child(even) {
+    float: left;
+  }
+  .row-home .col .box p {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  .row-home .col .box-img img {
+    width: 100%;
+  }
+  .row-home .col .box-contact form {
+    width: 100%;
+  }
+  .row-home .col .box-contact form div {
+    width: 100%;
+  }
+  .row-home .col .box-contact form div input {
+    width: 100%;
+  }
+  .row-home .col .box-contact form div textarea {
+    max-width: 95%;
+    min-width: 95%;
+  }
+  .row-home .col .box-contact form div button {
     width: 100%;
   }
 }

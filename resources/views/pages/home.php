@@ -1,45 +1,72 @@
 
-<main>
-    <div class="center-play">
-        <img class="sudoku" src="public\images\sudoku.png" alt="">
-        <a class="btn-play" href="<?= route('Game')?>">Jouer</a>
+<div class="center-play">
+    <img class="sudoku" src="public\images\sudoku.png" alt="">
+    <a class="btn-play" href="<?= route('Game')?>">Jouer</a>
+</div>
+
+<section class="row-home">
+    <div class="col">
+        <h2>Bonjour à toi jeune joueur ! Bienvenu dans le monde du sudoku</h2>
+        <div class="text1">
+            <img class="lil-sudoku" src="public\images\sudoku_home.jpg" alt="">
+            <div class="box-p">
+                <p>
+                    Tu peux jouer dès maintenant pour t'essayer à nos sudokus mais si tu souhaites sauvegarder ta progression ne
+                    perds pas un instant à créer ton compte en cliquant<a href="<?= route('Register')?>"> ici</a>.
+                </p>
+            </div>
+        </div>
+        <div class="box-2">
+            <h2 class="left">Avec ton comptes tu pourras...</h2>
+            <div class="box">
+                <p>
+                    jouer à différents niveau pour obtenir des points
+                </p>
+                <img src="public/images/niveau.png" alt="image niveau">
+            </div>
+            <div class="box">
+                <img src="public/images/amis.jpg" alt="image amis">
+                <p>
+                    ajouter tes amis pour voir leurs avancés
+                </p>
+            </div>
+            <div class="box">
+                <p>
+                    te comparer aux autres joueurs pour devenir le meilleur
+                </p>
+                <img src="public/images/classement.jpg" alt="image classement">
+            </div>
+            <div class="box">
+                <img src="public/images/stats.jpg" alt="image stats">
+                <p>suivre ta progression d'un seul coup d'oeil</p>
+            </div>
+        </div>
+        <h2 class="left">Les règles sont simples...</h2>
+        <div class="box-img">
+            <img src="public/images/pave_numerique.png" alt="image pavé numérique">
+        </div>
+        <h2 class="left">Nous contacter...</h2>
+        <p><?= (isset($_GET['message'])) ? $_GET['message'] : '' ?></p>
+        <div class="box-contact" id="contact">
+            <form action="<?= route('Contact') ?>" method="post" class="form">
+                <div>
+                    <input type="text" name="name" id="name" required placeholder="Votre nom..">
+                </div>
+                <div>
+                    <input class="input" type="email" id="email" name="email" placeholder="Votre e-mail..">
+                </div>
+                <div>
+                    <textarea class="input" id="comment" name="comment" required autocomplete="off" placeholder="Votre message.."></textarea>
+                </div>
+                <div>
+                    <button type="submit">Envoyer</button>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <h2 class="title-pres">Présentation</h2>
-
-    <div class="text1">
-        <img class="lil-sudoku" src="public\images\sudoku-pres.png" alt="">
-        <p class="text-pres"><strong> Bonjour à toi jeune joueur!</strong> <br>
-        Je te souhaite la bienvenue dans le monde du Sudoku. <br>
-        Pour t'expliquer comment cela se passe, tu vas pouvoir jouer directement sans t'inscrire via le bouton "JOUER"
-        juste au dessus. <br> <strong> Par contre si tu t'inscrit !!</strong> Tu vas pouvoir changer le niveau du sudoku, pouvoir mettre en pause sa partie,
-        et encore mieux tu vas pouvoir affronter tes amis ou des personnes n'importe ou dans le monde dans des duels de rapidité</p>
-    </div>
-
-    <h2 class="title-apropos">A Propos de nous</h2>
-
-    <div class="text2">
-        <div class="about">
-            <img class="pdp" src="public\images\sudoku.png" alt="">
-            <p class="text-about">Matteo Bonneval</p>
-        </div>
-        <div class="about">
-            <img class="pdp" src="public\images\sudoku.png" alt="">
-            <p class="text-about">Nicolas Servary</p>
-        </div>
-        <div class="about">
-            <img class="pdp" src="public\images\sudoku.png" alt="">
-            <p class="text-about">Arthur Méry</p>
-        </div>
-        <div class="about">
-            <img class="pdp" src="public\images\sudoku.png" alt="">
-            <p  class="text-about">Wiliam André</p>
-        </div>
-        <div class="about">
-            <img class="pdp" src="public\images\sudoku.png" alt="">
-            <p class="text-about">Lucas Reynaud</p>
-        </div>
-
-        
-        </div>
-</main>
+</section>
+<footer>
+    <p>
+        Copyright © 2022 my-sudoku.matteo-bonneval.fr - Tous droits réservés - développé par mySudokuWeb
+    </p>
+</footer>
