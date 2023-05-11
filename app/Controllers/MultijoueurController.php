@@ -70,10 +70,10 @@ class MultijoueurController extends Controller{
         // rajouter la vérification si le sudoku est déjà présent
         if (!isset($_GET['sudoku'])) {
             $sudoku = Sudoku::generateSudoku();
-            $solutionSudoku = json_decode(Sudoku::generateSolutionSudoku($sudoku));
             $id_sudoku = Sudoku::createSudoku(
-                json_encode(json_decode($sudoku)->{'board'}),
-                json_encode($solutionSudoku));
+                json_encode($sudoku->{'value'}),
+                json_encode($sudoku->{'solution'}),
+            );
             Multijoueur::updateSudokuDuel($id_sudoku, $_GET['duel']);
             redirect('game_multi', '?duel='.$_GET['duel'].'&sudoku='.$id_sudoku);
         }
