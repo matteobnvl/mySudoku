@@ -311,6 +311,68 @@ body {
         }
       }
     }
+
+    .section-update{
+      form{
+        flex-wrap: wrap;
+
+        div{
+          width: 90%;
+  
+          input{
+            padding: 0px;
+          }
+        }
+      }
+    }
+
+    .section-profil{
+      margin-bottom:5vh;
+      .list-amis{
+        .box-btn{
+          padding-bottom: 5%;
+          button{
+            width: 30%;
+          }
+        }
+      }
+    }
+
+    .contain-box-sudoku{
+      .box-sudoku{
+        .box{
+          width: 100%;
+          .sudoku{
+            width: 40%;
+          }
+          .statut{
+            width: 20%;
+          }
+          .win{
+            width: 20%;
+          }
+        }
+      }
+    }
+    .section-sudoku{
+      .box-sudoku{
+        margin: 20px 40px;
+      }
+    }
+
+    .box-game{
+      form{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        a{
+          //width: 100%;
+          text-align: center;
+          margin-top: 5%;
+        }
+      }
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1000px) {

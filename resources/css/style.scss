@@ -81,6 +81,7 @@ body.active{
         top: -10%;
         right: 10%;
         font-size: 1.5rem;
+        color: #02589F;
     }
 
     #sudokuAdverse{
@@ -99,7 +100,7 @@ body.active{
         margin: flex;
         width: 500px;
         height: 500px;
-        border:2px solid black;
+        border:2px solid #02589F;
         text-align: center;
         border-collapse: collapse; 
     }
@@ -109,16 +110,16 @@ body.active{
         width: 10%;
         height: 10%;
         font-size: 2rem;
-        border: 1px solid gray;
+        border: 1px solid #0271C0;
         transition: all .4s;
     
         &:nth-child(3),
         &:nth-child(6){
-            border-right: 2px solid black;
+            border-right: 2px solid #02589F;
         }
     
         &:hover{
-            background-color: rgba(137, 136, 136, .3);
+            background-color: rgba(100, 155, 219, 0.3);
             transition: all .2s;
             cursor: pointer;
         }
@@ -133,12 +134,12 @@ body.active{
     }
     
     tr{
-        border: 1px solid gray;
+        border: 1px solid #0271C0;
     
         &:nth-child(3),
         &:nth-child(6)
         {
-            border-bottom: 2px solid black;
+            border-bottom: 2px solid #02589F;
         }
     }
     
@@ -169,16 +170,17 @@ body.active{
     }
     
     .selected{
-        background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
+        background-color: rgba($color: #0271C0, $alpha: .5);
     
         &:hover{
-            background-color: rgba($color: rgba(110, 110, 110, 0.5), $alpha: .5);
+            background-color:  rgba($color: #0271C0, $alpha: .5);
         }
     }
 }
 
 .title-h1{
     margin-left: 5%;
+    color: #02589F;
 }
 
 
@@ -555,25 +557,36 @@ $colorTertiaire: #B9E0FC;
     display: flex;
     justify-content: center;
 
-    select{
-        cursor: pointer;
-        padding: 8px;
-        border: 3px solid #0271C0;
-        border-radius: 20px;
-        color: #0271C0;
-        background-color: transparent;
-        font-size: 1.2rem;
-    }
+    form{
+        select{
+            cursor: pointer;
+            padding: 8px;
+            border: 3px solid #0271C0;
+            border-radius: 20px;
+            color: #0271C0;
+            background-color: transparent;
+            font-size: 1.2rem;
+        }
+    
+        button{
+            width: 200px;
+            padding: 8px;
+            border: 3px solid #0271C0;
+            border-radius: 20px;
+            color: white;
+            background-color: #0271C0;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
 
-    button{
-        width: 200px;
-        padding: 8px;
-        border: 3px solid #0271C0;
-        border-radius: 20px;
-        color: white;
-        background-color: #0271C0;
-        font-size: 1.2rem;
-        cursor: pointer;
+        a{
+            text-decoration: none;
+            color: #02589F;
+            border: 2px solid #02589F;
+            padding: 7px;
+            border-radius: 999px;
+
+        }
     }
 }
 
@@ -834,6 +847,7 @@ $colorTertiaire: #B9E0FC;
         width: 500px;
 
         .box-btn{
+            padding-bottom: 2%;
 
             display: flex;
             align-items: center;

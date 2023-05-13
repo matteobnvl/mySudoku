@@ -251,6 +251,48 @@ body {
   .row-home .col .box-contact form div button {
     width: 100%;
   }
+  .section-update form {
+    flex-wrap: wrap;
+  }
+  .section-update form div {
+    width: 90%;
+  }
+  .section-update form div input {
+    padding: 0px;
+  }
+  .section-profil {
+    margin-bottom: 5vh;
+  }
+  .section-profil .list-amis .box-btn {
+    padding-bottom: 5%;
+  }
+  .section-profil .list-amis .box-btn button {
+    width: 30%;
+  }
+  .contain-box-sudoku .box-sudoku .box {
+    width: 100%;
+  }
+  .contain-box-sudoku .box-sudoku .box .sudoku {
+    width: 40%;
+  }
+  .contain-box-sudoku .box-sudoku .box .statut {
+    width: 20%;
+  }
+  .contain-box-sudoku .box-sudoku .box .win {
+    width: 20%;
+  }
+  .section-sudoku .box-sudoku {
+    margin: 20px 40px;
+  }
+  .box-game form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .box-game form a {
+    text-align: center;
+    margin-top: 5%;
+  }
 }
 @media screen and (min-width: 768px) and (max-width: 1000px) {
   .title-h1 {

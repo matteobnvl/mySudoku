@@ -45,9 +45,9 @@
         <div class="box-img">
             <img src="public/images/pave_numerique.png" alt="image pavé numérique">
         </div>
-        <h2 class="left">Nous contacter...</h2>
-        <p><?= (isset($_GET['message'])) ? $_GET['message'] : '' ?></p>
-        <div class="box-contact" id="contact">
+        <h2 id="contact" class="left">Nous contacter...</h2>
+        <p id="message"></p>
+        <div class="box-contact">
             <form action="<?= route('Contact') ?>" method="post" class="form">
                 <div>
                     <input type="text" name="name" id="name" required placeholder="Votre nom..">
@@ -70,3 +70,9 @@
         Copyright © 2022 my-sudoku.matteo-bonneval.fr - Tous droits réservés - développé par mySudokuWeb
     </p>
 </footer>
+
+<script>
+    if (window.location.hash === '#contact') {
+        $('#message').html('Votre message a bien été envoyé !')
+    }
+</script>

@@ -85,6 +85,7 @@ body.active {
   top: -10%;
   right: 10%;
   font-size: 1.5rem;
+  color: #02589F;
 }
 .sudoku-gameplay #sudokuAdverse {
   width: 100px;
@@ -100,7 +101,7 @@ body.active {
   margin: flex;
   width: 500px;
   height: 500px;
-  border: 2px solid black;
+  border: 2px solid #02589F;
   text-align: center;
   border-collapse: collapse;
 }
@@ -109,14 +110,14 @@ body.active {
   width: 10%;
   height: 10%;
   font-size: 2rem;
-  border: 1px solid gray;
+  border: 1px solid #0271C0;
   transition: all 0.4s;
 }
 .sudoku-gameplay td:nth-child(3), .sudoku-gameplay td:nth-child(6) {
-  border-right: 2px solid black;
+  border-right: 2px solid #02589F;
 }
 .sudoku-gameplay td:hover {
-  background-color: rgba(137, 136, 136, 0.3);
+  background-color: rgba(100, 155, 219, 0.3);
   transition: all 0.2s;
   cursor: pointer;
 }
@@ -127,10 +128,10 @@ body.active {
   background-color: rgba(255, 66, 66, 0.5);
 }
 .sudoku-gameplay tr {
-  border: 1px solid gray;
+  border: 1px solid #0271C0;
 }
 .sudoku-gameplay tr:nth-child(3), .sudoku-gameplay tr:nth-child(6) {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #02589F;
 }
 .sudoku-gameplay .choose-number {
   width: 25%;
@@ -156,14 +157,15 @@ body.active {
   cursor: pointer;
 }
 .sudoku-gameplay .selected {
-  background-color: rgba(110, 110, 110, 0.5);
+  background-color: rgba(2, 113, 192, 0.5);
 }
 .sudoku-gameplay .selected:hover {
-  background-color: rgba(110, 110, 110, 0.5);
+  background-color: rgba(2, 113, 192, 0.5);
 }
 
 .title-h1 {
   margin-left: 5%;
+  color: #02589F;
 }
 
 @media (min-width: 768px) {
@@ -473,7 +475,7 @@ body.active {
   display: flex;
   justify-content: center;
 }
-.box-game select {
+.box-game form select {
   cursor: pointer;
   padding: 8px;
   border: 3px solid #0271C0;
@@ -482,7 +484,7 @@ body.active {
   background-color: transparent;
   font-size: 1.2rem;
 }
-.box-game button {
+.box-game form button {
   width: 200px;
   padding: 8px;
   border: 3px solid #0271C0;
@@ -491,6 +493,13 @@ body.active {
   background-color: #0271C0;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.box-game form a {
+  text-decoration: none;
+  color: #02589F;
+  border: 2px solid #02589F;
+  padding: 7px;
+  border-radius: 999px;
 }
 
 .title-h3 {
@@ -706,6 +715,7 @@ body.active {
   width: 500px;
 }
 .section-profil .list-amis .box-btn {
+  padding-bottom: 2%;
   display: flex;
   align-items: center;
   justify-content: space-between;

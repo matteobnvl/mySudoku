@@ -14,15 +14,14 @@ class ContactController extends Controller
             $name = $_POST['name'];
             $email = $_POST['email'];
             $comment = $_POST['comment'];
-    
-            // envoyer le mail à l'admin
+
             $result = Mail::sendComment($name, $email, $comment);
 
             Mail::sendRemerciementContact($name, $email);
 
 
         }
-        redirect('Accueil', '#contact?message='.$result);
+        redirect('Accueil', '#contact');
 
     }
 
