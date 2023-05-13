@@ -1,6 +1,6 @@
 <h1 class="title-h1">Sudoku niveau <?= $niveau[$statut['id_niveau']] ?></h1>
-<section class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
-    <p id="toggleWin">
+<section id="toggleWin" class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
+    <p>
         <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
         <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
         <span id="reussi"></span>
@@ -17,7 +17,7 @@
         Oh mince ! Vous n'avez plus de vie
     </p>
     <div>
-        <a href="<?= route('Dashboard')?>">Arreter la partie</a>
+        <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil')?>">Arreter la partie</a>
         <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
     </div> 
     

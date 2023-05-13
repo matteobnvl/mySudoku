@@ -18,14 +18,10 @@ class GameController extends Controller
                 }
             } else {
                 $partie = Game::getGame($_GET['sudoku']);
-                if (empty($sudoku)) {
-                    redirect('Accueil');
-                } 
-                if ($partie['id_joueur'] ==! null) {
+                if (empty($partie) || $partie['id_joueur'] != null) {
                     redirect('Accueil');
                 }
             }
-
         }
     }
 
@@ -43,7 +39,7 @@ class GameController extends Controller
                     $partie = Game::getLastGameCreate($_SESSION['id_joueur']);
                 }
             } else {
-                if (Game::create($niveau[0]['id_niveau'])) {
+                if (Game::create()) {
                     $partie = Game::getLastGameCreate();
                 }
             }

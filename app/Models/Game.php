@@ -57,7 +57,8 @@ class Game extends Model
                 WHERE id_partie = :id_partie AND id_niveau = :id_niveau";
         $stt = $db->prepare($qry);
         $stt->execute([
-            ':id_partie' => $id_partie
+            ':id_partie' => $id_partie,
+            ':id_niveau' => 1
         ]);
         return $stt->fetch(\PDO::FETCH_ASSOC);
         
