@@ -13,8 +13,10 @@ class Sudoku extends Model
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
             $result = curl_exec($curl);
             curl_close($curl);
-            // voir faire continue; si pas étirable
             $sudoku = json_decode($result);
+            if (!is_object($sudoku)) {
+                continue;
+            }
             $sudoku = $sudoku->{'newboard'}->{'grids'};
         } while (is_array($sudoku) && $niveau != $sudoku[0]->{'difficulty'});
         return $sudoku[0];

@@ -29,3 +29,12 @@
     <?php } ?>
 </div>
 <div id="toggle-page" class="toggle-page <?php if($forgotpassword === true): ?>active<?php endif ?>"></div>
+
+<script>
+const close = document.getElementById('close');
+
+close.addEventListener('click', function(){
+    document.getElementById('toggle').classList.remove('active');
+    document.getElementById('toggle-page').classList.remove('active');
+})
+</script>
