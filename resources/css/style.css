@@ -83,7 +83,7 @@ body.active {
 .sudoku-gameplay .box-vie {
   position: absolute;
   top: -10%;
-  left: 10%;
+  right: 10%;
   font-size: 1.5rem;
 }
 .sudoku-gameplay #sudokuAdverse {
@@ -631,6 +631,10 @@ body.active {
 }
 .contain-box-sudoku .box-sudoku {
   width: 100%;
+}
+.contain-box-sudoku .box-sudoku a {
+  text-decoration: none;
+  color: #014580;
 }
 .contain-box-sudoku .box-sudoku .box {
   width: 70%;

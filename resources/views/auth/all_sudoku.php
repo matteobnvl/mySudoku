@@ -68,25 +68,27 @@ function loadMoreItems(callback) {
                     console.log(row)
                     html = `<div class="box-sudoku">
                                 <p>${element.date_partie}</p>
-                                <div class="box">
-                                    <div class="sudoku">
-                                        <div class="table">
-                                            <table>
-                                                ${ row }
-                                            </table>        
+                                <a href="<?= route('Game')?>?sudoku=${element.id_partie}">
+                                    <div class="box">
+                                        <div class="sudoku">
+                                            <div class="table">
+                                                <table>
+                                                    ${ row }
+                                                </table>        
+                                            </div>
+                                        </div>
+                                        <div class="statut">
+                                            <div>
+                                                <h2>Niveau ${ niveau[element.id_niveau] }</h2>
+                                                <h3>${(element.score == null) ? '0' : element.score} <i style="color:gold" class="fa-solid fa-trophy"></i></h3>
+                                                <h3>${element.vie} <i style="color:red" class="fa-solid fa-heart"></i></h3>
+                                            </div>
+                                        </div>
+                                        <div class="win">
+                                            <div>${ statut[element.statut] }</div>
                                         </div>
                                     </div>
-                                    <div class="statut">
-                                        <div>
-                                            <h2>Niveau ${ niveau[element.id_niveau] }</h2>
-                                            <h3>Score : ${(element.score == null) ? '0' : element.score}</h3>
-                                            <h3>Vie : ${element.vie}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="win">
-                                        <div>${ statut[element.statut] }</div>
-                                    </div>
-                                </div>
+                                </a>
                             </div>`;
                     $('#content').append(html);
                 });

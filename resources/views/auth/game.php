@@ -23,7 +23,7 @@
     
 </section>
 <section class="sudoku-gameplay">
-    <p class="box-vie">Vos vies restantes : <span id="vie"></span></p>
+    <p class="box-vie">Vos vies restantes : <span id="vie"></span> <i style="color:red" class="fa-solid fa-heart"></i></p>
     <table>
         <?php
         foreach(json_decode($sudoku[0]['tableau']) as $keyLignes => $lignes):

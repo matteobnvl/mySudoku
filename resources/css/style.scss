@@ -79,7 +79,7 @@ body.active{
     .box-vie{
         position: absolute;
         top: -10%;
-        left: 10%;
+        right: 10%;
         font-size: 1.5rem;
     }
 
@@ -602,6 +602,10 @@ $colorTertiaire: #B9E0FC;
         transition: all .1s;
         position: relative;
 
+        a{
+
+        }
+
         &:hover{
             transform: scale(1.05);
             transition: all .4s;
@@ -738,6 +742,10 @@ $colorTertiaire: #B9E0FC;
 
     .box-sudoku{
         width: 100%;
+        a{
+            text-decoration: none;
+            color: #014580;
+        }
 
         .box{
             width: 70%;
