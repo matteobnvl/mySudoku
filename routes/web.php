@@ -39,6 +39,7 @@ Route::get(['/finish-multi', 'App\Controllers\MultijoueurController@finishMulti'
 
 // Route Profil
 Route::get(['/profil', 'App\Controllers\ProfilController@index'])->name('Profil');
+Route::get(['/suppression-compte', 'App\Controllers\ProfilController@delete'])->name('Delete compte');
 
 
 // Route Game Sudoku

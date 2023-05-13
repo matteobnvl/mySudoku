@@ -27,6 +27,14 @@ $('main').click(function () {
     $('.toggle-profil').removeClass('active')
 })
 
+$('#Game').click(function () {
+    $('#loader').addClass('active')
+})
+
+$('.btn-play').click(function () {
+    $('#loader').addClass('active')
+})
+
 const loader = document.getElementById("loader");
 
 document.getElementById('play').addEventListener('click', function() {

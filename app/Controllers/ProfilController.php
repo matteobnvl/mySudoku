@@ -42,5 +42,11 @@ class ProfilController extends Controller
         ]);
     }
 
+    public function delete()
+    {
+        User::deleteJoueur();
+        redirect('Logout');
+    }
+
 
 }

@@ -67,6 +67,7 @@
         <h2>Mes stats :</h2>
     </div>
 </section>
+<a style="float: right; color:red;margin-right:10vw;" href="<?= route('Delete compte') ?>">Supprimer mon compte <i class="fa-solid fa-trash"></i></a>
 
 <script>
 var options = {

@@ -77,7 +77,7 @@ class User extends Model
                 FROM Joueur 
                 JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
                 WHERE (Amis.id_amis = :id_joueur OR Amis.id_amis_1 = :id_joueur) 
-                AND Joueur.id_joueur <> :id_joueur";
+                AND Joueur.id_joueur <> :id_joueur AND Joueur.deleted = 0";
         $stt = $db->prepare($qry);
         $stt->bindParam(':id_joueur', $id_joueur, PDO::PARAM_INT);
         $stt->execute();
@@ -88,7 +88,7 @@ class User extends Model
     public static function getScores()
     {
         $db = self::db();
-        $qry = "SELECT pseudo, score FROM Joueur ORDER BY score DESC";
+        $qry = "SELECT pseudo, score FROM Joueur WHERE deleted = 0 ORDER BY score DESC";
         $stt = $db->prepare($qry);
         $stt->execute();
         $scores = $stt->fetchAll(PDO::FETCH_OBJ);
@@ -222,6 +222,7 @@ class User extends Model
                 WHERE (a.id_amis = :id_joueur 
                     OR a.id_amis_1 = :id_joueur 
                     OR j.id_joueur = :id_joueur)
+                    AND j.deleted = 0
                 ORDER BY score DESC";
         $stt = $db->prepare($qry);
         $stt->bindParam(':id_joueur', $_SESSION['id_joueur'], PDO::PARAM_INT);
@@ -344,5 +345,20 @@ class User extends Model
             ':id_joueur' => $id_joueur
         ]);
         return $stt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function deleteJoueur()
+    {
+        $db = self::db();
+        $qry = "UPDATE Joueur SET
+                deleted = :deleted, email = :email, pseudo = :pseudo
+                WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':id_joueur' => $_SESSION['id_joueur'],
+            ':deleted' => 1,
+            ':email' => null,
+            ':pseudo' => null
+        ]);
     }
 }
