@@ -1,4 +1,4 @@
-<h1>jeux multi  -   Vous jouez contre <?= $adversaire['pseudo']?></h1>
+<h1 class="title">Vous jouez contre <?= $adversaire['pseudo']?></h1>
 <section id="toggleWin" class="toggle <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? 'active' : '' ?>">
     <p >
         <?= ($statut['statut'] == 2) ? 'Bravo tu as réussi ce sudoku !!' : '' ?>
@@ -23,7 +23,7 @@
     
 </section>
 <section class="sudoku-gameplay">
-    <p class="box-vie">Vos vies restantes : <span id="vie"></span></p>
+    <p class="box-vie">Vos vies restantes : <span id="vie"></span> <i style="color:red" class="fa-solid fa-heart"></i></p>
     <table>
         <?php
         foreach(json_decode($sudoku['tableau']) as $keyLignes => $lignes):
@@ -55,8 +55,13 @@
         <div <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? '' : 'data-check="1"' ?>><i class="fa-solid fa-lightbulb"></i></div>
         <div <?= ($statut['statut'] == 2 || $statut['statut'] == 3) ? '' : 'data-verif="1"' ?>><i class="fa-solid fa-check"></i></div>
     </section>
-    <p>vie adverse <span id="vieAdverse"></span></p>
-    <section id="sudokuAdverse"></section>
+    <button class="btn-adversaire"><i class="fa-solid fa-eye"></i></button>
+    <section class="adversaire">
+        <p>vie adverse <span id="vieAdverse"></span></p>
+        <div>
+            <table id="sudokuAdverse"></table>
+        </div>
+    </section>
 </section>
 
 <script>
@@ -264,8 +269,13 @@ $(document).ready(function() {
     getSudoku()
     getVie()
     getVainqueur()
-    setInterval(getSudoku, 10000)
-    setInterval(getVie, 10000)
-    setInterval(getVainqueur, 10000)
+    setInterval(getSudoku, 2000)
+    setInterval(getVie, 2000)
+    setInterval(getVainqueur, 2000)
+})
+
+
+$('.btn-adversaire').click(function () {
+    $('.adversaire').toggle('active')
 })
 </script>

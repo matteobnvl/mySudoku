@@ -26,7 +26,7 @@ body.active {
   position: absolute;
   width: 100%;
   height: 100vh;
-  z-index: 9999;
+  z-index: 998;
   background-color: #014580;
   display: flex;
   align-items: center;
@@ -86,16 +86,6 @@ body.active {
   right: 10%;
   font-size: 1.5rem;
   color: #02589F;
-}
-.sudoku-gameplay #sudokuAdverse {
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  right: 2%;
-  top: -10%;
-}
-.sudoku-gameplay #sudokuAdverse td {
-  font-size: 0.8rem;
 }
 .sudoku-gameplay table {
   margin: flex;
@@ -162,10 +152,99 @@ body.active {
 .sudoku-gameplay .selected:hover {
   background-color: rgba(2, 113, 192, 0.5);
 }
+.sudoku-gameplay .btn-adversaire {
+  position: absolute;
+  top: -10%;
+  right: 0;
+  border-radius: 999px;
+  border: 1px solid #014580;
+  background-color: #014580;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  cursor: pointer;
+}
+.sudoku-gameplay .btn-adversaire i {
+  color: white;
+  font-size: 1.5rem;
+}
+.sudoku-gameplay .adversaire {
+  position: absolute;
+  display: none;
+  width: 400px;
+  height: 400px;
+  background-color: #B9E0FC;
+  border-radius: 15px;
+  top: -10%;
+  right: 5%;
+}
+.sudoku-gameplay .adversaire.active {
+  display: block;
+}
+.sudoku-gameplay .adversaire p {
+  text-align: center;
+}
+.sudoku-gameplay .adversaire div {
+  width: 100%;
+}
+.sudoku-gameplay .adversaire div table {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+.sudoku-gameplay .adversaire div table tr td {
+  font-size: 0.8rem;
+  cursor: auto;
+}
 
 .title-h1 {
   margin-left: 5%;
   color: #02589F;
+}
+
+.title {
+  color: #02589F;
+  margin-left: 5%;
+}
+
+.multi {
+  position: relative;
+  width: 100%;
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.multi #aleatoire {
+  transform: translateX(-50%, -50%);
+  text-align: center;
+  border: 2px solid #02589F;
+  padding: 8px;
+  text-decoration: none;
+  color: #02589F;
+  border-radius: 999px;
+  font-size: 1.5rem;
+}
+
+.search-multi {
+  width: 100%;
+  z-index: 999;
+  margin-top: 10vh;
+}
+.search-multi p {
+  text-align: center;
+  font-size: 1.2rem;
+  z-index: 999;
+}
+.search-multi div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+}
+.search-multi div a {
+  font-size: 1.2rem;
+  z-index: 999;
 }
 
 @media (min-width: 768px) {

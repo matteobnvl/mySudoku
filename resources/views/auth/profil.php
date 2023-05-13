@@ -1,4 +1,4 @@
-<h1>Mon profil  -  <?= $_SESSION['score']?><i style="color:gold" class="fa-solid fa-trophy"></i></h1>
+<h1 class="title">Mon profil  -  <?= $_SESSION['score']?><i style="color:gold" class="fa-solid fa-trophy"></i></h1>
 <section class="section-update">
     <form action="<?= route('Profil') ?>" method="post">
         <div>

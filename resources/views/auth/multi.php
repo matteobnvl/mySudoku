@@ -1,15 +1,17 @@
-<h1>Chercher une partie en multi</h1>
-
-<a href="<?= route('multi')?>?mode=amis">Jouer contre un ami</a>
-<a id="aleatoire" href="<?= route('multi')?>?mode=aleatoire">Aléatoire</a>
-
-<div>
+<h1 class="title">Jouer contre un joueur aléatoirement</h1>
+<section class="multi">
+    <a id="aleatoire" href="<?= route('multi')?>?mode=aleatoire">chercher un joueur</a>
+</section>
+<div class="search-multi">
     <p id="p"><?= ($message !== '') ? $message :'' ?></p>
-    <a href="<?= route('multi')?>?mode=annuler&id=<?= (isset($id_multi))? $id_multi : ''?>"><?= ($message !== '') ? 'annuler' :'' ?></a>
+    <div>
+        <a href="<?= route('multi')?>?mode=annuler&id=<?= (isset($id_multi))? $id_multi : ''?>"><?= ($message !== '') ? 'annuler' :'' ?></a>
+    </div>
 </div>
 
 <script>
 function checkForOpponent() {
+    $('#loader').addClass('active')
     console.log('search player')
     $.ajax({
         url: '<?= env('APP_URL')?>/attente',
@@ -27,5 +29,8 @@ function checkForOpponent() {
         }
     });
 }
+$('#aleatoire').click(function () {
+    $('#loader').addClass('active')
+})
 $('#aleatoire').click(checkForOpponent())
 </script>

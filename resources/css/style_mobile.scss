@@ -373,6 +373,15 @@ body {
         }
       }
     }
+  .sudoku-gameplay{
+    .adversaire{
+      top: 5%;
+      right: -5%;
+    }
+    .btn-adversaire{
+      top: 0;
+    }
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1000px) {
