@@ -65,7 +65,6 @@ function loadMoreItems(callback) {
                         }
                         row += "</tr>"
                     }
-                    console.log(row)
                     html = `<div class="box-sudoku">
                                 <p>${element.date_partie}</p>
                                 <a href="<?= route('Game')?>?sudoku=${element.id_partie}">

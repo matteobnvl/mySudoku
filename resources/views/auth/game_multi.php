@@ -5,20 +5,19 @@
         <?= ($statut['statut'] == 3) ? 'Tu n\'as pas réussis ce sudoku !' : '' ?>
         <span id="reussi"></span>
         <br><br>
-        tu as obtenu <span id="score"><?= ($statut['statut'] == 2) ? $statut['score'] : '0' ?> points</span>
+            tu as obtenu <span id="score"><?= ($statut['statut'] == 2) ? $statut['score'] : '0' ?></span> points
         <br><br>
-        <a href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil') ?>">
-            <?= ($_SESSION) ? 'Retour home' : 'Retour home' ?>
+        <a href="<?= route('Dashboard') ?>">
+            Retour
         </a>
     </p>
 </section>
 <section class="toggle" id="toggleVie">
     <p id="plusDeVie">
-        Oh mince ! Vous n'avez plus de vie
+        Oh mince ! Vous n'avez plus de vies <br> Votre adversaire a gagné
     </p>
     <div>
-        <a href="<?= route('Dashboard')?>">Arreter la partie</a>
-        <a href="<?= route('retry')?>?sudoku=<?= $_GET['sudoku']?>">Recommencer</a>
+        <a href="<?= route('Dashboard')?>">Retour</a>
     </div> 
     
 </section>
@@ -115,13 +114,11 @@ $('div[data-check]').click(function () {
         type: 'POST',
         data: {id_duel: <?= $_GET['duel'] ?>, id_sudoku: <?= $_GET['sudoku'] ?>},
         success: function (response) {
-            console.log(response)
             if (response != 'false') {
                 response = JSON.parse(response)
                 vie = parseInt($('#vie').html())
                 vie--
                 $('#vie').html(vie.toString())
-                console.log(response)
                 elements.forEach(function (item) {
                     response.forEach(function (event) {
                         if ($(item).attr('data-row') == event.key) {
@@ -153,9 +150,8 @@ $('div[data-verif]').click(function () {
         $.ajax({
             url: '<?= env('APP_URL')?>/finish-multi',
             type: 'POST',
-            data: {id_duel: <?= $_GET['sudoku'] ?>},
+            data: {id_duel: <?= $_GET['duel'] ?>, id_sudoku: <?= $_GET['sudoku'] ?>},
             success: function (response) {
-                console.log(response)
                 response = JSON.parse(response)
                 if (response.key == true) {
                     elements.forEach(function (item) {
@@ -175,8 +171,6 @@ $('div[data-verif]').click(function () {
                 }
             }
         })
-    } else {
-        console.log('pas finis')
     }
 })
 
@@ -249,6 +243,8 @@ $(document).ready(function() {
                 elements.forEach(function (item) {
                     item.setAttribute('data-finish', '1')
                 })
+                $('#reussi').html("Bravo tu as gagné le duel !")
+                $('#score').html('50')
             }
         })
     }
@@ -262,7 +258,9 @@ $(document).ready(function() {
                 elements.forEach(function (item) {
                     item.setAttribute('data-finish', '1')
                 })
-                $('#toggleVie').addClass('active')
+                $('#toggleWin').addClass('active')
+                $('#reussi').html("Oh mince tu as perdu le duel !")
+                $('#score').html('0')
             }
         })
     }

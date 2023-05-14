@@ -12,7 +12,6 @@
 <script>
 function checkForOpponent() {
     $('#loader').addClass('active')
-    console.log('search player')
     $.ajax({
         url: '<?= env('APP_URL')?>/attente',
         type: 'POST',

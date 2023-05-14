@@ -110,13 +110,11 @@ $('div[data-check]').click(function () {
         type: 'POST',
         data: {id: <?= $_GET['sudoku'] ?>},
         success: function (response) {
-            console.log(response)
             if (response != 'false') {
                 response = JSON.parse(response)
                 vie = parseInt($('#vie').html())
                 vie--
                 $('#vie').html(vie.toString())
-                console.log(response)
                 elements.forEach(function (item) {
                     response.forEach(function (event) {
                         if ($(item).attr('data-row') == event.key) {
@@ -150,7 +148,6 @@ $('div[data-verif]').click(function () {
             type: 'POST',
             data: {id: <?= $_GET['sudoku'] ?>},
             success: function (response) {
-                console.log(response)
                 response = JSON.parse(response)
                 if (response.key == true) {
                     elements.forEach(function (item) {
@@ -170,8 +167,6 @@ $('div[data-verif]').click(function () {
                 }
             }
         })
-    } else {
-        console.log('pas finis')
     }
 })
 

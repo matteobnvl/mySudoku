@@ -42,9 +42,7 @@
             type: 'POST',
             data: {data: $('#searchFriends').val()},
             success: function (response) {
-                console.log(response)
                 response = JSON.parse(response)
-                console.log(response)
                 response.forEach(function (item) {
                     $('#listFriends').append('<div>' + item.pseudo + ' <a href="<?= route('add_friends') ?>?id=' + item.id_joueur +'">ajouter</a></div>')
                 })

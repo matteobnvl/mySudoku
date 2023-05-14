@@ -201,11 +201,12 @@ class MultijoueurController extends Controller{
     {
         if ($_POST) {
             $id_multi = $_POST['id_duel'];
+            $id_sudoku = $_POST['id_sudoku'];
 
-            $solutionSudoku = Sudoku::getSolutionSudokuByIdSudoku($id_multi);
+            $solutionSudoku = Sudoku::getSolutionSudokuByIdSudoku($id_sudoku);
             $solutionSudoku = json_decode($solutionSudoku[0]['solution']);
 
-            $sudoku = Sudoku::getSudokuById($id_multi);
+            $sudoku = Sudoku::getSudokuById($id_sudoku);
             $sudoku = json_decode($sudoku[0]['tableau']);
 
             $arrayVerif = [];
