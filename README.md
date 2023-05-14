@@ -25,6 +25,9 @@ cd mysudoku
 ```
 composer install
 ```
+```
+créer une base de données et importer dedans le fichier my_sudoku_bdd.sql
+```
 accéder à : http://localhost/mysudoku
 
 
