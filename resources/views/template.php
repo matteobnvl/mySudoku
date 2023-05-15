@@ -10,7 +10,7 @@ $title = (isset($current['name'])) ? ' | ' . ucfirst($current['name']) : '';
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mysudoku<?= $title ?></title>
+    <title>SudoRivals<?= $title ?></title>
     <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
     <link rel="icon" href="public/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="resources/css/style.css">
