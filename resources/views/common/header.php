@@ -6,7 +6,7 @@
                 <span class="burgerMenu bar2"></span>
                 <span class="burgerMenu bar3"></span>
             </div>
-            <div><a id="Home" href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil')?>">My Sudoku</a></div>
+            <div><a id="Home" href="<?= route(($_SESSION) ? 'Dashboard' : 'Accueil')?>">SudoRivals</a></div>
         </div>
         <div id="pages">
             <div>
