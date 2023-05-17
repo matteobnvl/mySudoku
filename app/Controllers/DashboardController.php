@@ -19,7 +19,6 @@ class DashboardController extends Controller
     public function index()
     {
         $sudokus = Game::getLastFiveSudokusByUser($_SESSION['id_joueur']);
-        $demande_amis = User::countRequestFriends();
         $arrayNiveau = [
             1 => 'Facile',
             2 => 'Moyen',
@@ -28,7 +27,6 @@ class DashboardController extends Controller
         ];
         return view('auth.dashboard',[
             'sudokus' => $sudokus,
-            'demande_amis' => $demande_amis[0]['nbdemande'],
             'niveau' => $arrayNiveau,
         ]);
     }

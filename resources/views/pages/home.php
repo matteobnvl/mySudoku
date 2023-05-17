@@ -58,6 +58,7 @@
                 <div>
                     <textarea class="input" id="comment" name="comment" required autocomplete="off" placeholder="Votre message.."></textarea>
                 </div>
+                <div class="g-recaptcha" data-sitekey="6LfDchkmAAAAANktSDojZBOyzZdraVMQbsPHJTv8"></div>
                 <div>
                     <button type="submit">Envoyer</button>
                 </div>

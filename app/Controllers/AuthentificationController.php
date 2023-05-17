@@ -18,15 +18,11 @@ class AuthentificationController extends Controller
         if ($_SESSION) {
             redirect('Dashboard');
         }
-                $pagesNext = '';
         $forgotpassword = false;
         $mail = '';
         $checkMail = '';
         $message = '';
         if($_GET){
-            if(isset($_GET['pagesNext'])){
-                $pagesNext = $_GET['pagesNext'];
-            }
             if(isset($_GET['forgotpassword'])){
                 $forgotpassword = true;
                 if(isset($_GET['mail']) && $_POST) {
@@ -50,7 +46,7 @@ class AuthentificationController extends Controller
                 }
             }
         }
-        $checker = $this->checkIfConnectionSent($pagesNext);
+        $checker = $this->checkIfConnectionSent();
         $pages = 'login';
         return view('auth.login',[
             'pages' => $pages,

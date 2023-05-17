@@ -23,7 +23,7 @@ class MultijoueurController extends Controller{
         $id_multi = null;
         if ($_GET) {
             if ($_GET['mode'] === 'aleatoire') {
-                if (!Multijoueur::checkUserHasDuel()) {
+                if (!Multijoueur::checkUserHasNotDuel()) {
                     $message = 'recherche d\'un joueur';
                     $id_multi = Multijoueur::getIdMultiByJoueur();
                     $id_multi = $id_multi[0]['id_multi'];
@@ -46,7 +46,6 @@ class MultijoueurController extends Controller{
                 redirect('multi');
             }
         }
-
         return view('auth.multi', [
             'message' => $message,
             'id_multi' => $id_multi
@@ -67,7 +66,6 @@ class MultijoueurController extends Controller{
         if (!$_GET['duel']) {
             redirect('Dashboard');
         }
-        // rajouter la vérification si le sudoku est déjà présent
         if (!isset($_GET['sudoku'])) {
             $sudoku = Sudoku::generateSudoku();
             $id_sudoku = Sudoku::createSudoku(

@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Multijoueur extends Model{
 
-    public static function checkUserHasDuel()
+    public static function checkUserHasNotDuel()
     {
         $db = self::db();
         $qry = "SELECT *
