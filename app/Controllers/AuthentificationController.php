@@ -28,8 +28,7 @@ class AuthentificationController extends Controller
                 if(isset($_GET['mail']) && $_POST) {
                     if($_POST['mail'] !== ''){
                         if(!Mail::checkMail($_POST)){
-                            $mail = false;
-                            $message = 'Le mail ne correspond à aucun compte';
+                            $mail = true;
                         } else {
                             if (User::verifAskResetPassword($_POST['mail'])) {
                                 $mail = true;

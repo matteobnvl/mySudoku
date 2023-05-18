@@ -15,6 +15,7 @@
         <div>
             <input class="input" type="password" id="password-repeat" name="password-repeat" required autocomplete="off" placeholder="répéter mot de passe">
         </div>
+        <p id="message"></p>
         <div>
             <button id="btnRegister" disabled>M'inscrire</button>
         </div>
@@ -30,9 +31,11 @@
         password = $(this).val()
 
         $('#password-repeat').on('input', function () {
+            $('#message').html('Les mots de passe ne sont pas identique')
 
             if (password == $(this).val()) {
                 $('#btnRegister').removeAttr('disabled')
+                $('#message').empty()
             } else {
                 $('#btnRegister').attr('disabled', 'disabled')
             }

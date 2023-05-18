@@ -10,7 +10,7 @@ class User extends Model
 
         $db = self::db();
         $qry = "SELECT * FROM Joueur
-            WHERE email = :email AND mot_de_passe = :mdp";
+            WHERE (email = :email OR pseudo = :email) AND mot_de_passe = :mdp";
         $stt = $db->prepare($qry);
         $stt->execute([
             ':email' => htmlentities($email),

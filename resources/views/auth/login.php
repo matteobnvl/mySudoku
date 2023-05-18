@@ -2,12 +2,11 @@
     <form action="<?= route('Login') ?>" method="post" class="form">
     
         <h1>Se connecter</h1>
-        <div><input class="input" type="email" id="email" name="email" required autocomplete="off" placeholder="email"></div>
+        <div><input class="input" type="text" id="email" name="email" required autocomplete="off" placeholder="email ou pseudo"></div>
         <div><input class="input" type="password" id="password" name="password" required autocomplete="off" placeholder="mot de passe"></div>
         <div><button>Se connecter</button></div>
         <a href="<?= route('Login') ?>?forgotpassword=true">Mot de passe oublié ?</a>
-        <p><?= $error ==! '' ? $error : '' ?></p>
-        
+        <p><?= ($error ==! '' && !isset($_GET['forgotpassword'])) ? $error : '' ?></p>
     </form>
 </div>
 <div id="toggle" class="toggle-contact <?php if($forgotpassword === true): ?>active<?php endif ?>">
@@ -25,7 +24,7 @@
             <button type="submit" class="btn btn-primary mb-4">Envoyer mail</button>
         </form>
     <?php }else{ ?>
-        <p>Un mail vous a été envoyé, veuillez vérifier votre boite mail</p>
+        <p>Un mail vous a été envoyé si vous avez un compte, veuillez vérifier votre boite mail</p>
     <?php } ?>
 </div>
 <div id="toggle-page" class="toggle-page <?php if($forgotpassword === true): ?>active<?php endif ?>"></div>
