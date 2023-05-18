@@ -6,20 +6,15 @@ class Sudoku extends Model
 {
     public static function generateSudoku($niveau = 'Easy')
     {
-        do {
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://sudoku-api.vercel.app/api/dosuku');
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
-            $result = curl_exec($curl);
-            curl_close($curl);
-            $sudoku = json_decode($result);
-            if (!is_object($sudoku)) {
-                continue;
-            }
-            $sudoku = $sudoku->{'newboard'}->{'grids'};
-        } while (is_array($sudoku) && $niveau != $sudoku[0]->{'difficulty'});
-        return $sudoku[0];
+        
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, env('API_SUDOKU'));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $sudoku = json_decode($result);            
+        return $sudoku;
     }
 
     public static function generateSolutionSudoku($grid)

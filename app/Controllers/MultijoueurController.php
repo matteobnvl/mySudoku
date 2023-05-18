@@ -69,7 +69,7 @@ class MultijoueurController extends Controller{
         if (!isset($_GET['sudoku'])) {
             $sudoku = Sudoku::generateSudoku();
             $id_sudoku = Sudoku::createSudoku(
-                json_encode($sudoku->{'value'}),
+                json_encode($sudoku->{'sudoku'}),
                 json_encode($sudoku->{'solution'}),
             );
             Multijoueur::updateSudokuDuel($id_sudoku, $_GET['duel']);
