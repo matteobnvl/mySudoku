@@ -44,8 +44,8 @@ class User extends Model
     public static function register($post)
     {
         $db = self::db();
-        $qry = "INSERT INTO Joueur (pseudo, email, mot_de_passe)
-                VALUES (:pseudo, :email, :mdp)";
+        $qry = "INSERT INTO Joueur (pseudo, email, mot_de_passe, created_at)
+                VALUES (:pseudo, :email, :mdp, NOW())";
         $stt = $db->prepare($qry);
         $stt->execute([
             ':pseudo' => htmlentities($post['pseudo']),

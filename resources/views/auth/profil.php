@@ -1,4 +1,7 @@
-<h1 class="title">Mon profil  -  <?= $_SESSION['score']?><i style="color:gold" class="fa-solid fa-trophy"></i></h1>
+<h1 class="title">Mon profil  -  <?= $_SESSION['score'] == null ? '0' : $_SESSION['score'] ?><i style="color:gold" class="fa-solid fa-trophy"></i></h1>
+<p style="margin-left: 50px;color:#02589F">
+    Vous jouez à sudoRivals depuis <?= intervalleDate($_SESSION['created_at']) == '0 jours' ? 'aujourd\'hui': intervalleDate($_SESSION['created_at'])?>
+</p>
 <section class="section-update">
     <form action="<?= route('Profil') ?>" method="post">
         <div>
@@ -33,7 +36,7 @@
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Aucun ami pour le moment</p>
+                <p>Vous n'avez aucun ami pour le moment.</p>
             <?php endif; ?>
         </div>
         <div id="classement-mondial" class="box-amis">
@@ -50,17 +53,21 @@
             <?php endforeach; ?>
         </div>
         <div id="classement-amis" class="box-amis">
-            <?php foreach($scores_amis as $key => $score): ?>
-                <div class="box classement-box">
-                    <table>
-                        <tr>
-                            <td><?= (int) $key +1  ?><?= ($key == 0)? 'er' : 'ème' ?></td>
-                            <td><?= $score->pseudo ?><?= ($score->pseudo == $_SESSION['pseudo']) ? ' <i class="fa-solid fa-star"></i>':  '' ?></td>
-                            <td><?= ($score->score === null) ? '0' : $score->score ?> <i style="color:gold" class="fa-solid fa-trophy"></i></td>
-                        </tr>
-                    </table>
-                </div>
-            <?php endforeach; ?>    
+            <?php if (!empty($scores_amis)): ?>
+                <?php foreach($scores_amis as $key => $score): ?>
+                    <div class="box classement-box">
+                        <table>
+                            <tr>
+                                <td><?= (int) $key +1  ?><?= ($key == 0)? 'er' : 'ème' ?></td>
+                                <td><?= $score->pseudo ?><?= ($score->pseudo == $_SESSION['pseudo']) ? ' <i class="fa-solid fa-star"></i>':  '' ?></td>
+                                <td><?= ($score->score === null) ? '0' : $score->score ?> <i style="color:gold" class="fa-solid fa-trophy"></i></td>
+                            </tr>
+                        </table>
+                    </div>
+                <?php endforeach ?>  
+            <?php else: ?>
+                <p>Vous n'avez aucun ami pour le moment.</p>
+            <?php endif ?>
         </div>
     </div>
     <div id="chart">

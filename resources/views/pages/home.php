@@ -6,7 +6,7 @@
 
 <section class="row-home">
     <div class="col">
-        <h2>Bonjour à toi jeune joueur ! Bienvenu dans le monde du sudoku</h2>
+        <h2>Bonjour à toi jeune joueur ! Bienvenue dans le monde du sudoku</h2>
         <div class="text1">
             <img class="lil-sudoku" src="public\images\sudoku_home.jpg" alt="">
             <div class="box-p">
