@@ -14,7 +14,7 @@ class User extends Model
         $stt = $db->prepare($qry);
         $stt->execute([
             ':email' => htmlentities($email),
-            ':mdp' => hash('sha256', $mdp)
+            ':mdp' => hash(env('HASH'), $mdp)
         ]);
         $user = $stt->fetch(\PDO::FETCH_ASSOC);
 
@@ -50,7 +50,7 @@ class User extends Model
         $stt->execute([
             ':pseudo' => htmlentities($post['pseudo']),
             ':email' => htmlentities($post['email']),
-            ':mdp' => hash('sha256',$post['password'])
+            ':mdp' => hash(env('HASH'),$post['password'])
         ]);
         return true;
     }
@@ -115,7 +115,6 @@ class User extends Model
         $db = self::db();
         $qry = "SELECT J.id_joueur, J.pseudo
                 FROM Joueur AS J
-                LEFT JOIN Amis AS A ON J.id_joueur = A.id_amis
                 WHERE pseudo LIKE :pseudo 
                     AND pseudo != :pseudo_user";
         $stt = $db->prepare($qry);
@@ -218,11 +217,12 @@ class User extends Model
         $db = self::db();
         $qry = "SELECT j.pseudo, j.score 
                 FROM Joueur j 
-                LEFT JOIN Amis a ON (j.id_joueur = a.id_amis) 
+                INNER JOIN Amis a ON (j.id_joueur = a.id_amis) 
                 WHERE (a.id_amis = :id_joueur 
                     OR a.id_amis_1 = :id_joueur 
                     OR j.id_joueur = :id_joueur)
                     AND j.deleted = 0
+                GROUP BY j.pseudo, j.score
                 ORDER BY score DESC";
         $stt = $db->prepare($qry);
         $stt->bindParam(':id_joueur', $_SESSION['id_joueur'], PDO::PARAM_INT);
