@@ -1261,8 +1261,7 @@ $colorTertiaire: #B9E0FC;
             form{
                 width: 80%;
 
-                div{
-                    width: 100%;
+                .box{
                     display: flex;
                     align-items: center;
                     margin: 5vh 0px;

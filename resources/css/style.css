@@ -1062,13 +1062,12 @@ body.active {
 .row-home .col .box-contact form {
   width: 80%;
 }
-.row-home .col .box-contact form div {
-  width: 100%;
+.row-home .col .box-contact form .box {
   display: flex;
   align-items: center;
   margin: 5vh 0px;
 }
-.row-home .col .box-contact form div input {
+.row-home .col .box-contact form .box input {
   width: 50%;
   height: 30px;
   border-radius: 999px;
@@ -1076,7 +1075,7 @@ body.active {
   padding: 8px;
   border: 2px solid #02589F;
 }
-.row-home .col .box-contact form div textarea {
+.row-home .col .box-contact form .box textarea {
   max-width: 50%;
   min-width: 50%;
   min-height: 300px;
@@ -1087,7 +1086,7 @@ body.active {
   font-size: 1.5rem;
   overflow: hidden;
 }
-.row-home .col .box-contact form div button {
+.row-home .col .box-contact form .box button {
   font-size: 1.5rem;
   border-radius: 999px;
   background-color: #02589F;

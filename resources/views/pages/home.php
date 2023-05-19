@@ -48,26 +48,29 @@
         <h2 id="contact" class="left">Nous contacter...</h2>
         <p id="message"></p>
         <div class="box-contact">
-            <form action="<?= route('Contact') ?>" method="post" class="form">
-                <div>
+            <form action="<?= route('Contact') ?>" method="post" class="form" id="form-contact">
+                <div class="box">
                     <input type="text" name="name" id="name" required placeholder="Votre nom..">
                 </div>
-                <div>
+                <div class="box">
                     <input class="input" type="email" id="email" name="email" placeholder="Votre e-mail..">
                 </div>
-                <div>
+                <div class="box">
                     <textarea class="input" id="comment" name="comment" required autocomplete="off" placeholder="Votre message.."></textarea>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6LfDchkmAAAAANktSDojZBOyzZdraVMQbsPHJTv8"></div>
-                <div>
-                    <button type="submit">Envoyer</button>
+                <div class="box">
+                    <button type="submit"
+                            class="g-recaptcha"
+                            data-sitekey="<?= env('PUBLIC_KEY_CAPTCHA') ?>"
+                            data-callback='onSubmit'
+                            data-action='submit'>Envoyer</button>
                 </div>
             </form>
         </div>
     </div>
 </section>
 <footer>
-    <p>
+    <p style="text-align: center;">
         Copyright © 2022 my-sudoku.matteo-bonneval.fr - Tous droits réservés - développé par mySudokuWeb
     </p>
 </footer>
@@ -75,5 +78,9 @@
 <script>
     if (window.location.hash === '#contact') {
         $('#message').html('Votre message a bien été envoyé !')
+    }
+
+    function onSubmit(token) {
+        document.getElementById('form-contact').submit()
     }
 </script>
