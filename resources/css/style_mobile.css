@@ -239,17 +239,17 @@ body {
   .row-home .col .box-contact form {
     width: 100%;
   }
-  .row-home .col .box-contact form div {
+  .row-home .col .box-contact form .box {
     width: 100%;
   }
-  .row-home .col .box-contact form div input {
+  .row-home .col .box-contact form .box input {
     width: 100%;
   }
-  .row-home .col .box-contact form div textarea {
+  .row-home .col .box-contact form .box textarea {
     max-width: 95%;
     min-width: 95%;
   }
-  .row-home .col .box-contact form div button {
+  .row-home .col .box-contact form .box button {
     width: 100%;
   }
   .section-update form {

@@ -71,7 +71,7 @@
 </section>
 <footer>
     <p style="text-align: center;">
-        Copyright © 2022 my-sudoku.matteo-bonneval.fr - Tous droits réservés - développé par mySudokuWeb
+        Copyright © 2022 sudorivals.matteo-bonneval.fr - Tous droits réservés - développé par sudoweb
     </p>
 </footer>
 

@@ -14,7 +14,7 @@
                     <a class="btn-header" id="Login" href="<?= route('Login')?>">Connexion</a>
                     <a class="btn-header" id="Register" href="<?= route('Register')?>">Inscription</a>
                 <?php else: ?>
-                    <a class="btn-header" href="<?= route('Dashboard')?>"><i class="fa-solid fa-house"></i></a>
+                    <a class="btn-header" href="<?= route('Dashboard')?>">Home</a>
                 <?php endif ?>
                 <a class="btn-header" id="Game" href="<?= route('Game')?>">Jouer</a>
                 <?php if($_SESSION): ?>
