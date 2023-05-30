@@ -28,17 +28,17 @@ class Mail extends Model{
     public static function ForgotPasswordMail($post, $token) {
         $mail = new PHPMailer();
         try {
-            //Server settings
+            $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
+            $mail->Host = env('HOST_MAIL');
             $mail->SMTPAuth = true;
-            $mail->Username = 'contact_mysudoku@matteo-bonneval.fr';
-            $mail->Password = '!Epsi2023Sudoku';
+            $mail->Username = env('USER_MAIL');
+            $mail->Password = env('PASSWORD_MAIL');
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = 465;
+            $mail->Port = env('PORT_MAIL');
     
             //Recipients
-            $mail->setFrom('contact_mysudoku@matteo-bonneval.fr');
+            $mail->setFrom(env('EMAIL_SENT_FROM'));
             $mail->addAddress($post['mail']);     //Add a recipient
     
             //Content
@@ -60,17 +60,17 @@ class Mail extends Model{
     {
         $mail = new PHPMailer();
         try {
-            //Server settings
+            $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
+            $mail->Host = env('HOST_MAIL');
             $mail->SMTPAuth = true;
-            $mail->Username = 'contact_mysudoku@matteo-bonneval.fr';
-            $mail->Password = '!Epsi2023Sudoku';
+            $mail->Username = env('USER_MAIL');
+            $mail->Password = env('PASSWORD_MAIL');
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = 465;
+            $mail->Port = env('PORT_MAIL');
     
             //Recipients
-            $mail->setFrom('contact_mysudoku@matteo-bonneval.fr');
+            $mail->setFrom(env('EMAIL_SENT_FROM'));
             $mail->addAddress($amis['email']);     //Add a recipient
     
             //Content
