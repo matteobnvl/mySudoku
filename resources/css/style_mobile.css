@@ -113,8 +113,11 @@ body {
   margin-left: 15px;
 }
 .addFriend ul {
-  display: flex;
-  justify-content: center;
+  text-align: center;
+}
+.addFriend ul li {
+  margin: 20px 0px;
+  list-style: none;
 }
 .addFriend ul li a {
   display: inline-flex;

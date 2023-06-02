@@ -128,9 +128,11 @@ body {
     }
   }
   ul {
-    display: flex;
-    justify-content: center;
+    text-align: center;
+
     li{
+      margin: 20px 0px;
+      list-style: none;
       a{
         display: inline-flex;
         justify-content: center;

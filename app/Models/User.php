@@ -77,7 +77,7 @@ class User extends Model
                 FROM Joueur 
                 JOIN Amis ON (Joueur.id_joueur = Amis.id_amis OR Joueur.id_joueur = Amis.id_amis_1) 
                 WHERE (Amis.id_amis = :id_joueur OR Amis.id_amis_1 = :id_joueur) 
-                AND Joueur.id_joueur <> :id_joueur AND Joueur.deleted = 0";
+                AND Joueur.id_joueur <> :id_joueur AND Joueur.deleted = 0 AND Amis.statut = 1";
         $stt = $db->prepare($qry);
         $stt->bindParam(':id_joueur', $id_joueur, PDO::PARAM_INT);
         $stt->execute();
@@ -178,11 +178,14 @@ class User extends Model
         $db = self::db();
         $qry = "SELECT *
                 FROM Amis 
-                WHERE id_amis = :id_joueur AND id_amis_1 = :id_demande";
+                WHERE id_amis = :id_joueur 
+                    AND id_amis_1 = :id_demande
+                    AND statut = :statut";
         $stt = $db->prepare($qry);
         $stt->execute([
             ':id_joueur' => $_SESSION['id_joueur'],
-            ':id_demande' => $id
+            ':id_demande' => $id,
+            ':statut' => 0
         ]);
         return empty($stt->fetchAll(\PDO::FETCH_ASSOC));
     }
