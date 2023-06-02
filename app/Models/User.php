@@ -88,7 +88,7 @@ class User extends Model
     public static function getScores()
     {
         $db = self::db();
-        $qry = "SELECT pseudo, score FROM Joueur WHERE deleted = 0 ORDER BY score DESC";
+        $qry = "SELECT pseudo, score FROM Joueur WHERE deleted = 0 ORDER BY score DESC LIMIT 10";
         $stt = $db->prepare($qry);
         $stt->execute();
         $scores = $stt->fetchAll(PDO::FETCH_OBJ);
