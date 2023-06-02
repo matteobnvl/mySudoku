@@ -1,6 +1,7 @@
 <?php
 $current = getCurrentRoute();
 $title = (isset($current['name'])) ? ' | ' . ucfirst($current['name']) : '';
+checkToken();
 ?>
 
 <!DOCTYPE html>

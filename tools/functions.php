@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Request;
 
 if (!function_exists('setErrorsDisplay')) {
@@ -229,4 +230,19 @@ function intervalleDate($date = null) {
         return $interval->format('%m mois, %d jours');
     }
     return $interval->format('%d jours');
+}
+
+
+function checkToken()
+{
+    if (!$_SESSION && $_COOKIE['remember_token']) {
+        $token = $_COOKIE['remember_token'];
+        $user = User::checkToken($token);
+
+        if (!empty($user)) {
+            $user = $user[0];
+            User::login($user['email'], $user['mot_de_passe'], true);
+            redirect('Dashboard');
+        }
+    }
 }

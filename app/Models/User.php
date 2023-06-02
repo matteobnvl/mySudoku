@@ -6,7 +6,7 @@ use DateTime;
 
 class User extends Model
 {
-    public static function login($email, $mdp) {
+    public static function login($email, $mdp, $token = false) {
 
         $db = self::db();
         $qry = "SELECT * FROM Joueur
@@ -14,8 +14,9 @@ class User extends Model
         $stt = $db->prepare($qry);
         $stt->execute([
             ':email' => htmlentities($email),
-            ':mdp' => hash(env('HASH'), $mdp)
+            ':mdp' => ($token == true)? $mdp : hash(env('HASH'), $mdp)
         ]);
+
         $user = $stt->fetch(\PDO::FETCH_ASSOC);
 
         if ($stt->rowCount() > 0) {
@@ -26,6 +27,40 @@ class User extends Model
             return true;
         }
         return false;
+    }
+
+    public static function insertToken($token)
+    {
+        $db = self::db();
+        $qry = "UPDATE Joueur SET token_remember_me = :token_remember WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token_remember' => $token,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
+    }
+
+    public static function checkToken($token)
+    {
+        $db = self::db();
+        $qry = "SELECT email, mot_de_passe FROM Joueur WHERE token_remember_me = :token_remember";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token_remember' => $token
+        ]);
+
+        return $stt->fetchAll();
+    }
+
+    public static function deleteCookie()
+    {
+        $db = self::db();
+        $qry = "UPDATE Joueur SET token_remember_me = :token_remember WHERE id_joueur = :id_joueur";
+        $stt = $db->prepare($qry);
+        $stt->execute([
+            ':token_remember' => null,
+            ':id_joueur' => $_SESSION['id_joueur']
+        ]);
     }
 
     public static function checkMailAndPseudo($email, $pseudo)

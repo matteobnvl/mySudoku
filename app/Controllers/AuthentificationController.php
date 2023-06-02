@@ -59,6 +59,8 @@ class AuthentificationController extends Controller
 
     public function logout()
     {
+        setcookie('remember_token', '', time() - 3600, '/');
+        User::deleteCookie();
         session_destroy();
         redirect('Accueil');
     }
@@ -124,6 +126,13 @@ class AuthentificationController extends Controller
                     if (!User::login($_POST['email'], $_POST['password'])) {
                         return 'Les identifiants ne correspondent pas...';
                     } else {
+                        if (!isset($_COOKIE['remember_token'])) {
+                            $string = implode('', array_merge(range('A','Z'), range('a','z'), range('0','9')));
+                            $token = substr(str_shuffle($string), 0, 50);;
+                            User::insertToken($token);
+                            $timestamp = time() + (30 * 24 * 60 * 60);
+                            setcookie('remember_token', $token, $timestamp);;
+                        }
                         redirect('Dashboard');
                     }
                 } else {
