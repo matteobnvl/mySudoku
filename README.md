@@ -31,14 +31,6 @@ créer une base de données et importer dedans le fichier my_sudoku_bdd.sql
 accéder à : http://localhost/mysudoku
 
 
-## Membres du projet
-
- - André William : Back-end et BDD 
- - Bonneval Mattéo : Back-end, BDD etFront-end
- - Méry Arthur : Maquette, Front-end et BDD
- - Reynaud Lucas : Maquette et Front-end
- - Servary Nicolas : Maquette et Front-end
-
 ## Contactez nous
 
 Pour tout contact à propos de projet n'hésitez pas à le faire ici :
